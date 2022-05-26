@@ -3,8 +3,8 @@ import axios from "axios";
 import { LoginView } from "../login-view/login-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import NavBar from "../navbar/navbar";
+import { Row, Col } from "react-bootstrap";
 
 class MainView extends React.Component {
   constructor() {
@@ -48,9 +48,11 @@ class MainView extends React.Component {
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
     if (!user)
       return (
-        <div>
-          <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-        </div>
+        <Row className="justify-content-md-center">
+          <Col md={6}>
+            <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+          </Col>
+        </Row>
       );
 
     // Before the movies have been loaded
@@ -58,6 +60,7 @@ class MainView extends React.Component {
 
     return (
       <Row className="justify-content-md-center">
+        <NavBar />
         {selectedMovie ? (
           <Col md={8}>
             <MovieView
