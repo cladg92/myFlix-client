@@ -81,7 +81,14 @@ class MainView extends React.Component {
   render() {
     const { movies, selectedMovie, user, register } = this.state;
 
-    if (register === true) return <RegisterView />;
+    if (register === true)
+      return (
+        <Row className="justify-content-md-center">
+          <Col md={6}>
+            <RegisterView />
+          </Col>
+        </Row>
+      );
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
     if (!user)
