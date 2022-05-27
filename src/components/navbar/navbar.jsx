@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import {
   Navbar,
   Container,
@@ -10,14 +11,17 @@ import {
 
 class NavBar extends Component {
   render() {
+    const { onBackLog } = this.props;
     return (
       <Navbar sticky="top" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">MyFlix</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Movies</Nav.Link>
-            <Nav.Link href="#features">Profile</Nav.Link>
-            <Nav.Link href="#pricing">Log out</Nav.Link>
+            <Nav.Link href="#movies">Movies</Nav.Link>
+            <Nav.Link href="#profile">Profile</Nav.Link>
+            <Nav.Link href="#logout" onClick={() => onBackLog()}>
+              Log out
+            </Nav.Link>
           </Nav>
           <Form className="d-flex">
             <FormControl
@@ -35,3 +39,7 @@ class NavBar extends Component {
 }
 
 export default NavBar;
+
+NavBar.propTypes = {
+  onBackLog: PropTypes.func.isRequired,
+};
