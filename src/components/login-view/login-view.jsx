@@ -56,14 +56,6 @@ export function LoginView(props) {
         onClick={handleSubmit}
       >
         Login
-      </Button>{" "}
-      <Button
-        className="mt-3"
-        variant="secondary"
-        type="submit"
-        onClick={onRegister}
-      >
-        Register
       </Button>
     </Form>
   );

@@ -10,28 +10,49 @@ import {
 } from "react-bootstrap";
 
 class NavBar extends Component {
+  isAuth() {
+    if (typeof window == "undefined") {
+      return false;
+    }
+    if (localStorage.getItem("token")) {
+      return localStorage.getItem("token");
+    } else {
+      return false;
+    }
+  }
+
   render() {
-    const { onBackLog } = this.props;
+    const { onBackLog, user } = this.props;
     return (
-      <Navbar sticky="top" bg="dark" variant="dark">
+      <Navbar className="main-nav" sticky="top" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">MyFlix</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#movies">Movies</Nav.Link>
-            <Nav.Link href="#profile">Profile</Nav.Link>
-            <Nav.Link href="#logout" onClick={() => onBackLog()}>
-              Log out
-            </Nav.Link>
-          </Nav>
-          <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+          <Navbar.Brand className="navbar-logo" href="/">
+            MyFlix
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="ml-auto">
+              {this.isAuth() && (
+                <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>
+              )}
+              {this.isAuth() && (
+                <Nav.Link onClick={() => onBackLog()}>Logout</Nav.Link>
+              )}
+              {!this.isAuth() && <Nav.Link href="/">Login</Nav.Link>}
+              {!this.isAuth() && <Nav.Link href="/register">Register</Nav.Link>}
+            </Nav>
+            {this.isAuth() && (
+              <Form className="d-flex">
+                <FormControl
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  aria-label="Search"
+                />
+                <Button variant="outline-success">Search</Button>
+              </Form>
+            )}
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     );
