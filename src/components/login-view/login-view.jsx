@@ -1,36 +1,75 @@
-import React, { useState } from 'react';
-import { RegisterView } from '../register-view/register-view';
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import PropTypes from "prop-types";
+import axios from "axios";
 
 export function LoginView(props) {
-  const [ username, setUsername ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
     /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
+    axios
+      .post("https://myflixapi92.herokuapp.com/login", {
+        Username: username,
+        Password: password,
+      })
+      .then((response) => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch((e) => {
+        console.log("no such user");
+      });
   };
 
-  const handleNewUser = (e) => {
-    e.preventDefault();
-    console.log('register');
-    return <RegisterView />
-  }
+  const onRegister = () => {
+    props.onRegister();
+  };
 
   return (
-    <form>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <button type="submit" onClick={handleSubmit}>Submit</button>
-      <button type="submit" onClick={handleNewUser}>Register</button>
-    </form>
+    <Form>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Form.Group>
+      <Button
+        className="mt-3"
+        variant="success"
+        type="submit"
+        onClick={handleSubmit}
+      >
+        Login
+      </Button>{" "}
+      <Button
+        className="mt-3"
+        variant="secondary"
+        type="submit"
+        onClick={onRegister}
+      >
+        Register
+      </Button>
+    </Form>
   );
 }
+
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired,
+  onRegister: PropTypes.func.isRequired,
+};

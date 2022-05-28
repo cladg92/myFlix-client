@@ -1,35 +1,119 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 export function RegisterView(props) {
-  const [ email, setEmail ] = useState('');
-  const [ username, setUsername ] = useState('');
-  const [ password, setPassword ] = useState('');
-  const [ birthDate, setBirthDate ] = useState('');
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  // Declare hook for each input
+  const [usernameErr, setUsernameErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+  const [emailErr, setEmailErr] = useState("");
 
-  const handleSubmit = (e) => {
+  // validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr("Username Required");
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr("Username must be at least 2 characters long");
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr("Password Required");
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr("Password must be at least 6 characters long");
+      isReq = false;
+    }
+    if (!email) {
+      setEmailErr("Email Required");
+      isReq = false;
+    } else if (email.indexOf("@") === -1) {
+      setEmailErr("Wrong format");
+      isReq = false;
+    }
+
+    return isReq;
+  };
+
+  const handleRegister = (e) => {
     e.preventDefault();
-    console.log(email,username, password, birthDate);
+    const isReq = validate();
+    if (isReq) {
+      /* Send request to the server for registration */
+      axios
+        .post("https://myflixapi92.herokuapp.com/users", {
+          Username: username,
+          Password: password,
+          Email: email,
+          BirthDate: birthDate,
+        })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          alert("Registration successful, please login!");
+          window.open("/", "self");
+        })
+        .catch((response) => {
+          console.error(response);
+          alert("unable to register");
+        });
+    }
   };
 
   return (
-    <form>
-      <label>
-        Email:
-        <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-      </label>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <label>
-        Birthday:
-        <input type="date" value={email} onChange={e => setBirthDate(e.target.value)} />
-      </label>
-      <button type="submit" onClick={handleSubmit}>Register</button>
-    </form>
+    <Form>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        {/* code added here to display validation error */}
+        {usernameErr && <p>{usernameErr}</p>}
+      </Form.Group>
+      <Form.Group controlId="formEmail">
+        <Form.Label>Email:</Form.Label>
+        <Form.Control
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {/* code added here to display validation error */}
+        {emailErr && <p>{emailErr}</p>}
+      </Form.Group>
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {/* code added here to display validation error */}
+        {passwordErr && <p>{passwordErr}</p>}
+      </Form.Group>
+      <Form.Group controlId="formBirthday">
+        <Form.Label>Birthday:</Form.Label>
+        <Form.Control
+          type="date"
+          value={birthDate}
+          onChange={(e) => setBirthDate(e.target.value)}
+        />
+      </Form.Group>
+      <Button
+        className="mt-3"
+        variant="success"
+        type="submit"
+        onClick={handleRegister}
+      >
+        Register
+      </Button>
+    </Form>
   );
 }
