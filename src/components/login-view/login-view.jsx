@@ -25,10 +25,6 @@ export function LoginView(props) {
       });
   };
 
-  const onRegister = () => {
-    props.onRegister();
-  };
-
   return (
     <Form>
       <Form.Group controlId="formUsername">
