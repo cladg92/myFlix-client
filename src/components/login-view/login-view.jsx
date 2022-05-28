@@ -25,10 +25,6 @@ export function LoginView(props) {
       });
   };
 
-  const onRegister = () => {
-    props.onRegister();
-  };
-
   return (
     <Form>
       <Form.Group controlId="formUsername">
@@ -56,14 +52,6 @@ export function LoginView(props) {
         onClick={handleSubmit}
       >
         Login
-      </Button>{" "}
-      <Button
-        className="mt-3"
-        variant="secondary"
-        type="submit"
-        onClick={onRegister}
-      >
-        Register
       </Button>
     </Form>
   );
@@ -71,5 +59,4 @@ export function LoginView(props) {
 
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired,
-  onRegister: PropTypes.func.isRequired,
 };
