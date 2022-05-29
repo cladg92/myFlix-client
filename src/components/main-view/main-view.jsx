@@ -18,8 +18,8 @@ class MainView extends React.Component {
     this.state = {
       movies: [],
       selectedMovie: null,
-      user: null,
-      register: false,
+      users: [],
+      userInfo: null,
     };
   }
 
@@ -32,6 +32,7 @@ class MainView extends React.Component {
         user: localStorage.getItem("user"),
       });
       this.getMovies(accessToken);
+      this.getUsers(accessToken);
     }
   }
 
@@ -44,6 +45,22 @@ class MainView extends React.Component {
         // Assign the result to the state
         this.setState({
           movies: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  getUsers(token) {
+    axios
+      .get("https://myflixapi92.herokuapp.com/users", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        // Assign the result to the state
+        this.setState({
+          users: response.data,
         });
       })
       .catch(function (error) {
@@ -74,7 +91,7 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state;
+    const { movies, user, users } = this.state;
 
     return (
       <Router>
@@ -119,12 +136,18 @@ class MainView extends React.Component {
             />
             <Route
               path={`/users/${user}`}
-              render={(history) => {
+              render={(history, match) => {
                 if (!user) return <Redirect to="/" />;
                 return (
                   <Col>
                     <ProfileView
-                      user={user}
+                      history={history}
+                      match={match}
+                      movies={movies}
+                      user={users.find((u) => {
+                        return u.Username === user;
+                      })}
+                      users={users}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>

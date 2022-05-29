@@ -7,6 +7,7 @@ class DirectorView extends Component {
     const { onBackClick, director } = this.props;
     return (
       <div className="director-view">
+        <p>{console.log({ director })}</p>
         <div className="director-name">
           <h1 className="value">{director.Name}</h1>
         </div>
@@ -14,7 +15,7 @@ class DirectorView extends Component {
           <p className="value">{`${director.Birth} - ${director.Death}`}</p>
         </div>
         <div className="director-bio">
-          <h4 className="label">Biography</h4>
+          <h5 className="label">Biography</h5>
           <p className="value">{director.Bio}</p>
         </div>
         <Button
