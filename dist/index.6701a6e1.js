@@ -44791,17 +44791,14 @@ var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _axios = require("axios");
-var _axiosDefault = parcelHelpers.interopDefault(_axios);
 class DirectorView extends _react.Component {
-    // METHODS
     render() {
         const { onBackClick , director  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "director-view",
             __source: {
                 fileName: "src/components/director-view/director-view.jsx",
-                lineNumber: 12
+                lineNumber: 9
             },
             __self: this,
             children: [
@@ -44809,14 +44806,14 @@ class DirectorView extends _react.Component {
                     className: "director-name",
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 13
+                        lineNumber: 10
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("h1", {
                         className: "value",
                         __source: {
                             fileName: "src/components/director-view/director-view.jsx",
-                            lineNumber: 14
+                            lineNumber: 11
                         },
                         __self: this,
                         children: director.Name
@@ -44826,14 +44823,14 @@ class DirectorView extends _react.Component {
                     className: "director-birth",
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 16
+                        lineNumber: 13
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         className: "value",
                         __source: {
                             fileName: "src/components/director-view/director-view.jsx",
-                            lineNumber: 17
+                            lineNumber: 14
                         },
                         __self: this,
                         children: `${director.Birth} - ${director.Death}`
@@ -44843,7 +44840,7 @@ class DirectorView extends _react.Component {
                     className: "director-bio",
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 19
+                        lineNumber: 16
                     },
                     __self: this,
                     children: [
@@ -44851,16 +44848,16 @@ class DirectorView extends _react.Component {
                             className: "label",
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 20
+                                lineNumber: 17
                             },
                             __self: this,
-                            children: "Biography "
+                            children: "Biography"
                         }),
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                        /*#__PURE__*/ _jsxRuntime.jsx("p", {
                             className: "value",
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 21
+                                lineNumber: 18
                             },
                             __self: this,
                             children: director.Bio
@@ -44876,7 +44873,7 @@ class DirectorView extends _react.Component {
                     },
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 23
+                        lineNumber: 20
                     },
                     __self: this,
                     children: "Back"
@@ -44895,7 +44892,7 @@ DirectorView.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Button":"9CzHT","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","axios":"iYoWk"}],"8WCoL":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Button":"9CzHT","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh"}],"8WCoL":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$5f0a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -44913,21 +44910,59 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 class GenreView extends _react.Component {
     render() {
-        const { onBackClick  } = this.props;
+        const { onBackClick , genre  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+            className: "genre-view",
             __source: {
                 fileName: "src/components/genre-view/genre-view.jsx",
                 lineNumber: 9
             },
             __self: this,
             children: [
-                /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                    className: "genre-name",
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
                         lineNumber: 10
                     },
                     __self: this,
-                    children: "Genre view"
+                    children: /*#__PURE__*/ _jsxRuntime.jsx("h1", {
+                        className: "value",
+                        __source: {
+                            fileName: "src/components/genre-view/genre-view.jsx",
+                            lineNumber: 11
+                        },
+                        __self: this,
+                        children: genre.Name
+                    })
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "genre-description",
+                    __source: {
+                        fileName: "src/components/genre-view/genre-view.jsx",
+                        lineNumber: 13
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("h5", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 14
+                            },
+                            __self: this,
+                            children: "Description"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 15
+                            },
+                            __self: this,
+                            children: genre.Description
+                        })
+                    ]
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                     variant: "success",
@@ -44937,7 +44972,7 @@ class GenreView extends _react.Component {
                     },
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 11
+                        lineNumber: 17
                     },
                     __self: this,
                     children: "Back"
