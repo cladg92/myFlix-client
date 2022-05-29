@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
-import axios from "axios";
 
 class DirectorView extends Component {
-  // METHODS
-
   render() {
     const { onBackClick, director } = this.props;
     return (
@@ -17,8 +14,8 @@ class DirectorView extends Component {
           <p className="value">{`${director.Birth} - ${director.Death}`}</p>
         </div>
         <div className="director-bio">
-          <h4 className="label">Biography </h4>
-          <span className="value">{director.Bio}</span>
+          <h4 className="label">Biography</h4>
+          <p className="value">{director.Bio}</p>
         </div>
         <Button
           className="mt-3"
