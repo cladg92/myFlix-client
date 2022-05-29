@@ -7,7 +7,7 @@ class DirectorView extends Component {
     const { onBackClick, director } = this.props;
     return (
       <div className="director-view">
-        <p>{console.log({ director })}</p>
+        <p>{console.log("hello")}</p>
         <div className="director-name">
           <h1 className="value">{director.Name}</h1>
         </div>

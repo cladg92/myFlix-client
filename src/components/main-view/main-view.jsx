@@ -18,8 +18,7 @@ class MainView extends React.Component {
     this.state = {
       movies: [],
       selectedMovie: null,
-      users: [],
-      userInfo: null,
+      user: null,
     };
   }
 
@@ -32,7 +31,7 @@ class MainView extends React.Component {
         user: localStorage.getItem("user"),
       });
       this.getMovies(accessToken);
-      this.getUsers(accessToken);
+      //this.getUsers(accessToken);
     }
   }
 
@@ -52,7 +51,7 @@ class MainView extends React.Component {
       });
   }
 
-  getUsers(token) {
+  /*getUsers(token) {
     axios
       .get("https://myflixapi92.herokuapp.com/users", {
         headers: { Authorization: `Bearer ${token}` },
@@ -66,7 +65,7 @@ class MainView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  }*/
 
   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
 
@@ -144,10 +143,7 @@ class MainView extends React.Component {
                       history={history}
                       match={match}
                       movies={movies}
-                      user={users.find((u) => {
-                        return u.Username === user;
-                      })}
-                      users={users}
+                      user={user}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>
