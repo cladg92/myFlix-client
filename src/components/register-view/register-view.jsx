@@ -57,11 +57,10 @@ export function RegisterView(props) {
           const data = response.data;
           console.log(data);
           alert("Registration successful, please login!");
-          window.open("/", "self");
+          window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
         })
-        .catch((response) => {
-          console.error(response);
-          alert("unable to register");
+        .catch((e) => {
+          console.log("error registering the user");
         });
     }
   };

@@ -33,7 +33,7 @@ class NavBar extends Component {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
               {this.isAuth() && (
-                <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>
+                <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
               )}
               {this.isAuth() && (
                 <Nav.Link onClick={() => onBackLog()}>Logout</Nav.Link>
