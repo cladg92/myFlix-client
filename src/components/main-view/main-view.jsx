@@ -144,6 +144,9 @@ class MainView extends React.Component {
                       match={match}
                       movies={movies}
                       user={user}
+                      onBackLog={() => {
+                        this.onLoggedOut();
+                      }}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>
