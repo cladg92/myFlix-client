@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 export function ProfileView(props) {
   const [user, setUser] = useState(props.user);
-  const [movies, setMovies] = useState(props.movies);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const currentUser = localStorage.getItem("user");
   const token = localStorage.getItem("token");
+  const history = useHistory();
 
   const getUser = () => {
     axios
@@ -38,13 +39,17 @@ export function ProfileView(props) {
       </div>
       <div className="profile-favmovies">
         <h5 className="label">My favourite movies</h5>
-        <span className="value">{}</span>
+        <ul className="value">
+          {favoriteMovies.map((f) => (
+            <li key={f._id}>{f.Title}</li>
+          ))}
+        </ul>
       </div>
       <Button
         variant="success"
         type="button"
         onClick={() => {
-          onBackClick();
+          history.goBack();
         }}
       >
         Back

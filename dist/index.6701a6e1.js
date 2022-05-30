@@ -45042,16 +45042,17 @@ var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _reactRouterDom = require("react-router-dom");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _s = $RefreshSig$();
 function ProfileView(props) {
     _s();
     const [user, setUser] = _react.useState(props.user);
-    const [movies, setMovies] = _react.useState(props.movies);
     const [favoriteMovies, setFavoriteMovies] = _react.useState([]);
     const currentUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
+    const history = _reactRouterDom.useHistory();
     const getUser = ()=>{
         _axiosDefault.default.get(`https://myflixapi92.herokuapp.com/users/${currentUser}`, {
             headers: {
@@ -45070,14 +45071,14 @@ function ProfileView(props) {
         className: "profile-view",
         __source: {
             fileName: "src/components/profile-view/profile-view.jsx",
-            lineNumber: 30
+            lineNumber: 31
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx("p", {
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 31
+                    lineNumber: 32
                 },
                 __self: this,
                 children: console.log({
@@ -45088,14 +45089,14 @@ function ProfileView(props) {
                 className: "title",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 32
+                    lineNumber: 33
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx("h1", {
                     className: "value",
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 33
+                        lineNumber: 34
                     },
                     __self: this,
                     children: "My profile"
@@ -45105,7 +45106,7 @@ function ProfileView(props) {
                 className: "profile-username",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 35
+                    lineNumber: 36
                 },
                 __self: this,
                 children: [
@@ -45113,7 +45114,7 @@ function ProfileView(props) {
                         className: "label",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 36
+                            lineNumber: 37
                         },
                         __self: this,
                         children: "Username: "
@@ -45122,7 +45123,7 @@ function ProfileView(props) {
                         className: "value",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 37
+                            lineNumber: 38
                         },
                         __self: this,
                         children: user.Username
@@ -45133,7 +45134,7 @@ function ProfileView(props) {
                 className: "profile-favmovies",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 39
+                    lineNumber: 40
                 },
                 __self: this,
                 children: [
@@ -45141,18 +45142,27 @@ function ProfileView(props) {
                         className: "label",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 40
+                            lineNumber: 41
                         },
                         __self: this,
                         children: "My favourite movies"
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                    /*#__PURE__*/ _jsxRuntime.jsx("ul", {
                         className: "value",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 41
+                            lineNumber: 42
                         },
-                        __self: this
+                        __self: this,
+                        children: favoriteMovies.map((f)=>/*#__PURE__*/ _jsxRuntime.jsx("li", {
+                                __source: {
+                                    fileName: "src/components/profile-view/profile-view.jsx",
+                                    lineNumber: 44
+                                },
+                                __self: this,
+                                children: f.Title
+                            }, f._id)
+                        )
                     })
                 ]
             }),
@@ -45160,11 +45170,11 @@ function ProfileView(props) {
                 variant: "success",
                 type: "button",
                 onClick: ()=>{
-                    onBackClick();
+                    history.goBack();
                 },
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 43
+                    lineNumber: 48
                 },
                 __self: this,
                 children: "Back"
@@ -45172,7 +45182,9 @@ function ProfileView(props) {
         ]
     }));
 }
-_s(ProfileView, "4XVWgEAJm8eH/OJpp/OH2S3aJ9o=");
+_s(ProfileView, "YfgEIB2cCWZ6j+kPG6pq0IfMM64=", false, function() {
+    return [_reactRouterDom.useHistory];
+});
 _c = ProfileView;
 exports.default = ProfileView;
 ProfileView.propTypes = {
@@ -45186,6 +45198,6 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Button":"9CzHT","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","axios":"iYoWk"}],"jUTZ8":[function() {},{}]},["edLgl","8JYhA","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Button":"9CzHT","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","axios":"iYoWk","react-router-dom":"cpyQW"}],"jUTZ8":[function() {},{}]},["edLgl","8JYhA","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map
