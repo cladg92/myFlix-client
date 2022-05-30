@@ -45415,7 +45415,7 @@ function ProfileView(props) {
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                                         className: "mt-3",
-                                        variant: "success",
+                                        variant: "warning",
                                         type: "submit",
                                         onClick: deleteUser,
                                         __source: {
@@ -45423,7 +45423,7 @@ function ProfileView(props) {
                                             lineNumber: 171
                                         },
                                         __self: this,
-                                        children: "Delete"
+                                        children: "Delete profile"
                                     })
                                 ]
                             }),
@@ -45517,23 +45517,13 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _favmovieCard = require("./favmovie-card");
 var _reactBootstrap = require("react-bootstrap");
 class FavoriteMovies extends _react.Component {
-    // METHODS
-    /*deleteMovie(m) {
-    axios.delete(
-      `https://myflixapi92.herokuapp.com/users/${this.props.user}/movies/${m}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    alert("Movie was successfully deleted.");
-    window.open(`/users/${this.props.user}`, "_self");
-  }*/ render() {
+    render() {
         const { favoriteMovies , user , token  } = this.props;
         return favoriteMovies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                 md: 3,
                 __source: {
                     fileName: "src/components/profile-view/favorite-movies.jsx",
-                    lineNumber: 23
+                    lineNumber: 10
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_favmovieCard.MovieCard, {
@@ -45542,7 +45532,7 @@ class FavoriteMovies extends _react.Component {
                     movie: m,
                     __source: {
                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                        lineNumber: 24
+                        lineNumber: 11
                     },
                     __self: this
                 })

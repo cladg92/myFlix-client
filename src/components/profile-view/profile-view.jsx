@@ -170,11 +170,11 @@ export function ProfileView(props) {
             </Button>
             <Button
               className="mt-3"
-              variant="success"
+              variant="warning"
               type="submit"
               onClick={deleteUser}
             >
-              Delete
+              Delete profile
             </Button>
           </Form>
           <div className="profile-favmovies">
