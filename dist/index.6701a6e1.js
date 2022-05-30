@@ -45452,8 +45452,9 @@ function ProfileView(props) {
                                         },
                                         __self: this,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_favoriteMoviesDefault.default, {
-                                            user: currentUser,
                                             favoriteMovies: favoriteMovies,
+                                            user: currentUser,
+                                            token: token,
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
                                                 lineNumber: 183
@@ -45475,7 +45476,7 @@ function ProfileView(props) {
                 },
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 191
+                    lineNumber: 192
                 },
                 __self: this,
                 children: "Back"
@@ -45517,17 +45518,17 @@ var _favmovieCard = require("./favmovie-card");
 var _reactBootstrap = require("react-bootstrap");
 class FavoriteMovies extends _react.Component {
     // METHODS
-    deleteMovie(m) {
-        _axiosDefault.default.delete(`https://myflixapi92.herokuapp.com/users/${this.props.user}/movies/${m}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        alert("Movie was successfully deleted.");
-        window.open(`/users/${this.props.user}`, "_self");
-    }
-    render() {
-        const { favoriteMovies  } = this.props;
+    /*deleteMovie(m) {
+    axios.delete(
+      `https://myflixapi92.herokuapp.com/users/${this.props.user}/movies/${m}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    alert("Movie was successfully deleted.");
+    window.open(`/users/${this.props.user}`, "_self");
+  }*/ render() {
+        const { favoriteMovies , user , token  } = this.props;
         return favoriteMovies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                 md: 3,
                 __source: {
@@ -45536,6 +45537,8 @@ class FavoriteMovies extends _react.Component {
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_favmovieCard.MovieCard, {
+                    token: token,
+                    user: user,
                     movie: m,
                     __source: {
                         fileName: "src/components/profile-view/favorite-movies.jsx",
@@ -45568,6 +45571,8 @@ parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _button = require("react-bootstrap/Button");
@@ -45576,19 +45581,31 @@ var _card = require("react-bootstrap/Card");
 var _cardDefault = parcelHelpers.interopDefault(_card);
 var _reactRouterDom = require("react-router-dom");
 class MovieCard extends _reactDefault.default.Component {
+    // METHODS
+    deleteMovie(id) {
+        _axiosDefault.default.delete(`https://myflixapi92.herokuapp.com/users/${this.props.user}/movies/${id}`, {
+            headers: {
+                Authorization: `Bearer ${this.props.token}`
+            }
+        }).then(()=>{
+            alert(`The movie was successfully deleted.`);
+            window.open(`/users/${this.props.user}`, "_self");
+        }).catch((error)=>console.error(error)
+        );
+    }
     render() {
-        const { movie , deleteMovie  } = this.props;
+        const { movie  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
             __source: {
                 fileName: "src/components/profile-view/favmovie-card.jsx",
-                lineNumber: 12
+                lineNumber: 30
             },
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx("p", {
                     __source: {
                         fileName: "src/components/profile-view/favmovie-card.jsx",
-                        lineNumber: 13
+                        lineNumber: 31
                     },
                     __self: this,
                     children: console.log("Hello")
@@ -45599,21 +45616,21 @@ class MovieCard extends _reactDefault.default.Component {
                     src: movie.ImagePath,
                     __source: {
                         fileName: "src/components/profile-view/favmovie-card.jsx",
-                        lineNumber: 14
+                        lineNumber: 32
                     },
                     __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
                     __source: {
                         fileName: "src/components/profile-view/favmovie-card.jsx",
-                        lineNumber: 15
+                        lineNumber: 33
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
                             __source: {
                                 fileName: "src/components/profile-view/favmovie-card.jsx",
-                                lineNumber: 16
+                                lineNumber: 34
                             },
                             __self: this,
                             children: movie.Title
@@ -45621,7 +45638,7 @@ class MovieCard extends _reactDefault.default.Component {
                         /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
                             __source: {
                                 fileName: "src/components/profile-view/favmovie-card.jsx",
-                                lineNumber: 17
+                                lineNumber: 35
                             },
                             __self: this,
                             children: movie.Description
@@ -45630,25 +45647,27 @@ class MovieCard extends _reactDefault.default.Component {
                             to: `/movies/${movie._id}`,
                             __source: {
                                 fileName: "src/components/profile-view/favmovie-card.jsx",
-                                lineNumber: 18
+                                lineNumber: 36
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                                 variant: "success",
                                 __source: {
                                     fileName: "src/components/profile-view/favmovie-card.jsx",
-                                    lineNumber: 19
+                                    lineNumber: 37
                                 },
                                 __self: this,
                                 children: "Open"
                             })
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            onClick: deleteMovie,
+                            onClick: ()=>{
+                                this.deleteMovie(movie._id);
+                            },
                             variant: "success",
                             __source: {
                                 fileName: "src/components/profile-view/favmovie-card.jsx",
-                                lineNumber: 21
+                                lineNumber: 39
                             },
                             __self: this,
                             children: "Delete"
@@ -45682,6 +45701,6 @@ MovieCard.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Button":"9CzHT","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh"}],"jUTZ8":[function() {},{}]},["edLgl","8JYhA","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Button":"9CzHT","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","axios":"iYoWk"}],"jUTZ8":[function() {},{}]},["edLgl","8JYhA","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map

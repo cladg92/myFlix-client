@@ -181,8 +181,9 @@ export function ProfileView(props) {
             <h5 className="label">My favourite movies</h5>
             <Row className="justify-content-md-center">
               <FavoriteMovies
-                user={currentUser}
                 favoriteMovies={favoriteMovies}
+                user={currentUser}
+                token={token}
               />
             </Row>
           </div>

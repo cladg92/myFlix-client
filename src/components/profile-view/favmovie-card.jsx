@@ -1,12 +1,30 @@
 import React from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 
 export class MovieCard extends React.Component {
+  // METHODS
+
+  deleteMovie(id) {
+    axios
+      .delete(
+        `https://myflixapi92.herokuapp.com/users/${this.props.user}/movies/${id}`,
+        {
+          headers: { Authorization: `Bearer ${this.props.token}` },
+        }
+      )
+      .then(() => {
+        alert(`The movie was successfully deleted.`);
+        window.open(`/users/${this.props.user}`, "_self");
+      })
+      .catch((error) => console.error(error));
+  }
+
   render() {
-    const { movie, deleteMovie } = this.props;
+    const { movie } = this.props;
 
     return (
       <Card>
@@ -18,7 +36,12 @@ export class MovieCard extends React.Component {
           <Link to={`/movies/${movie._id}`}>
             <Button variant="success">Open</Button>
           </Link>
-          <Button onClick={deleteMovie} variant="success">
+          <Button
+            onClick={() => {
+              this.deleteMovie(movie._id);
+            }}
+            variant="success"
+          >
             Delete
           </Button>
         </Card.Body>
