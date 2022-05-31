@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
+import { Container, Button, Row, Col, Card } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import { Row } from "react-bootstrap";
 import axios from "axios";
 import FavoriteMovies from "./favorite-movies";
+import UserInfo from "./user-info";
+import UpdateUser from "./update-user";
 
 export function ProfileView(props) {
   // for getUser
@@ -105,90 +105,45 @@ export function ProfileView(props) {
   };
 
   return (
-    <div className="profile-view">
-      <div className="profile-info">
-        <p>{console.log({ user })}</p>
-        <div className="title">
-          <h1 className="value">My profile</h1>
-        </div>
-        <div className="profile-username">
-          <span className="label">Username: </span>
-          <span className="value">{user.Username}</span>
-        </div>
-        <div className="profile-email">
-          <span className="label">Email: </span>
-          <span className="value">{user.Email}</span>
-        </div>
-        <div className="update-user">
-          <h5>Update profile</h5>
-          <Form>
-            <Form.Group controlId="formUsername">
-              <Form.Label>Username:</Form.Label>
-              <Form.Control
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+    <Container className="profile-view">
+      <h1 className="value">Profile</h1>
+      <Row>
+        <Col xs={12} sm={4}>
+          <Card>
+            <Card.Body>
+              <UserInfo username={user.Username} email={user.Email} />
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={12} sm={8}>
+          <Card>
+            <Card.Body>
+              <UpdateUser
+                username={username}
+                usernameErr={usernameErr}
+                setUsername={setUsername}
+                password={password}
+                passwordErr={passwordErr}
+                setPassword={setPassword}
+                email={email}
+                emailErr={emailErr}
+                setEmail={setEmail}
+                birthDate={birthDate}
+                setBirthDate={setBirthDate}
+                updateUser={updateUser}
+                deleteUser={deleteUser}
               />
-              {/* code added here to display validation error */}
-              {usernameErr && <p>{usernameErr}</p>}
-            </Form.Group>
-            <Form.Group controlId="formEmail">
-              <Form.Label>Email:</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              {/* code added here to display validation error */}
-              {emailErr && <p>{emailErr}</p>}
-            </Form.Group>
-            <Form.Group controlId="formPassword">
-              <Form.Label>Password:</Form.Label>
-              <Form.Control
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {/* code added here to display validation error */}
-              {passwordErr && <p>{passwordErr}</p>}
-            </Form.Group>
-            <Form.Group controlId="formBirthday">
-              <Form.Label>Birthday:</Form.Label>
-              <Form.Control
-                type="date"
-                value={birthDate}
-                onChange={(e) => setBirthDate(e.target.value)}
-              />
-            </Form.Group>
-            <Button
-              className="mt-3"
-              variant="success"
-              type="submit"
-              onClick={updateUser}
-            >
-              Update
-            </Button>
-            <Button
-              className="mt-3"
-              variant="warning"
-              type="submit"
-              onClick={deleteUser}
-            >
-              Delete profile
-            </Button>
-          </Form>
-          <div className="profile-favmovies">
-            <h5 className="label">My favourite movies</h5>
-            <Row className="justify-content-md-center">
-              <FavoriteMovies
-                favoriteMovies={favoriteMovies}
-                user={currentUser}
-                token={token}
-              />
-            </Row>
-          </div>
-        </div>
-      </div>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+
+      <FavoriteMovies
+        favoriteMovies={favoriteMovies}
+        user={currentUser}
+        token={token}
+      />
+
       <Button
         variant="success"
         type="button"
@@ -198,7 +153,7 @@ export function ProfileView(props) {
       >
         Back
       </Button>
-    </div>
+    </Container>
   );
 }
 

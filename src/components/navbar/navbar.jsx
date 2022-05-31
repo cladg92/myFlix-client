@@ -33,6 +33,7 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
+              {this.isAuth() && <Nav.Link href="/">Movies</Nav.Link>}
               {this.isAuth() && (
                 <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>
               )}
