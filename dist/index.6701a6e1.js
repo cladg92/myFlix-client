@@ -33473,7 +33473,6 @@ function RegisterView(props) {
     const [username, setUsername] = _react.useState("");
     const [password, setPassword] = _react.useState("");
     const [birthDate, setBirthDate] = _react.useState("");
-    // Declare hook for each input
     const [usernameErr, setUsernameErr] = _react.useState("");
     const [passwordErr, setPasswordErr] = _react.useState("");
     const [emailErr, setEmailErr] = _react.useState("");
@@ -33523,7 +33522,7 @@ function RegisterView(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
         __source: {
             fileName: "src/components/register-view/register-view.jsx",
-            lineNumber: 69
+            lineNumber: 68
         },
         __self: this,
         children: [
@@ -33531,14 +33530,14 @@ function RegisterView(props) {
                 controlId: "formUsername",
                 __source: {
                     fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 70
+                    lineNumber: 69
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 71
+                            lineNumber: 70
                         },
                         __self: this,
                         children: "Username:"
@@ -33550,14 +33549,14 @@ function RegisterView(props) {
                         ,
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 72
+                            lineNumber: 71
                         },
                         __self: this
                     }),
                     usernameErr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 78
+                            lineNumber: 77
                         },
                         __self: this,
                         children: usernameErr
@@ -33568,14 +33567,14 @@ function RegisterView(props) {
                 controlId: "formEmail",
                 __source: {
                     fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 80
+                    lineNumber: 79
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 81
+                            lineNumber: 80
                         },
                         __self: this,
                         children: "Email:"
@@ -33587,14 +33586,14 @@ function RegisterView(props) {
                         ,
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 82
+                            lineNumber: 81
                         },
                         __self: this
                     }),
                     emailErr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 88
+                            lineNumber: 87
                         },
                         __self: this,
                         children: emailErr
@@ -33605,14 +33604,14 @@ function RegisterView(props) {
                 controlId: "formPassword",
                 __source: {
                     fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 90
+                    lineNumber: 89
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 91
+                            lineNumber: 90
                         },
                         __self: this,
                         children: "Password:"
@@ -33624,14 +33623,14 @@ function RegisterView(props) {
                         ,
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 92
+                            lineNumber: 91
                         },
                         __self: this
                     }),
                     passwordErr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 98
+                            lineNumber: 97
                         },
                         __self: this,
                         children: passwordErr
@@ -33642,14 +33641,14 @@ function RegisterView(props) {
                 controlId: "formBirthday",
                 __source: {
                     fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 100
+                    lineNumber: 99
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 101
+                            lineNumber: 100
                         },
                         __self: this,
                         children: "Birthday:"
@@ -33661,7 +33660,7 @@ function RegisterView(props) {
                         ,
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 102
+                            lineNumber: 101
                         },
                         __self: this
                     })
@@ -33674,7 +33673,7 @@ function RegisterView(props) {
                 onClick: handleRegister,
                 __source: {
                     fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 108
+                    lineNumber: 107
                 },
                 __self: this,
                 children: "Register"
@@ -33715,6 +33714,7 @@ class NavBar extends _react.Component {
     }
     render() {
         const { onBackLog , user  } = this.props;
+        const path = window.location.pathname;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar, {
             className: "main-nav",
             sticky: "top",
@@ -33722,13 +33722,13 @@ class NavBar extends _react.Component {
             variant: "dark",
             __source: {
                 fileName: "src/components/navbar/navbar.jsx",
-                lineNumber: 27
+                lineNumber: 28
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
                 __source: {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 28
+                    lineNumber: 29
                 },
                 __self: this,
                 children: [
@@ -33737,7 +33737,7 @@ class NavBar extends _react.Component {
                         href: "/",
                         __source: {
                             fileName: "src/components/navbar/navbar.jsx",
-                            lineNumber: 29
+                            lineNumber: 30
                         },
                         __self: this,
                         children: "MyFlix"
@@ -33746,7 +33746,7 @@ class NavBar extends _react.Component {
                         "aria-controls": "responsive-navbar-nav",
                         __source: {
                             fileName: "src/components/navbar/navbar.jsx",
-                            lineNumber: 32
+                            lineNumber: 33
                         },
                         __self: this
                     }),
@@ -33754,7 +33754,7 @@ class NavBar extends _react.Component {
                         id: "responsive-navbar-nav",
                         __source: {
                             fileName: "src/components/navbar/navbar.jsx",
-                            lineNumber: 33
+                            lineNumber: 34
                         },
                         __self: this,
                         children: [
@@ -33762,7 +33762,7 @@ class NavBar extends _react.Component {
                                 className: "ml-auto",
                                 __source: {
                                     fileName: "src/components/navbar/navbar.jsx",
-                                    lineNumber: 34
+                                    lineNumber: 35
                                 },
                                 __self: this,
                                 children: [
@@ -33770,7 +33770,7 @@ class NavBar extends _react.Component {
                                         href: `/users/${user}`,
                                         __source: {
                                             fileName: "src/components/navbar/navbar.jsx",
-                                            lineNumber: 36
+                                            lineNumber: 37
                                         },
                                         __self: this,
                                         children: "Profile"
@@ -33780,7 +33780,7 @@ class NavBar extends _react.Component {
                                         ,
                                         __source: {
                                             fileName: "src/components/navbar/navbar.jsx",
-                                            lineNumber: 39
+                                            lineNumber: 40
                                         },
                                         __self: this,
                                         children: "Logout"
@@ -33789,7 +33789,7 @@ class NavBar extends _react.Component {
                                         href: "/",
                                         __source: {
                                             fileName: "src/components/navbar/navbar.jsx",
-                                            lineNumber: 41
+                                            lineNumber: 42
                                         },
                                         __self: this,
                                         children: "Login"
@@ -33798,18 +33798,18 @@ class NavBar extends _react.Component {
                                         href: "/register",
                                         __source: {
                                             fileName: "src/components/navbar/navbar.jsx",
-                                            lineNumber: 42
+                                            lineNumber: 43
                                         },
                                         __self: this,
                                         children: "Register"
                                     })
                                 ]
                             }),
-                            this.isAuth() && /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
+                            this.isAuth() && path === "/" && /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                                 className: "d-flex",
                                 __source: {
                                     fileName: "src/components/navbar/navbar.jsx",
-                                    lineNumber: 45
+                                    lineNumber: 46
                                 },
                                 __self: this,
                                 children: [
@@ -33820,7 +33820,7 @@ class NavBar extends _react.Component {
                                         "aria-label": "Search",
                                         __source: {
                                             fileName: "src/components/navbar/navbar.jsx",
-                                            lineNumber: 46
+                                            lineNumber: 47
                                         },
                                         __self: this
                                     }),
@@ -33828,7 +33828,7 @@ class NavBar extends _react.Component {
                                         variant: "outline-success",
                                         __source: {
                                             fileName: "src/components/navbar/navbar.jsx",
-                                            lineNumber: 52
+                                            lineNumber: 53
                                         },
                                         __self: this,
                                         children: "Search"

@@ -23,6 +23,7 @@ class NavBar extends Component {
 
   render() {
     const { onBackLog, user } = this.props;
+    const path = window.location.pathname;
     return (
       <Navbar className="main-nav" sticky="top" bg="dark" variant="dark">
         <Container>
@@ -41,7 +42,7 @@ class NavBar extends Component {
               {!this.isAuth() && <Nav.Link href="/">Login</Nav.Link>}
               {!this.isAuth() && <Nav.Link href="/register">Register</Nav.Link>}
             </Nav>
-            {this.isAuth() && (
+            {this.isAuth() && path === "/" && (
               <Form className="d-flex">
                 <FormControl
                   type="search"
