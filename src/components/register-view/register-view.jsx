@@ -19,8 +19,8 @@ export function RegisterView(props) {
     if (!username) {
       setUsernameErr("Username Required");
       isReq = false;
-    } else if (username.length < 2) {
-      setUsernameErr("Username must be at least 2 characters long");
+    } else if (username.length < 5) {
+      setUsernameErr("Username must be at least 5 characters long");
       isReq = false;
     }
     if (!password) {

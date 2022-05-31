@@ -40,9 +40,9 @@ export class MovieCard extends React.Component {
             onClick={() => {
               this.deleteMovie(movie._id);
             }}
-            variant="success"
+            variant="warning"
           >
-            Delete
+            Remove
           </Button>
         </Card.Body>
       </Card>

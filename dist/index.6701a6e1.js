@@ -32711,8 +32711,30 @@ function LoginView(props) {
     _s();
     const [username, setUsername] = _react.useState("");
     const [password, setPassword] = _react.useState("");
+    const [usernameErr, setUsernameErr] = _react.useState("");
+    const [passwordErr, setPasswordErr] = _react.useState("");
+    // validate user inputs
+    const validate = ()=>{
+        let isReq = true;
+        if (!username) {
+            setUsernameErr("Username Required");
+            isReq = false;
+        } else if (username.length < 5) {
+            setUsernameErr("Username must be at least 5 characters long");
+            isReq = false;
+        }
+        if (!password) {
+            setPasswordErr("Password Required");
+            isReq = false;
+        } else if (password.length < 6) {
+            setPasswordErr("Password must be at least 6 characters long");
+            isReq = false;
+        }
+        return isReq;
+    };
     const handleSubmit = (e)=>{
         e.preventDefault();
+        const isReq = validate();
         /* Send a request to the server for authentication */ _axiosDefault.default.post("https://myflixapi92.herokuapp.com/login", {
             Username: username,
             Password: password
@@ -32726,7 +32748,7 @@ function LoginView(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 29
+            lineNumber: 53
         },
         __self: this,
         children: [
@@ -32734,14 +32756,14 @@ function LoginView(props) {
                 controlId: "formUsername",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 30
+                    lineNumber: 54
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 31
+                            lineNumber: 55
                         },
                         __self: this,
                         children: "Username:"
@@ -32754,9 +32776,17 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 32
+                            lineNumber: 56
                         },
                         __self: this
+                    }),
+                    usernameErr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                        __source: {
+                            fileName: "src/components/login-view/login-view.jsx",
+                            lineNumber: 63
+                        },
+                        __self: this,
+                        children: usernameErr
                     })
                 ]
             }),
@@ -32764,14 +32794,14 @@ function LoginView(props) {
                 controlId: "formPassword",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 39
+                    lineNumber: 65
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 40
+                            lineNumber: 66
                         },
                         __self: this,
                         children: "Password:"
@@ -32784,9 +32814,17 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 41
+                            lineNumber: 67
                         },
                         __self: this
+                    }),
+                    passwordErr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                        __source: {
+                            fileName: "src/components/login-view/login-view.jsx",
+                            lineNumber: 74
+                        },
+                        __self: this,
+                        children: passwordErr
                     })
                 ]
             }),
@@ -32797,7 +32835,7 @@ function LoginView(props) {
                 onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 48
+                    lineNumber: 76
                 },
                 __self: this,
                 children: "Login"
@@ -32805,7 +32843,7 @@ function LoginView(props) {
         ]
     }));
 }
-_s(LoginView, "Lrw7JeD9zj6OUWhT/IH4OIvPKEk=");
+_s(LoginView, "8pGqNa6D1L55vC7VE2hBm7jlBGo=");
 _c = LoginView;
 LoginView.propTypes = {
     onLoggedIn: _propTypesDefault.default.func.isRequired
@@ -33445,8 +33483,8 @@ function RegisterView(props) {
         if (!username) {
             setUsernameErr("Username Required");
             isReq = false;
-        } else if (username.length < 2) {
-            setUsernameErr("Username must be at least 2 characters long");
+        } else if (username.length < 5) {
+            setUsernameErr("Username must be at least 5 characters long");
             isReq = false;
         }
         if (!password) {
@@ -45654,13 +45692,13 @@ class MovieCard extends _reactDefault.default.Component {
                             onClick: ()=>{
                                 this.deleteMovie(movie._id);
                             },
-                            variant: "success",
+                            variant: "warning",
                             __source: {
                                 fileName: "src/components/profile-view/favmovie-card.jsx",
                                 lineNumber: 39
                             },
                             __self: this,
-                            children: "Delete"
+                            children: "Remove"
                         })
                     ]
                 })
