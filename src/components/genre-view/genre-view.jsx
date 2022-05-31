@@ -2,31 +2,32 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import { MovieCard } from "../movie-card/movie-card";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Card } from "react-bootstrap";
 
 class GenreView extends Component {
   render() {
     const { onBackClick, genre, movies } = this.props;
     return (
-      <div className="genre-view">
-        <p>{console.log({ genre })}</p>
-        <div className="genre-name">
-          <h1 className="value">{genre.Name}</h1>
-        </div>
-        <div className="genre-description">
-          <h5 className="label">Description</h5>
-          <p className="value">{genre.Description}</p>
-        </div>
-        <div className="director-movies">
-          <h5 className="label">Movies</h5>
-          <Row>
-            {movies.map((m) => (
-              <Col md={3} key={m._id}>
-                <MovieCard movie={m} />
-              </Col>
-            ))}
-          </Row>
-        </div>
+      <>
+        <h1 className="genre-name">{genre.Name}</h1>
+        <Card>
+          <Card.Body>
+            <h5 className="label">Description</h5>
+            <p className="value">{genre.Description}</p>
+          </Card.Body>
+        </Card>
+        <Card>
+          <Card.Body>
+            <h5 className="director-movies">Movies</h5>
+            <Row>
+              {movies.map((m) => (
+                <Col xs={12} md={6} lg={4} key={m._id}>
+                  <MovieCard movie={m} />
+                </Col>
+              ))}
+            </Row>
+          </Card.Body>
+        </Card>
         <Button
           className="mt-3"
           variant="success"
@@ -37,7 +38,7 @@ class GenreView extends Component {
         >
           Back
         </Button>
-      </div>
+      </>
     );
   }
 }

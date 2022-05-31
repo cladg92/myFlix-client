@@ -111,7 +111,6 @@ export function ProfileView(props) {
         <Col xs={12} sm={4}>
           <Card>
             <Card.Body>
-              <p>{console.log(user)}</p>
               <UserInfo username={user.Username} email={user.Email} />
             </Card.Body>
           </Card>
