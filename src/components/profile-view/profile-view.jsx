@@ -137,7 +137,6 @@ export function ProfileView(props) {
           </Card>
         </Col>
       </Row>
-
       <FavoriteMovies
         favoriteMovies={favoriteMovies}
         user={currentUser}

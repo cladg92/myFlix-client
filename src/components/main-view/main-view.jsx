@@ -12,6 +12,8 @@ import ProfileView from "../profile-view/profile-view";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 
+import "./main-view.scss";
+
 class MainView extends React.Component {
   constructor() {
     super();
@@ -31,7 +33,6 @@ class MainView extends React.Component {
         user: localStorage.getItem("user"),
       });
       this.getMovies(accessToken);
-      //this.getUsers(accessToken);
     }
   }
 
@@ -50,22 +51,6 @@ class MainView extends React.Component {
         console.log(error);
       });
   }
-
-  /*getUsers(token) {
-    axios
-      .get("https://myflixapi92.herokuapp.com/users", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          users: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }*/
 
   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
 
@@ -116,7 +101,7 @@ class MainView extends React.Component {
                 if (movies.length === 0)
                   return <div className="main-view"></div>;
                 return movies.map((m) => (
-                  <Col xs={12} md={6} lg={3} key={m._id}>
+                  <Col xs={12} md={6} lg={4} key={m._id} className="movie-card">
                     <MovieCard movie={m} />
                   </Col>
                 ));

@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 
+import "./profile-view.scss";
+
 export class MovieCard extends React.Component {
   // METHODS
 
@@ -28,7 +30,6 @@ export class MovieCard extends React.Component {
 
     return (
       <Card>
-        <p>{console.log("Hello")}</p>
         <Link to={`/movies/${movie._id}`}>
           <Card.Img
             crossOrigin="anonymous"
