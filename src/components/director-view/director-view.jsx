@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
+import { MovieCard } from "../movie-card/movie-card";
+import { Col, Row } from "react-bootstrap";
 
 class DirectorView extends Component {
   render() {
-    const { onBackClick, director } = this.props;
+    const { onBackClick, director, movies } = this.props;
     return (
       <div className="director-view">
         <p>{console.log("hello")}</p>
@@ -17,6 +19,16 @@ class DirectorView extends Component {
         <div className="director-bio">
           <h5 className="label">Biography</h5>
           <p className="value">{director.Bio}</p>
+        </div>
+        <div className="director-movies">
+          <h5 className="label">Movies</h5>
+          <Row>
+            {movies.map((m) => (
+              <Col md={3} key={m._id}>
+                <MovieCard movie={m} />
+              </Col>
+            ))}
+          </Row>
         </div>
         <Button
           className="mt-3"
