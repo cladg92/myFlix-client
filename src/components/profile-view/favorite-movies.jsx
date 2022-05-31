@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { MovieCard } from "./favmovie-card";
 import { Col, Row } from "react-bootstrap";
 

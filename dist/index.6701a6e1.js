@@ -25507,49 +25507,46 @@ class MovieCard extends _reactDefault.default.Component {
                     __self: this,
                     children: console.log("Hello")
                 }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
-                    crossOrigin: "anonymous",
-                    variant: "top",
-                    src: movie.ImagePath,
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                    to: `/movies/${movie._id}`,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
                         lineNumber: 14
                     },
-                    __self: this
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
+                        crossOrigin: "anonymous",
+                        variant: "top",
+                        src: movie.ImagePath,
+                        __source: {
+                            fileName: "src/components/movie-card/movie-card.jsx",
+                            lineNumber: 15
+                        },
+                        __self: this
+                    })
                 }),
-                /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
+                /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Body, {
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 15
+                        lineNumber: 21
                     },
                     __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                        to: `/movies/${movie._id}`,
+                        __source: {
+                            fileName: "src/components/movie-card/movie-card.jsx",
+                            lineNumber: 22
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
                             __source: {
                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 16
+                                lineNumber: 23
                             },
                             __self: this,
                             children: movie.Title
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                            to: `/movies/${movie._id}`,
-                            __source: {
-                                fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 17
-                            },
-                            __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "success",
-                                __source: {
-                                    fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 18
-                                },
-                                __self: this,
-                                children: "Open"
-                            })
                         })
-                    ]
+                    })
                 })
             ]
         }));
@@ -45430,8 +45427,6 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _axios = require("axios");
-var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _favmovieCard = require("./favmovie-card");
 var _reactBootstrap = require("react-bootstrap");
 class FavoriteMovies extends _react.Component {
@@ -45443,21 +45438,21 @@ class FavoriteMovies extends _react.Component {
                     className: "justify-content-md-center",
                     __source: {
                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                        lineNumber: 12
+                        lineNumber: 11
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                         xs: 12,
                         __source: {
                             fileName: "src/components/profile-view/favorite-movies.jsx",
-                            lineNumber: 13
+                            lineNumber: 12
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx("h5", {
                             className: "label",
                             __source: {
                                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                                lineNumber: 14
+                                lineNumber: 13
                             },
                             __self: this,
                             children: "My favourite movies"
@@ -45468,7 +45463,7 @@ class FavoriteMovies extends _react.Component {
                     className: "justify-content-md-center",
                     __source: {
                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                        lineNumber: 17
+                        lineNumber: 16
                     },
                     __self: this,
                     children: favoriteMovies.map((m)=>{
@@ -45478,7 +45473,7 @@ class FavoriteMovies extends _react.Component {
                             lg: 3,
                             __source: {
                                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                                lineNumber: 20
+                                lineNumber: 19
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_favmovieCard.MovieCard, {
@@ -45487,7 +45482,7 @@ class FavoriteMovies extends _react.Component {
                                 movie: m,
                                 __source: {
                                     fileName: "src/components/profile-view/favorite-movies.jsx",
-                                    lineNumber: 21
+                                    lineNumber: 20
                                 },
                                 __self: this
                             })
@@ -45505,7 +45500,7 @@ exports.default = FavoriteMovies;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","axios":"iYoWk","./favmovie-card":"cK75T","react":"6TuXu"}],"cK75T":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","./favmovie-card":"cK75T","react":"6TuXu"}],"cK75T":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$8052 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -45558,46 +45553,45 @@ class MovieCard extends _reactDefault.default.Component {
                     __self: this,
                     children: console.log("Hello")
                 }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
-                    crossOrigin: "anonymous",
-                    variant: "top",
-                    src: movie.ImagePath,
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                    to: `/movies/${movie._id}`,
                     __source: {
                         fileName: "src/components/profile-view/favmovie-card.jsx",
                         lineNumber: 32
                     },
-                    __self: this
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
+                        crossOrigin: "anonymous",
+                        variant: "top",
+                        src: movie.ImagePath,
+                        __source: {
+                            fileName: "src/components/profile-view/favmovie-card.jsx",
+                            lineNumber: 33
+                        },
+                        __self: this
+                    })
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
                     __source: {
                         fileName: "src/components/profile-view/favmovie-card.jsx",
-                        lineNumber: 33
+                        lineNumber: 39
                     },
                     __self: this,
                     children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
-                            __source: {
-                                fileName: "src/components/profile-view/favmovie-card.jsx",
-                                lineNumber: 34
-                            },
-                            __self: this,
-                            children: movie.Title
-                        }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
                             to: `/movies/${movie._id}`,
                             __source: {
                                 fileName: "src/components/profile-view/favmovie-card.jsx",
-                                lineNumber: 35
+                                lineNumber: 40
                             },
                             __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "success",
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
                                 __source: {
                                     fileName: "src/components/profile-view/favmovie-card.jsx",
-                                    lineNumber: 36
+                                    lineNumber: 41
                                 },
                                 __self: this,
-                                children: "Open"
+                                children: movie.Title
                             })
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
@@ -45607,7 +45601,7 @@ class MovieCard extends _reactDefault.default.Component {
                             variant: "warning",
                             __source: {
                                 fileName: "src/components/profile-view/favmovie-card.jsx",
-                                lineNumber: 38
+                                lineNumber: 43
                             },
                             __self: this,
                             children: "Remove"

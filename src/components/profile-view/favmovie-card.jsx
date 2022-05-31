@@ -29,11 +29,16 @@ export class MovieCard extends React.Component {
     return (
       <Card>
         <p>{console.log("Hello")}</p>
-        <Card.Img crossOrigin="anonymous" variant="top" src={movie.ImagePath} />
+        <Link to={`/movies/${movie._id}`}>
+          <Card.Img
+            crossOrigin="anonymous"
+            variant="top"
+            src={movie.ImagePath}
+          />
+        </Link>
         <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
           <Link to={`/movies/${movie._id}`}>
-            <Button variant="success">Open</Button>
+            <Card.Title>{movie.Title}</Card.Title>
           </Link>
           <Button
             onClick={() => {
