@@ -9,6 +9,7 @@ class GenreView extends Component {
     const { onBackClick, genre, movies } = this.props;
     return (
       <div className="genre-view">
+        <p>{console.log({ genre })}</p>
         <div className="genre-name">
           <h1 className="value">{genre.Name}</h1>
         </div>
@@ -44,5 +45,10 @@ class GenreView extends Component {
 export default GenreView;
 
 GenreView.propTypes = {
+  genre: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+  }).isRequired,
+  movies: PropTypes.array.isRequired,
   onBackClick: PropTypes.func.isRequired,
 };

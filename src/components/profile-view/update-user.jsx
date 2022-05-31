@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import PropTypes from "prop-types";
 
 function UpdateUser(props) {
   const {
@@ -85,3 +86,19 @@ function UpdateUser(props) {
 }
 
 export default UpdateUser;
+
+UpdateUser.propTypes = {
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  usernameErr: PropTypes.string.isRequired,
+  passwordErr: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  emailErr: PropTypes.string.isRequired,
+  updateUser: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  setBirthDate: PropTypes.func.isRequired,
+  birthDate: PropTypes.string.isRequired,
+};

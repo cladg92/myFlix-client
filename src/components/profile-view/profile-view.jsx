@@ -111,6 +111,7 @@ export function ProfileView(props) {
         <Col xs={12} sm={4}>
           <Card>
             <Card.Body>
+              <p>{console.log(user)}</p>
               <UserInfo username={user.Username} email={user.Email} />
             </Card.Body>
           </Card>
@@ -159,5 +160,13 @@ export function ProfileView(props) {
 export default ProfileView;
 
 ProfileView.propTypes = {
-  onBackClick: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+    BirthDate: PropTypes.string.isRequired,
+    FavoriteMovies: PropTypes.array.isRequired,
+  }).isRequired,
+  onBackLog: PropTypes.func.isRequired,
 };

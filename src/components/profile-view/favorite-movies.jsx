@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { MovieCard } from "./favmovie-card";
 import { Card, Col, Row } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 import "./profile-view.scss";
 
@@ -13,7 +14,7 @@ class FavoriteMovies extends Component {
         <Card.Body>
           <Row className="justify-content-md-center">
             <Col xs={12}>
-              <h5 className="label">My favourite movies</h5>
+              <h5 className="label">My favorite movies</h5>
             </Col>
           </Row>
           <Row className="justify-content-md-center">
@@ -32,3 +33,9 @@ class FavoriteMovies extends Component {
 }
 
 export default FavoriteMovies;
+
+FavoriteMovies.propTypes = {
+  favoriteMovies: PropTypes.array.isRequired,
+  token: PropTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
+};

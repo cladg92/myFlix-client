@@ -64,5 +64,6 @@ class NavBar extends Component {
 export default NavBar;
 
 NavBar.propTypes = {
+  user: PropTypes.string,
   onBackLog: PropTypes.func.isRequired,
 };

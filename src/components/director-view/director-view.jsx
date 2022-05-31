@@ -9,7 +9,6 @@ class DirectorView extends Component {
     const { onBackClick, director, movies } = this.props;
     return (
       <div className="director-view">
-        <p>{console.log("hello")}</p>
         <div className="director-name">
           <h1 className="value">{director.Name}</h1>
         </div>
@@ -48,5 +47,12 @@ class DirectorView extends Component {
 export default DirectorView;
 
 DirectorView.propTypes = {
+  director: PropTypes.shape({
+    Bio: PropTypes.string.isRequired,
+    Birth: PropTypes.string.isRequired,
+    Death: PropTypes.string.isRequired,
+    Name: PropTypes.string.isRequired,
+  }).isRequired,
+  movies: PropTypes.array.isRequired,
   onBackClick: PropTypes.func.isRequired,
 };

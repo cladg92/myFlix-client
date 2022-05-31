@@ -19,7 +19,6 @@ class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      selectedMovie: null,
       user: null,
     };
   }
@@ -75,7 +74,7 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, users } = this.state;
+    const { movies, user } = this.state;
 
     return (
       <Router>
@@ -101,7 +100,7 @@ class MainView extends React.Component {
                 if (movies.length === 0)
                   return <div className="main-view"></div>;
                 return movies.map((m) => (
-                  <Col xs={12} md={6} lg={4} key={m._id} className="movie-card">
+                  <Col xs={12} md={6} lg={3} key={m._id} className="movie-card">
                     <MovieCard movie={m} />
                   </Col>
                 ));
