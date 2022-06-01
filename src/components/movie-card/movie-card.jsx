@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+
+import "./movie-card.scss";
 
 export class MovieCard extends React.Component {
   render() {
@@ -10,12 +11,16 @@ export class MovieCard extends React.Component {
 
     return (
       <Card>
-        <Card.Img crossOrigin="anonymous" variant="top" src={movie.ImagePath} />
+        <Link to={`/movies/${movie._id}`}>
+          <Card.Img
+            crossOrigin="anonymous"
+            variant="top"
+            src={movie.ImagePath}
+          />
+        </Link>
         <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>{movie.Description}</Card.Text>
           <Link to={`/movies/${movie._id}`}>
-            <Button variant="success">Open</Button>
+            <Card.Title>{movie.Title}</Card.Title>
           </Link>
         </Card.Body>
       </Card>
@@ -25,18 +30,16 @@ export class MovieCard extends React.Component {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    ReleaseYear: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired,
-    }).isRequired,
+    Actors: PropTypes.array.isRequired,
+    Description: PropTypes.string.isRequired,
     Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
       Bio: PropTypes.string.isRequired,
       Birth: PropTypes.string.isRequired,
+      Death: PropTypes.string.isRequired,
+      Name: PropTypes.string.isRequired,
     }).isRequired,
-    Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
   }).isRequired,
 };

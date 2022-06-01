@@ -1,0 +1,14 @@
+.movie-card {
+  margin-bottom: 15px;
+}
+
+Card.Img {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+img {
+  height: 400px;
+}

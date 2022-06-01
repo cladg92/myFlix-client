@@ -12,14 +12,14 @@ import ProfileView from "../profile-view/profile-view";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 
+import "./main-view.scss";
+
 class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
       movies: [],
-      selectedMovie: null,
       user: null,
-      register: false,
     };
   }
 
@@ -100,7 +100,7 @@ class MainView extends React.Component {
                 if (movies.length === 0)
                   return <div className="main-view"></div>;
                 return movies.map((m) => (
-                  <Col md={3} key={m._id}>
+                  <Col xs={12} md={6} lg={3} key={m._id} className="movie-card">
                     <MovieCard movie={m} />
                   </Col>
                 ));
@@ -119,12 +119,18 @@ class MainView extends React.Component {
             />
             <Route
               path={`/users/${user}`}
-              render={(history) => {
+              render={(history, match) => {
                 if (!user) return <Redirect to="/" />;
                 return (
                   <Col>
                     <ProfileView
+                      history={history}
+                      match={match}
+                      movies={movies}
                       user={user}
+                      onBackLog={() => {
+                        this.onLoggedOut();
+                      }}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>
@@ -173,6 +179,9 @@ class MainView extends React.Component {
                           (m) => m.Director.Name === match.params.name
                         ).Director
                       }
+                      movies={movies.filter(
+                        (m) => m.Director.Name === match.params.name
+                      )}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>
@@ -198,6 +207,9 @@ class MainView extends React.Component {
                         movies.find((m) => m.Genre.Name === match.params.name)
                           .Genre
                       }
+                      movies={movies.filter(
+                        (m) => m.Genre.Name === match.params.name
+                      )}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>

@@ -23,6 +23,7 @@ class NavBar extends Component {
 
   render() {
     const { onBackLog, user } = this.props;
+    const path = window.location.pathname;
     return (
       <Navbar className="main-nav" sticky="top" bg="dark" variant="dark">
         <Container>
@@ -32,8 +33,9 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
+              {this.isAuth() && <Nav.Link href="/">Movies</Nav.Link>}
               {this.isAuth() && (
-                <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
+                <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>
               )}
               {this.isAuth() && (
                 <Nav.Link onClick={() => onBackLog()}>Logout</Nav.Link>
@@ -41,7 +43,7 @@ class NavBar extends Component {
               {!this.isAuth() && <Nav.Link href="/">Login</Nav.Link>}
               {!this.isAuth() && <Nav.Link href="/register">Register</Nav.Link>}
             </Nav>
-            {this.isAuth() && (
+            {this.isAuth() && path === "/" && (
               <Form className="d-flex">
                 <FormControl
                   type="search"
@@ -62,5 +64,6 @@ class NavBar extends Component {
 export default NavBar;
 
 NavBar.propTypes = {
+  user: PropTypes.string,
   onBackLog: PropTypes.func.isRequired,
 };
