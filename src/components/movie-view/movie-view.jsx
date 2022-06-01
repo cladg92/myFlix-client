@@ -9,7 +9,7 @@ export class MovieView extends React.Component {
     const { movie, onBackClick } = this.props;
 
     return (
-      <>
+      <Container fluid>
         <h1 className="movie-title">{movie.Title}</h1>
         <Row>
           <Col>
@@ -26,6 +26,14 @@ export class MovieView extends React.Component {
                   <Link to={`/directors/${movie.Director.Name}`}>
                     <span variant="link">{movie.Director.Name}</span>
                   </Link>
+                </div>
+                <div className="movie-actors">
+                  <span className="label">Actors: </span>
+                  <span variant="link">
+                    {movie.Actors.map((a) => (
+                      <span key={a}>- {a} </span>
+                    ))}
+                  </span>
                 </div>
               </Card.Body>
             </Card>
@@ -54,7 +62,7 @@ export class MovieView extends React.Component {
         >
           Back
         </Button>
-      </>
+      </Container>
     );
   }
 }
@@ -62,6 +70,7 @@ export class MovieView extends React.Component {
 MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
+    Actors: PropTypes.array.isRequired,
     ReleaseYear: PropTypes.string.isRequired,
     Genre: PropTypes.shape({
       Name: PropTypes.string.isRequired,
