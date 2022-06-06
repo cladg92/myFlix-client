@@ -25,7 +25,7 @@ export class MovieCard extends React.Component {
       )
       .then(() => {
         alert(`The movie was successfully added to favorites.`);
-        //window.location.reload();
+        window.location.reload();
       })
       .catch((error) => console.error(error));
   }
@@ -40,7 +40,7 @@ export class MovieCard extends React.Component {
       })
       .then(() => {
         alert(`The movie was successfully deleted.`);
-        //window.open(`/users/${this.props.user}`, "_self");
+        window.location.reload();
       })
       .catch((error) => console.error(error));
   }
@@ -81,7 +81,7 @@ export class MovieCard extends React.Component {
             }}
             variant="warning"
           >
-            Add to favorites
+            Toggle
           </Button>
         </Card.Body>
       </Card>

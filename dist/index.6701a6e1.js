@@ -44913,7 +44913,7 @@ class MovieCard extends _reactDefault.default.Component {
             }
         }).then(()=>{
             alert(`The movie was successfully added to favorites.`);
-        //window.location.reload();
+            window.location.reload();
         }).catch((error)=>console.error(error)
         );
     }
@@ -44927,7 +44927,7 @@ class MovieCard extends _reactDefault.default.Component {
             }
         }).then(()=>{
             alert(`The movie was successfully deleted.`);
-        //window.open(`/users/${this.props.user}`, "_self");
+            window.location.reload();
         }).catch((error)=>console.error(error)
         );
     }
@@ -45002,7 +45002,7 @@ class MovieCard extends _reactDefault.default.Component {
                                 lineNumber: 78
                             },
                             __self: this,
-                            children: "Add to favorites"
+                            children: "Toggle"
                         })
                     ]
                 })
