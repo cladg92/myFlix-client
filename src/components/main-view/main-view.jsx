@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 
-import { setMovies } from "../../actions/actions";
+import { setMovies, setUser } from "../../actions/actions";
 import MoviesList from "../movies-list/movies-list";
 
 import { LoginView } from "../login-view/login-view";
@@ -19,21 +19,19 @@ import { Redirect } from "react-router-dom";
 import "./main-view.scss";
 
 class MainView extends React.Component {
-  constructor() {
+  /*constructor() {
     super();
     this.state = {
       user: null,
     };
-  }
+  }*/
 
   // METHODS
 
   componentDidMount() {
     let accessToken = localStorage.getItem("token");
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem("user"),
-      });
+      this.props.setUser(localStorage.getItem("user"));
       this.getMovies(accessToken);
     }
   }
@@ -56,9 +54,7 @@ class MainView extends React.Component {
 
   onLoggedIn(authData) {
     console.log(authData);
-    this.setState({
-      user: authData.user.Username,
-    });
+    this.props.setUser(authData.user.Username);
 
     localStorage.setItem("token", authData.token);
     localStorage.setItem("user", authData.user.Username);
@@ -68,16 +64,13 @@ class MainView extends React.Component {
   onLoggedOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    this.setState({
-      user: null,
-    });
+    this.props.setUser(null);
     window.open("/", "_self");
   }
 
   render() {
     // movies is extracted from this.props rather than from the this.state
-    let { movies } = this.props;
-    let { user } = this.state;
+    let { movies, user } = this.props;
 
     return (
       <Router>
@@ -119,7 +112,12 @@ class MainView extends React.Component {
             <Route
               path={`/users/${user}`}
               render={(history, match) => {
-                if (!user) return <Redirect to="/" />;
+                if (!user)
+                  return (
+                    <Col>
+                      <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                    </Col>
+                  );
                 return (
                   <Col>
                     <ProfileView
@@ -224,7 +222,19 @@ class MainView extends React.Component {
 
 // state from store and pass it as a prop to the component
 let mapStateToProps = (state) => {
-  return { movies: state.movies };
+  return { movies: state.movies, user: state.user };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUser: (user) => {
+      dispatch(setUser(user));
+    },
+    setMovies: (movies) => {
+      dispatch(setMovies(movies));
+    },
+  };
+};
+
 // connect() to connect component to store
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, mapDispatchToProps)(MainView);
