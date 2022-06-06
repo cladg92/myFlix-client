@@ -44890,19 +44890,36 @@ parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _card = require("react-bootstrap/Card");
 var _cardDefault = parcelHelpers.interopDefault(_card);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _reactRouterDom = require("react-router-dom");
 var _movieCardScss = require("./movie-card.scss");
 class MovieCard extends _reactDefault.default.Component {
+    // METHODS
+    addMovie(id) {
+        const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
+        _axiosDefault.default.post(`https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`, null, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(()=>{
+            alert(`The movie was successfully added to favorites.`);
+        }).catch((error)=>console.error(error)
+        );
+    }
     render() {
         const { movie  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
             __source: {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 13
+                lineNumber: 34
             },
             __self: this,
             children: [
@@ -44910,7 +44927,7 @@ class MovieCard extends _reactDefault.default.Component {
                     to: `/movies/${movie._id}`,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 14
+                        lineNumber: 35
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
@@ -44919,33 +44936,47 @@ class MovieCard extends _reactDefault.default.Component {
                         src: movie.ImagePath,
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 15
+                            lineNumber: 36
                         },
                         __self: this
                     })
                 }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Body, {
+                /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 21
+                        lineNumber: 42
                     },
                     __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                        to: `/movies/${movie._id}`,
-                        __source: {
-                            fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 22
-                        },
-                        __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                            to: `/movies/${movie._id}`,
                             __source: {
                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 23
+                                lineNumber: 43
                             },
                             __self: this,
-                            children: movie.Title
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+                                __source: {
+                                    fileName: "src/components/movie-card/movie-card.jsx",
+                                    lineNumber: 44
+                                },
+                                __self: this,
+                                children: movie.Title
+                            })
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                            onClick: ()=>{
+                                this.addMovie(movie._id);
+                            },
+                            variant: "warning",
+                            __source: {
+                                fileName: "src/components/movie-card/movie-card.jsx",
+                                lineNumber: 46
+                            },
+                            __self: this,
+                            children: "Add to favorites"
                         })
-                    })
+                    ]
                 })
             ]
         }));
@@ -44953,18 +44984,23 @@ class MovieCard extends _reactDefault.default.Component {
 }
 MovieCard.propTypes = {
     movie: _propTypesDefault.default.shape({
-        Actors: _propTypesDefault.default.array.isRequired,
-        Description: _propTypesDefault.default.string.isRequired,
-        Director: _propTypesDefault.default.shape({
-            Bio: _propTypesDefault.default.string.isRequired,
-            Birth: _propTypesDefault.default.string.isRequired,
-            Death: _propTypesDefault.default.string.isRequired,
-            Name: _propTypesDefault.default.string.isRequired
-        }).isRequired,
-        ImagePath: _propTypesDefault.default.string.isRequired,
         _id: _propTypesDefault.default.string.isRequired,
-        Title: _propTypesDefault.default.string.isRequired
-    }).isRequired
+        Title: _propTypesDefault.default.string.isRequired,
+        ReleaseYear: _propTypesDefault.default.string.isRequired,
+        Genre: _propTypesDefault.default.shape({
+            Name: _propTypesDefault.default.string.isRequired,
+            Description: _propTypesDefault.default.string.isRequired
+        }).isRequired,
+        Director: _propTypesDefault.default.shape({
+            Name: _propTypesDefault.default.string.isRequired,
+            Bio: _propTypesDefault.default.string.isRequired,
+            Birth: _propTypesDefault.default.string.isRequired
+        }).isRequired,
+        Description: _propTypesDefault.default.string.isRequired,
+        ImagePath: _propTypesDefault.default.string.isRequired
+    }).isRequired,
+    user: _propTypesDefault.default.string.isRequired,
+    token: _propTypesDefault.default.string.isRequired
 };
 
   $parcel$ReactRefreshHelpers$4249.postlude(module);
@@ -44972,7 +45008,7 @@ MovieCard.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","prop-types":"1tgq3","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","./movie-card.scss":"cF5gT"}],"cF5gT":[function() {},{}],"8WCoL":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","prop-types":"1tgq3","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","./movie-card.scss":"cF5gT","react-bootstrap/Button":"9CzHT","axios":"iYoWk"}],"cF5gT":[function() {},{}],"8WCoL":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$5f0a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
