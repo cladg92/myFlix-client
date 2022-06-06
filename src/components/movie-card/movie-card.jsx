@@ -10,9 +10,11 @@ import "./movie-card.scss";
 export class MovieCard extends React.Component {
   // METHODS
 
+  //calling the API to add a favorite Movie to the user
   addMovie(id) {
     const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
+    console.log(this.props.favoriteMovies);
     axios
       .post(
         `https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`,
@@ -23,8 +25,38 @@ export class MovieCard extends React.Component {
       )
       .then(() => {
         alert(`The movie was successfully added to favorites.`);
+        //window.location.reload();
       })
       .catch((error) => console.error(error));
+  }
+
+  //calling API to remove movie from the users list
+  deleteMovie(id) {
+    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    axios
+      .delete(`https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        alert(`The movie was successfully deleted.`);
+        //window.open(`/users/${this.props.user}`, "_self");
+      })
+      .catch((error) => console.error(error));
+  }
+
+  //when clicked the movie is either added/removed from the user via the API
+  favMovieClick(e) {
+    console.log("Add/remove");
+    e.preventDefault();
+    let { favoriteMovies } = this.props;
+    let favMoviesIds = favoriteMovies.map((m) => m._id);
+    let movieId = this.props.movie._id;
+    if (favMoviesIds.includes(movieId)) {
+      this.deleteMovie(movieId);
+    } else {
+      this.addMovie(movieId);
+    }
   }
 
   render() {
@@ -44,8 +76,8 @@ export class MovieCard extends React.Component {
             <Card.Title>{movie.Title}</Card.Title>
           </Link>
           <Button
-            onClick={() => {
-              this.addMovie(movie._id);
+            onClick={(e) => {
+              this.favMovieClick(e);
             }}
             variant="warning"
           >
