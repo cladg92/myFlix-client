@@ -1,0 +1,35 @@
+
+.fav-movie {
+  margin-bottom: 15px;
+}
+
+Card.Img {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+img {
+  height: 400px;
+}
+
+.card {
+  margin-bottom: 15px;
+}
+.movie-card {
+  margin-bottom: 15px;
+}
+
+Card.Img {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+img {
+  height: 400px;
+}
+
+/*# sourceMappingURL=index.css.map */
