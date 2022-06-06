@@ -1,7 +1,11 @@
 import React from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+
+import { setMovies } from "../../actions/actions";
+import MoviesList from "../movies-list/movies-list";
+
 import { LoginView } from "../login-view/login-view";
-import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import NavBar from "../navbar/navbar";
 import { Container, Row, Col } from "react-bootstrap";
@@ -18,7 +22,6 @@ class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
       user: null,
     };
   }
@@ -41,10 +44,8 @@ class MainView extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
+        // Assign the result to the setMovies state
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -74,7 +75,9 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state;
+    // movies is extracted from this.props rather than from the this.state
+    let { movies } = this.props;
+    let { user } = this.state;
 
     return (
       <Router>
@@ -99,11 +102,7 @@ class MainView extends React.Component {
                 // Before the movies have been loaded
                 if (movies.length === 0)
                   return <div className="main-view"></div>;
-                return movies.map((m) => (
-                  <Col xs={12} md={6} lg={3} key={m._id} className="movie-card">
-                    <MovieCard movie={m} />
-                  </Col>
-                ));
+                return <MoviesList movies={movies} />;
               }}
             />
             <Route
@@ -223,4 +222,9 @@ class MainView extends React.Component {
   }
 }
 
-export default MainView;
+// state from store and pass it as a prop to the component
+let mapStateToProps = (state) => {
+  return { movies: state.movies };
+};
+// connect() to connect component to store
+export default connect(mapStateToProps, { setMovies })(MainView);

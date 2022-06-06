@@ -43,17 +43,6 @@ class NavBar extends Component {
               {!this.isAuth() && <Nav.Link href="/">Login</Nav.Link>}
               {!this.isAuth() && <Nav.Link href="/register">Register</Nav.Link>}
             </Nav>
-            {this.isAuth() && path === "/" && (
-              <Form className="d-flex">
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
-              </Form>
-            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

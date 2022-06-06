@@ -160,12 +160,12 @@ export default ProfileView;
 
 ProfileView.propTypes = {
   user: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    Username: PropTypes.string.isRequired,
-    Password: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    BirthDate: PropTypes.string.isRequired,
-    FavoriteMovies: PropTypes.array.isRequired,
+    _id: PropTypes.string,
+    Username: PropTypes.string,
+    Password: PropTypes.string,
+    Email: PropTypes.string,
+    BirthDate: PropTypes.string,
+    FavoriteMovies: PropTypes.array,
   }).isRequired,
   onBackLog: PropTypes.func.isRequired,
 };
