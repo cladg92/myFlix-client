@@ -44725,8 +44725,6 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
-var _axios = require("axios");
-var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _propTypes = require("prop-types");
@@ -44741,7 +44739,7 @@ function DirectorView(props) {
                 className: "director-name",
                 __source: {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 13
+                    lineNumber: 12
                 },
                 __self: this,
                 children: director.Name
@@ -44750,7 +44748,7 @@ function DirectorView(props) {
                 className: "director-birth",
                 __source: {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 14
+                    lineNumber: 13
                 },
                 __self: this,
                 children: `${director.Birth} - ${director.Death}`
@@ -44758,13 +44756,13 @@ function DirectorView(props) {
             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                 __source: {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 15
+                    lineNumber: 14
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 16
+                        lineNumber: 15
                     },
                     __self: this,
                     children: [
@@ -44772,7 +44770,7 @@ function DirectorView(props) {
                             className: "label",
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 17
+                                lineNumber: 16
                             },
                             __self: this,
                             children: "Biography"
@@ -44781,7 +44779,7 @@ function DirectorView(props) {
                             className: "value",
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 18
+                                lineNumber: 17
                             },
                             __self: this,
                             children: director.Bio
@@ -44792,13 +44790,13 @@ function DirectorView(props) {
             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                 __source: {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 21
+                    lineNumber: 20
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 22
+                        lineNumber: 21
                     },
                     __self: this,
                     children: [
@@ -44806,7 +44804,7 @@ function DirectorView(props) {
                             className: "label",
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 23
+                                lineNumber: 22
                             },
                             __self: this,
                             children: "Movies"
@@ -44815,7 +44813,7 @@ function DirectorView(props) {
                             className: "justify-content-md-center",
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 24
+                                lineNumber: 23
                             },
                             __self: this,
                             children: movies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
@@ -44824,14 +44822,14 @@ function DirectorView(props) {
                                     lg: 4,
                                     __source: {
                                         fileName: "src/components/director-view/director-view.jsx",
-                                        lineNumber: 26
+                                        lineNumber: 25
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
                                         movie: m,
                                         __source: {
                                             fileName: "src/components/director-view/director-view.jsx",
-                                            lineNumber: 27
+                                            lineNumber: 26
                                         },
                                         __self: this
                                     })
@@ -44850,7 +44848,7 @@ function DirectorView(props) {
                 },
                 __source: {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 33
+                    lineNumber: 32
                 },
                 __self: this,
                 children: "Back"
@@ -44878,7 +44876,7 @@ $RefreshReg$(_c, "DirectorView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Button":"9CzHT","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","../movie-card/movie-card":"6EiBJ","react-bootstrap":"h2YVd","axios":"iYoWk"}],"6EiBJ":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Button":"9CzHT","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","../movie-card/movie-card":"6EiBJ","react-bootstrap":"h2YVd"}],"6EiBJ":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$4249 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -45131,8 +45129,6 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
-var _axios = require("axios");
-var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _propTypes = require("prop-types");
@@ -45147,7 +45143,7 @@ function GenreView(props) {
                 className: "genre-name",
                 __source: {
                     fileName: "src/components/genre-view/genre-view.jsx",
-                    lineNumber: 13
+                    lineNumber: 12
                 },
                 __self: this,
                 children: genre.Name
@@ -45155,13 +45151,13 @@ function GenreView(props) {
             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                 __source: {
                     fileName: "src/components/genre-view/genre-view.jsx",
-                    lineNumber: 14
+                    lineNumber: 13
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 15
+                        lineNumber: 14
                     },
                     __self: this,
                     children: [
@@ -45169,7 +45165,7 @@ function GenreView(props) {
                             className: "label",
                             __source: {
                                 fileName: "src/components/genre-view/genre-view.jsx",
-                                lineNumber: 16
+                                lineNumber: 15
                             },
                             __self: this,
                             children: "Description"
@@ -45178,7 +45174,7 @@ function GenreView(props) {
                             className: "value",
                             __source: {
                                 fileName: "src/components/genre-view/genre-view.jsx",
-                                lineNumber: 17
+                                lineNumber: 16
                             },
                             __self: this,
                             children: genre.Description
@@ -45189,13 +45185,13 @@ function GenreView(props) {
             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                 __source: {
                     fileName: "src/components/genre-view/genre-view.jsx",
-                    lineNumber: 20
+                    lineNumber: 19
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 21
+                        lineNumber: 20
                     },
                     __self: this,
                     children: [
@@ -45203,7 +45199,7 @@ function GenreView(props) {
                             className: "director-movies",
                             __source: {
                                 fileName: "src/components/genre-view/genre-view.jsx",
-                                lineNumber: 22
+                                lineNumber: 21
                             },
                             __self: this,
                             children: "Movies"
@@ -45211,7 +45207,7 @@ function GenreView(props) {
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                             __source: {
                                 fileName: "src/components/genre-view/genre-view.jsx",
-                                lineNumber: 23
+                                lineNumber: 22
                             },
                             __self: this,
                             children: movies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
@@ -45220,14 +45216,14 @@ function GenreView(props) {
                                     lg: 4,
                                     __source: {
                                         fileName: "src/components/genre-view/genre-view.jsx",
-                                        lineNumber: 25
+                                        lineNumber: 24
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
                                         movie: m,
                                         __source: {
                                             fileName: "src/components/genre-view/genre-view.jsx",
-                                            lineNumber: 26
+                                            lineNumber: 25
                                         },
                                         __self: this
                                     })
@@ -45246,7 +45242,7 @@ function GenreView(props) {
                 },
                 __source: {
                     fileName: "src/components/genre-view/genre-view.jsx",
-                    lineNumber: 32
+                    lineNumber: 31
                 },
                 __self: this,
                 children: "Back"
@@ -45272,7 +45268,7 @@ $RefreshReg$(_c, "GenreView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Button":"9CzHT","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","../movie-card/movie-card":"6EiBJ","react-bootstrap":"h2YVd","axios":"iYoWk"}],"2E7Aw":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Button":"9CzHT","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","../movie-card/movie-card":"6EiBJ","react-bootstrap":"h2YVd"}],"2E7Aw":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$58c6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
