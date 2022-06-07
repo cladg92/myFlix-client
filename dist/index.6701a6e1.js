@@ -47783,7 +47783,7 @@ function MoviesList(props) {
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     sm: 12,
-                    md: 5,
+                    md: 6,
                     className: "mt-3 mb-3",
                     __source: {
                         fileName: "src/components/movies-list/movies-list.jsx",
