@@ -3,12 +3,13 @@
   top: 10px;
   right: 10px;
   z-index: 1000;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
 }
 
-Link {
-  text-decoration: none;
+.fav-icon:hover {
+  height: 30px;
+  width: 30px;
 }
 .fav-movie {
   margin-bottom: 15px;
@@ -27,6 +28,19 @@ img {
 
 .card {
   margin-bottom: 15px;
+}
+.x-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  height: 10px;
+  width: 10px;
+}
+
+.x-icon:hover {
+  height: 15px;
+  width: 15px;
 }
 .movie-card {
   margin-bottom: 15px;

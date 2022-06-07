@@ -1,58 +1,76 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 
-import "./profile-view.scss";
+//favorite images
 
-export class MovieCard extends React.Component {
-  // METHODS
+import xMark from "../../img/x-mark.png";
 
-  deleteMovie(id) {
+import "./favmovie-card.scss";
+
+export function MovieCard(props) {
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const { movie } = props;
+
+  // set favorite movies
+  const getFavMovies = () => {
+    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
     axios
-      .delete(
-        `https://myflixapi92.herokuapp.com/users/${this.props.user}/movies/${id}`,
-        {
-          headers: { Authorization: `Bearer ${this.props.token}` },
-        }
-      )
-      .then(() => {
-        alert(`The movie was successfully deleted.`);
-        window.open(`/users/${this.props.user}`, "_self");
+      .get(`https://myflixapi92.herokuapp.com/users/${user}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setFavoriteMovies(response.data.FavoriteMovies);
       })
       .catch((error) => console.error(error));
-  }
+  };
 
-  render() {
-    const { movie } = this.props;
+  useEffect(() => {
+    getFavMovies();
+  }, []);
 
-    return (
-      <Card>
-        <Link to={`/movies/${movie._id}`}>
-          <Card.Img
-            crossOrigin="anonymous"
-            variant="top"
-            src={movie.ImagePath}
-          />
+  // METHODS
+
+  //calling API to remove movie from the users list
+  const deleteMovie = (id) => {
+    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    axios
+      .delete(`https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => console.error(error));
+  };
+
+  return (
+    <Card>
+      <Link to={`/movies/${movie._id}`}>
+        <Card.Img crossOrigin="anonymous" variant="top" src={movie.ImagePath} />
+      </Link>
+      <Card.Body>
+        <Link
+          to={`/movies/${movie._id}`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <Card.Title className="card-title">{movie.Title}</Card.Title>
         </Link>
-        <Card.Body>
-          <Link to={`/movies/${movie._id}`}>
-            <Card.Title>{movie.Title}</Card.Title>
-          </Link>
-          <Button
-            onClick={() => {
-              this.deleteMovie(movie._id);
-            }}
-            variant="warning"
-          >
-            Remove
-          </Button>
-        </Card.Body>
-      </Card>
-    );
-  }
+        <a
+          href="#"
+          onClick={() => {
+            deleteMovie(movie._id);
+          }}
+        >
+          <img src={xMark} className="x-icon" />
+        </a>
+      </Card.Body>
+    </Card>
+  );
 }
 
 MovieCard.propTypes = {

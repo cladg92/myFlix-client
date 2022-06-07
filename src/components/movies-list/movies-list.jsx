@@ -13,7 +13,6 @@ const mapStateToProps = (state) => {
 };
 
 function MoviesList(props) {
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
   const { movies, visibilityFilter } = props;
   let filteredMovies = movies;
 
@@ -23,35 +22,16 @@ function MoviesList(props) {
     );
   }
 
-  // set favorite movies
-  const getFavMovies = () => {
-    const user = localStorage.getItem("user");
-    const token = localStorage.getItem("token");
-    axios
-      .get(`https://myflixapi92.herokuapp.com/users/${user}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        setFavoriteMovies(response.data.FavoriteMovies);
-      })
-      .catch((error) => console.error(error));
-  };
-
-  useEffect(() => {
-    getFavMovies();
-  }, []);
-
   if (!movies) return <div className="main-view" />;
 
   return (
     <>
       <Col md={12} style={{ margin: "1em" }}>
-        <p>{console.log(favoriteMovies)}</p>
         <VisibilityFilterInput visibilityFilter={visibilityFilter} />
       </Col>
       {filteredMovies.map((m) => (
         <Col md={3} key={m._id}>
-          <MovieCard favoriteMovies={favoriteMovies} movie={m} />
+          <MovieCard movie={m} />
         </Col>
       ))}
     </>
