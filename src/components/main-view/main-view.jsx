@@ -103,7 +103,7 @@ class MainView extends React.Component {
               render={() => {
                 if (user) return <Redirect to="/" />;
                 return (
-                  <Col>
+                  <Col md={7}>
                     <RegisterView />
                   </Col>
                 );

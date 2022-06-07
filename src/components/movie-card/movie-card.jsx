@@ -133,6 +133,4 @@ MovieCard.propTypes = {
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
   }).isRequired,
-  user: PropTypes.string.isRequired,
-  token: PropTypes.string.isRequired,
 };

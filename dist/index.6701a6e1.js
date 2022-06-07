@@ -24467,6 +24467,7 @@ class MainView extends _reactDefault.default.Component {
                                         to: "/"
                                     }));
                                     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                        md: 7,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_registerView.RegisterView, {
                                         })
                                     }));
@@ -44598,7 +44599,6 @@ class NavBar extends _react.Component {
     }
     render() {
         const { onBackLog , user  } = this.props;
-        const path = window.location.pathname;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar, {
             className: "main-nav",
             sticky: "top",
@@ -44606,13 +44606,13 @@ class NavBar extends _react.Component {
             variant: "dark",
             __source: {
                 fileName: "src/components/navbar/navbar.jsx",
-                lineNumber: 28
+                lineNumber: 27
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
                 __source: {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 29
+                    lineNumber: 28
                 },
                 __self: this,
                 children: [
@@ -44621,7 +44621,7 @@ class NavBar extends _react.Component {
                         href: "/",
                         __source: {
                             fileName: "src/components/navbar/navbar.jsx",
-                            lineNumber: 30
+                            lineNumber: 29
                         },
                         __self: this,
                         children: "MyFlix"
@@ -44630,7 +44630,7 @@ class NavBar extends _react.Component {
                         "aria-controls": "responsive-navbar-nav",
                         __source: {
                             fileName: "src/components/navbar/navbar.jsx",
-                            lineNumber: 33
+                            lineNumber: 32
                         },
                         __self: this
                     }),
@@ -44638,14 +44638,14 @@ class NavBar extends _react.Component {
                         id: "responsive-navbar-nav",
                         __source: {
                             fileName: "src/components/navbar/navbar.jsx",
-                            lineNumber: 34
+                            lineNumber: 33
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Nav, {
                             className: "ml-auto",
                             __source: {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 35
+                                lineNumber: 34
                             },
                             __self: this,
                             children: [
@@ -44653,7 +44653,7 @@ class NavBar extends _react.Component {
                                     href: "/",
                                     __source: {
                                         fileName: "src/components/navbar/navbar.jsx",
-                                        lineNumber: 36
+                                        lineNumber: 35
                                     },
                                     __self: this,
                                     children: "Movies"
@@ -44662,7 +44662,7 @@ class NavBar extends _react.Component {
                                     href: `/users/${user}`,
                                     __source: {
                                         fileName: "src/components/navbar/navbar.jsx",
-                                        lineNumber: 38
+                                        lineNumber: 37
                                     },
                                     __self: this,
                                     children: "Profile"
@@ -44672,7 +44672,7 @@ class NavBar extends _react.Component {
                                     ,
                                     __source: {
                                         fileName: "src/components/navbar/navbar.jsx",
-                                        lineNumber: 41
+                                        lineNumber: 40
                                     },
                                     __self: this,
                                     children: "Logout"
@@ -44681,7 +44681,7 @@ class NavBar extends _react.Component {
                                     href: "/",
                                     __source: {
                                         fileName: "src/components/navbar/navbar.jsx",
-                                        lineNumber: 43
+                                        lineNumber: 42
                                     },
                                     __self: this,
                                     children: "Login"
@@ -44690,7 +44690,7 @@ class NavBar extends _react.Component {
                                     href: "/register",
                                     __source: {
                                         fileName: "src/components/navbar/navbar.jsx",
-                                        lineNumber: 44
+                                        lineNumber: 43
                                     },
                                     __self: this,
                                     children: "Register"
@@ -45065,9 +45065,7 @@ MovieCard.propTypes = {
         }).isRequired,
         Description: _propTypesDefault.default.string.isRequired,
         ImagePath: _propTypesDefault.default.string.isRequired
-    }).isRequired,
-    user: _propTypesDefault.default.string.isRequired,
-    token: _propTypesDefault.default.string.isRequired
+    }).isRequired
 };
 var _c;
 $RefreshReg$(_c, "MovieCard");
@@ -47752,8 +47750,6 @@ var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
-var _axios = require("axios");
-var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactRedux = require("react-redux");
 var _visibilityFilterInput = require("../visibility-filter-input/visibility-filter-input");
 var _visibilityFilterInputDefault = parcelHelpers.interopDefault(_visibilityFilterInput);
@@ -47800,7 +47796,9 @@ function MoviesList(props) {
                 })
             }),
             filteredMovies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                    md: 3,
+                    sm: 12,
+                    md: 4,
+                    lg: 3,
                     __source: {
                         fileName: "src/components/movies-list/movies-list.jsx",
                         lineNumber: 33
@@ -47829,7 +47827,7 @@ $RefreshReg$(_c, "MoviesList");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Col":"fbam0","react-redux":"2L0if","../movie-card/movie-card":"6EiBJ","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","../visibility-filter-input/visibility-filter-input":"7ZxGS","axios":"iYoWk"}],"7ZxGS":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Col":"fbam0","react-redux":"2L0if","../movie-card/movie-card":"6EiBJ","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","../visibility-filter-input/visibility-filter-input":"7ZxGS"}],"7ZxGS":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9bc3 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -47845,15 +47843,16 @@ var _reactRedux = require("react-redux");
 var _form = require("react-bootstrap/Form");
 var _formDefault = parcelHelpers.interopDefault(_form);
 var _actions = require("../../actions/actions");
+var _visibilityFilterInputScss = require("./visibility-filter-input.scss");
 function VisibilityFilterInput(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
         onChange: (e)=>props.setFilter(e.target.value)
         ,
         value: props.visibilityFilter,
-        placeholder: "filter",
+        placeholder: "Search...",
         __source: {
             fileName: "src/components/visibility-filter-input/visibility-filter-input.jsx",
-            lineNumber: 10
+            lineNumber: 12
         },
         __self: this
     }));
@@ -47870,7 +47869,7 @@ $RefreshReg$(_c, "VisibilityFilterInput");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-redux":"2L0if","react-bootstrap/Form":"5ykgY","../../actions/actions":"1Ttfj","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh"}],"jUTZ8":[function() {},{}],"8GWVf":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-redux":"2L0if","react-bootstrap/Form":"5ykgY","../../actions/actions":"1Ttfj","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","./visibility-filter-input.scss":"3ZOIV"}],"3ZOIV":[function() {},{}],"jUTZ8":[function() {},{}],"8GWVf":[function(require,module,exports) {
 'use strict';
 var compose = require('redux').compose;
 exports.__esModule = true;
