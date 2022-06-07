@@ -44912,7 +44912,6 @@ parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
 );
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
@@ -44926,10 +44925,30 @@ var _heartEmptyPngDefault = parcelHelpers.interopDefault(_heartEmptyPng);
 var _heartFullPng = require("../../img/heart_full.png");
 var _heartFullPngDefault = parcelHelpers.interopDefault(_heartFullPng);
 var _movieCardScss = require("./movie-card.scss");
-class MovieCard extends _reactDefault.default.Component {
+var _s = $RefreshSig$();
+function MovieCard(props) {
+    _s();
+    const [favoriteMovies, setFavoriteMovies] = _react.useState([]);
+    const { movie  } = props;
+    // set favorite movies
+    const getFavMovies = ()=>{
+        const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
+        _axiosDefault.default.get(`https://myflixapi92.herokuapp.com/users/${user}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            setFavoriteMovies(response.data.FavoriteMovies);
+        }).catch((error)=>console.error(error)
+        );
+    };
+    _react.useEffect(()=>{
+        getFavMovies();
+    }, []);
     // METHODS
     //calling the API to add a favorite Movie to the user
-    addMovie(id) {
+    const addMovie = (id)=>{
         const user = localStorage.getItem("user");
         const token = localStorage.getItem("token");
         _axiosDefault.default.post(`https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`, null, {
@@ -44937,13 +44956,13 @@ class MovieCard extends _reactDefault.default.Component {
                 Authorization: `Bearer ${token}`
             }
         }).then(()=>{
-            alert(`The movie was successfully added to favorites.`);
-            window.location.reload();
+            //refresh state
+            getFavMovies();
         }).catch((error)=>console.error(error)
         );
-    }
+    };
     //calling API to remove movie from the users list
-    deleteMovie(id) {
+    const deleteMovie = (id)=>{
         const user = localStorage.getItem("user");
         const token = localStorage.getItem("token");
         _axiosDefault.default.delete(`https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`, {
@@ -44951,111 +44970,108 @@ class MovieCard extends _reactDefault.default.Component {
                 Authorization: `Bearer ${token}`
             }
         }).then(()=>{
-            alert(`The movie was successfully deleted.`);
-            window.location.reload();
+            //refresh state
+            getFavMovies();
         }).catch((error)=>console.error(error)
         );
-    }
+    };
     //when clicked the movie is either added/removed from the user via the API
-    favMovieClick(e) {
+    const favMovieClick = (e)=>{
         e.preventDefault();
-        let { favoriteMovies  } = this.props;
         let favMoviesIds = favoriteMovies.map((m)=>m._id
         );
-        let movieId = this.props.movie._id;
-        if (favMoviesIds.includes(movieId)) this.deleteMovie(movieId);
-        else this.addMovie(movieId);
-    }
+        let movieId = movie._id;
+        if (favMoviesIds.includes(movieId)) deleteMovie(movieId);
+        else addMovie(movieId);
+    };
     //icon handler
-    iconHandle() {
-        let { favoriteMovies  } = this.props;
+    const iconHandle = ()=>{
         let favMoviesIds = favoriteMovies.map((m)=>m._id
         );
-        let movieId = this.props.movie._id;
+        let movieId = movie._id;
         if (favMoviesIds.includes(movieId)) return _heartFullPngDefault.default;
         else return _heartEmptyPngDefault.default;
-    }
-    render() {
-        const { movie  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
-            __source: {
-                fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 79
-            },
-            __self: this,
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                    to: `/movies/${movie._id}`,
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
+        __source: {
+            fileName: "src/components/movie-card/movie-card.jsx",
+            lineNumber: 95
+        },
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                to: `/movies/${movie._id}`,
+                __source: {
+                    fileName: "src/components/movie-card/movie-card.jsx",
+                    lineNumber: 96
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
+                    crossOrigin: "anonymous",
+                    variant: "top",
+                    src: movie.ImagePath,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 80
+                        lineNumber: 97
                     },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
-                        crossOrigin: "anonymous",
-                        variant: "top",
-                        src: movie.ImagePath,
+                    __self: this
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
+                __source: {
+                    fileName: "src/components/movie-card/movie-card.jsx",
+                    lineNumber: 99
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                        to: `/movies/${movie._id}`,
+                        style: {
+                            textDecoration: "none",
+                            color: "black"
+                        },
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 81
+                            lineNumber: 100
                         },
-                        __self: this
-                    })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
-                    __source: {
-                        fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 87
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                            to: `/movies/${movie._id}`,
-                            style: {
-                                textDecoration: "none",
-                                color: "black"
-                            },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+                            className: "card-title",
                             __source: {
                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 88
+                                lineNumber: 104
                             },
                             __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
-                                className: "card-title",
-                                __source: {
-                                    fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 92
-                                },
-                                __self: this,
-                                children: movie.Title
-                            })
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                            href: "#",
-                            onClick: (e)=>{
-                                this.favMovieClick(e);
-                            },
-                            __source: {
-                                fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 94
-                            },
-                            __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
-                                src: this.iconHandle(),
-                                className: "fav-icon",
-                                __source: {
-                                    fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 100
-                                },
-                                __self: this
-                            })
+                            children: movie.Title
                         })
-                    ]
-                })
-            ]
-        }));
-    }
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("a", {
+                        href: "#",
+                        onClick: (e)=>{
+                            favMovieClick(e);
+                        },
+                        __source: {
+                            fileName: "src/components/movie-card/movie-card.jsx",
+                            lineNumber: 106
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                            src: iconHandle(),
+                            className: "fav-icon",
+                            __source: {
+                                fileName: "src/components/movie-card/movie-card.jsx",
+                                lineNumber: 112
+                            },
+                            __self: this
+                        })
+                    })
+                ]
+            })
+        ]
+    }));
 }
+_s(MovieCard, "sByoVp6aBrOVoky4xmNCPrRmJmg=");
+_c = MovieCard;
 MovieCard.propTypes = {
     movie: _propTypesDefault.default.shape({
         _id: _propTypesDefault.default.string.isRequired,
@@ -45076,6 +45092,8 @@ MovieCard.propTypes = {
     user: _propTypesDefault.default.string.isRequired,
     token: _propTypesDefault.default.string.isRequired
 };
+var _c;
+$RefreshReg$(_c, "MovieCard");
 
   $parcel$ReactRefreshHelpers$4249.postlude(module);
 } finally {
@@ -48358,7 +48376,6 @@ function visibilityFilter(state = "", action) {
 function movies(state = [], action) {
     switch(action.type){
         case _actions.SET_MOVIES:
-            console.log("SET_MOVIES reducer reached");
             return action.value;
         default:
             return state;
@@ -48367,7 +48384,6 @@ function movies(state = [], action) {
 function user(state = "", action) {
     switch(action.type){
         case _actions.SET_USER:
-            console.log("SET_USER reducer reached");
             return action.value;
         default:
             return state;

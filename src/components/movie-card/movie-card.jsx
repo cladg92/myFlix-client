@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
@@ -10,11 +10,32 @@ import heartFull from "../../img/heart_full.png";
 
 import "./movie-card.scss";
 
-export class MovieCard extends React.Component {
+export function MovieCard(props) {
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const { movie } = props;
+
+  // set favorite movies
+  const getFavMovies = () => {
+    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    axios
+      .get(`https://myflixapi92.herokuapp.com/users/${user}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setFavoriteMovies(response.data.FavoriteMovies);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    getFavMovies();
+  }, []);
+
   // METHODS
 
   //calling the API to add a favorite Movie to the user
-  addMovie(id) {
+  const addMovie = (id) => {
     const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     axios
@@ -26,14 +47,14 @@ export class MovieCard extends React.Component {
         }
       )
       .then(() => {
-        alert(`The movie was successfully added to favorites.`);
-        window.location.reload();
+        //refresh state
+        getFavMovies();
       })
       .catch((error) => console.error(error));
-  }
+  };
 
   //calling API to remove movie from the users list
-  deleteMovie(id) {
+  const deleteMovie = (id) => {
     const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     axios
@@ -41,68 +62,58 @@ export class MovieCard extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
-        alert(`The movie was successfully deleted.`);
-        window.location.reload();
+        //refresh state
+        getFavMovies();
       })
       .catch((error) => console.error(error));
-  }
+  };
 
   //when clicked the movie is either added/removed from the user via the API
-  favMovieClick(e) {
+  const favMovieClick = (e) => {
     e.preventDefault();
-    let { favoriteMovies } = this.props;
     let favMoviesIds = favoriteMovies.map((m) => m._id);
-    let movieId = this.props.movie._id;
+    let movieId = movie._id;
     if (favMoviesIds.includes(movieId)) {
-      this.deleteMovie(movieId);
+      deleteMovie(movieId);
     } else {
-      this.addMovie(movieId);
+      addMovie(movieId);
     }
-  }
+  };
 
   //icon handler
-  iconHandle() {
-    let { favoriteMovies } = this.props;
+  const iconHandle = () => {
     let favMoviesIds = favoriteMovies.map((m) => m._id);
-    let movieId = this.props.movie._id;
+    let movieId = movie._id;
     if (favMoviesIds.includes(movieId)) {
       return heartFull;
     } else {
       return heartEmpty;
     }
-  }
+  };
 
-  render() {
-    const { movie } = this.props;
-
-    return (
-      <Card>
-        <Link to={`/movies/${movie._id}`}>
-          <Card.Img
-            crossOrigin="anonymous"
-            variant="top"
-            src={movie.ImagePath}
-          />
+  return (
+    <Card>
+      <Link to={`/movies/${movie._id}`}>
+        <Card.Img crossOrigin="anonymous" variant="top" src={movie.ImagePath} />
+      </Link>
+      <Card.Body>
+        <Link
+          to={`/movies/${movie._id}`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <Card.Title className="card-title">{movie.Title}</Card.Title>
         </Link>
-        <Card.Body>
-          <Link
-            to={`/movies/${movie._id}`}
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <Card.Title className="card-title">{movie.Title}</Card.Title>
-          </Link>
-          <a
-            href="#"
-            onClick={(e) => {
-              this.favMovieClick(e);
-            }}
-          >
-            <img src={this.iconHandle()} className="fav-icon" />
-          </a>
-        </Card.Body>
-      </Card>
-    );
-  }
+        <a
+          href="#"
+          onClick={(e) => {
+            favMovieClick(e);
+          }}
+        >
+          <img src={iconHandle()} className="fav-icon" />
+        </a>
+      </Card.Body>
+    </Card>
+  );
 }
 
 MovieCard.propTypes = {
