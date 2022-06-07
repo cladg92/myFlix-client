@@ -2,8 +2,11 @@ import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+
+//favorite images
+import heartEmpty from "../../img/heart_empty.png";
+import heartFull from "../../img/heart_full.png";
 
 import "./movie-card.scss";
 
@@ -14,7 +17,6 @@ export class MovieCard extends React.Component {
   addMovie(id) {
     const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
-    console.log(this.props.favoriteMovies);
     axios
       .post(
         `https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`,
@@ -47,7 +49,6 @@ export class MovieCard extends React.Component {
 
   //when clicked the movie is either added/removed from the user via the API
   favMovieClick(e) {
-    console.log("Add/remove");
     e.preventDefault();
     let { favoriteMovies } = this.props;
     let favMoviesIds = favoriteMovies.map((m) => m._id);
@@ -56,6 +57,18 @@ export class MovieCard extends React.Component {
       this.deleteMovie(movieId);
     } else {
       this.addMovie(movieId);
+    }
+  }
+
+  //icon handler
+  iconHandle() {
+    let { favoriteMovies } = this.props;
+    let favMoviesIds = favoriteMovies.map((m) => m._id);
+    let movieId = this.props.movie._id;
+    if (favMoviesIds.includes(movieId)) {
+      return heartFull;
+    } else {
+      return heartEmpty;
     }
   }
 
@@ -72,17 +85,20 @@ export class MovieCard extends React.Component {
           />
         </Link>
         <Card.Body>
-          <Link to={`/movies/${movie._id}`}>
-            <Card.Title>{movie.Title}</Card.Title>
+          <Link
+            to={`/movies/${movie._id}`}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Card.Title className="card-title">{movie.Title}</Card.Title>
           </Link>
-          <Button
+          <a
+            href="#"
             onClick={(e) => {
               this.favMovieClick(e);
             }}
-            variant="warning"
           >
-            Toggle
-          </Button>
+            <img src={this.iconHandle()} className="fav-icon" />
+          </a>
         </Card.Body>
       </Card>
     );
