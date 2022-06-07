@@ -23,7 +23,6 @@ class NavBar extends Component {
 
   render() {
     const { onBackLog, user } = this.props;
-    const path = window.location.pathname;
     return (
       <Navbar className="main-nav" sticky="top" bg="dark" variant="dark">
         <Container>

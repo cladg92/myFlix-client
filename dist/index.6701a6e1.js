@@ -24363,19 +24363,16 @@ var _profileViewDefault = parcelHelpers.interopDefault(_profileView);
 var _reactRouterDom = require("react-router-dom");
 var _mainViewScss = require("./main-view.scss");
 class MainView extends _reactDefault.default.Component {
-    constructor(){
-        super();
-        this.state = {
-            user: null
-        };
-    }
-    // METHODS
+    /*constructor() {
+    super();
+    this.state = {
+      user: null,
+    };
+  }*/ // METHODS
     componentDidMount() {
         let accessToken = localStorage.getItem("token");
         if (accessToken !== null) {
-            this.setState({
-                user: localStorage.getItem("user")
-            });
+            this.props.setUser(localStorage.getItem("user"));
             this.getMovies(accessToken);
         }
     }
@@ -24393,9 +24390,7 @@ class MainView extends _reactDefault.default.Component {
     }
     /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/ onLoggedIn(authData) {
         console.log(authData);
-        this.setState({
-            user: authData.user.Username
-        });
+        this.props.setUser(authData.user.Username);
         localStorage.setItem("token", authData.token);
         localStorage.setItem("user", authData.user.Username);
         this.getMovies(authData.token);
@@ -24403,19 +24398,16 @@ class MainView extends _reactDefault.default.Component {
     onLoggedOut() {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        this.setState({
-            user: null
-        });
+        this.props.setUser(null);
         window.open("/", "_self");
     }
     render() {
         // movies is extracted from this.props rather than from the this.state
-        let { movies  } = this.props;
-        let { user  } = this.state;
+        let { movies , user  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 83
+                lineNumber: 76
             },
             __self: this,
             children: [
@@ -24426,21 +24418,21 @@ class MainView extends _reactDefault.default.Component {
                     user: user,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 84
+                        lineNumber: 77
                     },
                     __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 90
+                        lineNumber: 83
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Row, {
                         className: "justify-content-md-center",
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 91
+                            lineNumber: 84
                         },
                         __self: this,
                         children: [
@@ -24464,7 +24456,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 92
+                                    lineNumber: 85
                                 },
                                 __self: this
                             }),
@@ -24475,21 +24467,24 @@ class MainView extends _reactDefault.default.Component {
                                         to: "/"
                                     }));
                                     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                        md: 7,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_registerView.RegisterView, {
                                         })
                                     }));
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 108
+                                    lineNumber: 101
                                 },
                                 __self: this
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
                                 path: `/users/${user}`,
                                 render: (history, match)=>{
-                                    if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Redirect, {
-                                        to: "/"
+                                    if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+                                            onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                                        })
                                     }));
                                     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_profileViewDefault.default, {
@@ -24506,7 +24501,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 119
+                                    lineNumber: 112
                                 },
                                 __self: this
                             }),
@@ -24533,7 +24528,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 139
+                                    lineNumber: 137
                                 },
                                 __self: this
                             }),
@@ -24562,7 +24557,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 161
+                                    lineNumber: 159
                                 },
                                 __self: this
                             }),
@@ -24591,7 +24586,7 @@ class MainView extends _reactDefault.default.Component {
                                 },
                                 __source: {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 190
+                                    lineNumber: 188
                                 },
                                 __self: this
                             })
@@ -24605,12 +24600,21 @@ class MainView extends _reactDefault.default.Component {
 // state from store and pass it as a prop to the component
 let mapStateToProps = (state)=>{
     return {
-        movies: state.movies
+        movies: state.movies,
+        user: state.user
     };
 };
-exports.default = _reactRedux.connect(mapStateToProps, {
-    setMovies: _actions.setMovies
-})(MainView);
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        setUser: (user)=>{
+            dispatch(_actions.setUser(user));
+        },
+        setMovies: (movies)=>{
+            dispatch(_actions.setMovies(movies));
+        }
+    };
+};
+exports.default = _reactRedux.connect(mapStateToProps, mapDispatchToProps)(MainView);
 
   $parcel$ReactRefreshHelpers$35bf.postlude(module);
 } finally {
@@ -44595,7 +44599,6 @@ class NavBar extends _react.Component {
     }
     render() {
         const { onBackLog , user  } = this.props;
-        const path = window.location.pathname;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar, {
             className: "main-nav",
             sticky: "top",
@@ -44603,13 +44606,13 @@ class NavBar extends _react.Component {
             variant: "dark",
             __source: {
                 fileName: "src/components/navbar/navbar.jsx",
-                lineNumber: 28
+                lineNumber: 27
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
                 __source: {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 29
+                    lineNumber: 28
                 },
                 __self: this,
                 children: [
@@ -44618,7 +44621,7 @@ class NavBar extends _react.Component {
                         href: "/",
                         __source: {
                             fileName: "src/components/navbar/navbar.jsx",
-                            lineNumber: 30
+                            lineNumber: 29
                         },
                         __self: this,
                         children: "MyFlix"
@@ -44627,7 +44630,7 @@ class NavBar extends _react.Component {
                         "aria-controls": "responsive-navbar-nav",
                         __source: {
                             fileName: "src/components/navbar/navbar.jsx",
-                            lineNumber: 33
+                            lineNumber: 32
                         },
                         __self: this
                     }),
@@ -44635,14 +44638,14 @@ class NavBar extends _react.Component {
                         id: "responsive-navbar-nav",
                         __source: {
                             fileName: "src/components/navbar/navbar.jsx",
-                            lineNumber: 34
+                            lineNumber: 33
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Nav, {
                             className: "ml-auto",
                             __source: {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 35
+                                lineNumber: 34
                             },
                             __self: this,
                             children: [
@@ -44650,7 +44653,7 @@ class NavBar extends _react.Component {
                                     href: "/",
                                     __source: {
                                         fileName: "src/components/navbar/navbar.jsx",
-                                        lineNumber: 36
+                                        lineNumber: 35
                                     },
                                     __self: this,
                                     children: "Movies"
@@ -44659,7 +44662,7 @@ class NavBar extends _react.Component {
                                     href: `/users/${user}`,
                                     __source: {
                                         fileName: "src/components/navbar/navbar.jsx",
-                                        lineNumber: 38
+                                        lineNumber: 37
                                     },
                                     __self: this,
                                     children: "Profile"
@@ -44669,7 +44672,7 @@ class NavBar extends _react.Component {
                                     ,
                                     __source: {
                                         fileName: "src/components/navbar/navbar.jsx",
-                                        lineNumber: 41
+                                        lineNumber: 40
                                     },
                                     __self: this,
                                     children: "Logout"
@@ -44678,7 +44681,7 @@ class NavBar extends _react.Component {
                                     href: "/",
                                     __source: {
                                         fileName: "src/components/navbar/navbar.jsx",
-                                        lineNumber: 43
+                                        lineNumber: 42
                                     },
                                     __self: this,
                                     children: "Login"
@@ -44687,7 +44690,7 @@ class NavBar extends _react.Component {
                                     href: "/register",
                                     __source: {
                                         fileName: "src/components/navbar/navbar.jsx",
-                                        lineNumber: 44
+                                        lineNumber: 43
                                     },
                                     __self: this,
                                     children: "Register"
@@ -44722,140 +44725,138 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _movieCard = require("../movie-card/movie-card");
 var _reactBootstrap = require("react-bootstrap");
-class DirectorView extends _react.Component {
-    render() {
-        const { onBackClick , director , movies  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx("h1", {
-                    className: "director-name",
+function DirectorView(props) {
+    const { onBackClick , director , movies  } = props;
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx("h1", {
+                className: "director-name",
+                __source: {
+                    fileName: "src/components/director-view/director-view.jsx",
+                    lineNumber: 12
+                },
+                __self: this,
+                children: director.Name
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                className: "director-birth",
+                __source: {
+                    fileName: "src/components/director-view/director-view.jsx",
+                    lineNumber: 13
+                },
+                __self: this,
+                children: `${director.Birth} - ${director.Death}`
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+                __source: {
+                    fileName: "src/components/director-view/director-view.jsx",
+                    lineNumber: 14
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 12
+                        lineNumber: 15
                     },
                     __self: this,
-                    children: director.Name
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx("p", {
-                    className: "director-birth",
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("h5", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/director-view/director-view.jsx",
+                                lineNumber: 16
+                            },
+                            __self: this,
+                            children: "Biography"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/director-view/director-view.jsx",
+                                lineNumber: 17
+                            },
+                            __self: this,
+                            children: director.Bio
+                        })
+                    ]
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+                __source: {
+                    fileName: "src/components/director-view/director-view.jsx",
+                    lineNumber: 20
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 13
+                        lineNumber: 21
                     },
                     __self: this,
-                    children: `${director.Birth} - ${director.Death}`
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
-                    __source: {
-                        fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 14
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
-                        __source: {
-                            fileName: "src/components/director-view/director-view.jsx",
-                            lineNumber: 15
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("h5", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/director-view/director-view.jsx",
-                                    lineNumber: 16
-                                },
-                                __self: this,
-                                children: "Biography"
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx("p", {
-                                className: "value",
-                                __source: {
-                                    fileName: "src/components/director-view/director-view.jsx",
-                                    lineNumber: 17
-                                },
-                                __self: this,
-                                children: director.Bio
-                            })
-                        ]
-                    })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
-                    __source: {
-                        fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 20
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
-                        __source: {
-                            fileName: "src/components/director-view/director-view.jsx",
-                            lineNumber: 21
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("h5", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/director-view/director-view.jsx",
-                                    lineNumber: 22
-                                },
-                                __self: this,
-                                children: "Movies"
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
-                                className: "justify-content-md-center",
-                                __source: {
-                                    fileName: "src/components/director-view/director-view.jsx",
-                                    lineNumber: 23
-                                },
-                                __self: this,
-                                children: movies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                                        xs: 12,
-                                        md: 6,
-                                        lg: 4,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("h5", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/director-view/director-view.jsx",
+                                lineNumber: 22
+                            },
+                            __self: this,
+                            children: "Movies"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                            className: "justify-content-md-center",
+                            __source: {
+                                fileName: "src/components/director-view/director-view.jsx",
+                                lineNumber: 23
+                            },
+                            __self: this,
+                            children: movies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                    xs: 12,
+                                    md: 6,
+                                    lg: 4,
+                                    __source: {
+                                        fileName: "src/components/director-view/director-view.jsx",
+                                        lineNumber: 25
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
+                                        movie: m,
                                         __source: {
                                             fileName: "src/components/director-view/director-view.jsx",
-                                            lineNumber: 25
+                                            lineNumber: 26
                                         },
-                                        __self: this,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
-                                            movie: m,
-                                            __source: {
-                                                fileName: "src/components/director-view/director-view.jsx",
-                                                lineNumber: 26
-                                            },
-                                            __self: this
-                                        })
-                                    }, m._id)
-                                )
-                            })
-                        ]
-                    })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                    className: "mt-3",
-                    variant: "success",
-                    type: "button",
-                    onClick: ()=>{
-                        onBackClick();
-                    },
-                    __source: {
-                        fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 32
-                    },
-                    __self: this,
-                    children: "Back"
+                                        __self: this
+                                    })
+                                }, m._id)
+                            )
+                        })
+                    ]
                 })
-            ]
-        }));
-    }
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                className: "mt-3",
+                variant: "success",
+                type: "button",
+                onClick: ()=>{
+                    onBackClick();
+                },
+                __source: {
+                    fileName: "src/components/director-view/director-view.jsx",
+                    lineNumber: 32
+                },
+                __self: this,
+                children: "Back"
+            })
+        ]
+    }));
 }
+_c = DirectorView;
 exports.default = DirectorView;
 DirectorView.propTypes = {
     director: _propTypesDefault.default.shape({
@@ -44867,6 +44868,8 @@ DirectorView.propTypes = {
     movies: _propTypesDefault.default.array.isRequired,
     onBackClick: _propTypesDefault.default.func.isRequired
 };
+var _c;
+$RefreshReg$(_c, "DirectorView");
 
   $parcel$ReactRefreshHelpers$f8cc.postlude(module);
 } finally {
@@ -44886,90 +44889,234 @@ parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
 );
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _card = require("react-bootstrap/Card");
 var _cardDefault = parcelHelpers.interopDefault(_card);
 var _reactRouterDom = require("react-router-dom");
+//favorite images
+var _heartEmptyPng = require("../../img/heart_empty.png");
+var _heartEmptyPngDefault = parcelHelpers.interopDefault(_heartEmptyPng);
+var _heartFullPng = require("../../img/heart_full.png");
+var _heartFullPngDefault = parcelHelpers.interopDefault(_heartFullPng);
 var _movieCardScss = require("./movie-card.scss");
-class MovieCard extends _reactDefault.default.Component {
-    render() {
-        const { movie  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
-            __source: {
-                fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 13
-            },
-            __self: this,
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                    to: `/movies/${movie._id}`,
+var _s = $RefreshSig$();
+function MovieCard(props) {
+    _s();
+    const [favoriteMovies, setFavoriteMovies] = _react.useState([]);
+    const { movie  } = props;
+    // set favorite movies
+    const getFavMovies = ()=>{
+        const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
+        _axiosDefault.default.get(`https://myflixapi92.herokuapp.com/users/${user}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            setFavoriteMovies(response.data.FavoriteMovies);
+        }).catch((error)=>console.error(error)
+        );
+    };
+    _react.useEffect(()=>{
+        getFavMovies();
+    }, []);
+    // METHODS
+    //calling the API to add a favorite Movie to the user
+    const addMovie = (id)=>{
+        const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
+        _axiosDefault.default.post(`https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`, null, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(()=>{
+            //refresh state
+            getFavMovies();
+        }).catch((error)=>console.error(error)
+        );
+    };
+    //calling API to remove movie from the users list
+    const deleteMovie = (id)=>{
+        const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
+        _axiosDefault.default.delete(`https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(()=>{
+            //refresh state
+            getFavMovies();
+        }).catch((error)=>console.error(error)
+        );
+    };
+    //when clicked the movie is either added/removed from the user via the API
+    const favMovieClick = (e)=>{
+        e.preventDefault();
+        let favMoviesIds = favoriteMovies.map((m)=>m._id
+        );
+        let movieId = movie._id;
+        if (favMoviesIds.includes(movieId)) deleteMovie(movieId);
+        else addMovie(movieId);
+    };
+    //icon handler
+    const iconHandle = ()=>{
+        let favMoviesIds = favoriteMovies.map((m)=>m._id
+        );
+        let movieId = movie._id;
+        if (favMoviesIds.includes(movieId)) return _heartFullPngDefault.default;
+        else return _heartEmptyPngDefault.default;
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
+        __source: {
+            fileName: "src/components/movie-card/movie-card.jsx",
+            lineNumber: 95
+        },
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                to: `/movies/${movie._id}`,
+                __source: {
+                    fileName: "src/components/movie-card/movie-card.jsx",
+                    lineNumber: 96
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
+                    crossOrigin: "anonymous",
+                    variant: "top",
+                    src: movie.ImagePath,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 14
+                        lineNumber: 97
                     },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
-                        crossOrigin: "anonymous",
-                        variant: "top",
-                        src: movie.ImagePath,
-                        __source: {
-                            fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 15
-                        },
-                        __self: this
-                    })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Body, {
-                    __source: {
-                        fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 21
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                    __self: this
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
+                __source: {
+                    fileName: "src/components/movie-card/movie-card.jsx",
+                    lineNumber: 99
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
                         to: `/movies/${movie._id}`,
+                        style: {
+                            textDecoration: "none",
+                            color: "black"
+                        },
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 22
+                            lineNumber: 100
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+                            className: "card-title",
                             __source: {
                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 23
+                                lineNumber: 104
                             },
                             __self: this,
                             children: movie.Title
                         })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("a", {
+                        href: "#",
+                        onClick: (e)=>{
+                            favMovieClick(e);
+                        },
+                        __source: {
+                            fileName: "src/components/movie-card/movie-card.jsx",
+                            lineNumber: 106
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                            src: iconHandle(),
+                            className: "fav-icon",
+                            __source: {
+                                fileName: "src/components/movie-card/movie-card.jsx",
+                                lineNumber: 112
+                            },
+                            __self: this
+                        })
                     })
-                })
-            ]
-        }));
-    }
+                ]
+            })
+        ]
+    }));
 }
+_s(MovieCard, "sByoVp6aBrOVoky4xmNCPrRmJmg=");
+_c = MovieCard;
 MovieCard.propTypes = {
     movie: _propTypesDefault.default.shape({
-        Actors: _propTypesDefault.default.array.isRequired,
-        Description: _propTypesDefault.default.string.isRequired,
-        Director: _propTypesDefault.default.shape({
-            Bio: _propTypesDefault.default.string.isRequired,
-            Birth: _propTypesDefault.default.string.isRequired,
-            Death: _propTypesDefault.default.string.isRequired,
-            Name: _propTypesDefault.default.string.isRequired
-        }).isRequired,
-        ImagePath: _propTypesDefault.default.string.isRequired,
         _id: _propTypesDefault.default.string.isRequired,
-        Title: _propTypesDefault.default.string.isRequired
+        Title: _propTypesDefault.default.string.isRequired,
+        ReleaseYear: _propTypesDefault.default.string.isRequired,
+        Genre: _propTypesDefault.default.shape({
+            Name: _propTypesDefault.default.string.isRequired,
+            Description: _propTypesDefault.default.string.isRequired
+        }).isRequired,
+        Director: _propTypesDefault.default.shape({
+            Name: _propTypesDefault.default.string.isRequired,
+            Bio: _propTypesDefault.default.string.isRequired,
+            Birth: _propTypesDefault.default.string.isRequired
+        }).isRequired,
+        Description: _propTypesDefault.default.string.isRequired,
+        ImagePath: _propTypesDefault.default.string.isRequired
     }).isRequired
 };
+var _c;
+$RefreshReg$(_c, "MovieCard");
 
   $parcel$ReactRefreshHelpers$4249.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","prop-types":"1tgq3","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","./movie-card.scss":"cF5gT"}],"cF5gT":[function() {},{}],"8WCoL":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","prop-types":"1tgq3","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","./movie-card.scss":"cF5gT","axios":"iYoWk","../../img/heart_empty.png":"9nARP","../../img/heart_full.png":"1xwSL"}],"cF5gT":[function() {},{}],"9nARP":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "heart_empty.cecc081f.png";
+
+},{"./helpers/bundle-url":"3I0ov"}],"3I0ov":[function(require,module,exports) {
+"use strict";
+var bundleURL = {
+};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"1xwSL":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "heart_full.a40003f7.png";
+
+},{"./helpers/bundle-url":"3I0ov"}],"8WCoL":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$5f0a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -44980,130 +45127,128 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _movieCard = require("../movie-card/movie-card");
 var _reactBootstrap = require("react-bootstrap");
-class GenreView extends _react.Component {
-    render() {
-        const { onBackClick , genre , movies  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx("h1", {
-                    className: "genre-name",
+function GenreView(props) {
+    const { onBackClick , genre , movies  } = props;
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx("h1", {
+                className: "genre-name",
+                __source: {
+                    fileName: "src/components/genre-view/genre-view.jsx",
+                    lineNumber: 12
+                },
+                __self: this,
+                children: genre.Name
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+                __source: {
+                    fileName: "src/components/genre-view/genre-view.jsx",
+                    lineNumber: 13
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 12
+                        lineNumber: 14
                     },
                     __self: this,
-                    children: genre.Name
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("h5", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 15
+                            },
+                            __self: this,
+                            children: "Description"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 16
+                            },
+                            __self: this,
+                            children: genre.Description
+                        })
+                    ]
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+                __source: {
+                    fileName: "src/components/genre-view/genre-view.jsx",
+                    lineNumber: 19
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 13
+                        lineNumber: 20
                     },
                     __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
-                        __source: {
-                            fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 14
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("h5", {
-                                className: "label",
-                                __source: {
-                                    fileName: "src/components/genre-view/genre-view.jsx",
-                                    lineNumber: 15
-                                },
-                                __self: this,
-                                children: "Description"
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx("p", {
-                                className: "value",
-                                __source: {
-                                    fileName: "src/components/genre-view/genre-view.jsx",
-                                    lineNumber: 16
-                                },
-                                __self: this,
-                                children: genre.Description
-                            })
-                        ]
-                    })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
-                    __source: {
-                        fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 19
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
-                        __source: {
-                            fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 20
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx("h5", {
-                                className: "director-movies",
-                                __source: {
-                                    fileName: "src/components/genre-view/genre-view.jsx",
-                                    lineNumber: 21
-                                },
-                                __self: this,
-                                children: "Movies"
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
-                                __source: {
-                                    fileName: "src/components/genre-view/genre-view.jsx",
-                                    lineNumber: 22
-                                },
-                                __self: this,
-                                children: movies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                                        xs: 12,
-                                        md: 6,
-                                        lg: 4,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("h5", {
+                            className: "director-movies",
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 21
+                            },
+                            __self: this,
+                            children: "Movies"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 22
+                            },
+                            __self: this,
+                            children: movies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                    xs: 12,
+                                    md: 6,
+                                    lg: 4,
+                                    __source: {
+                                        fileName: "src/components/genre-view/genre-view.jsx",
+                                        lineNumber: 24
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
+                                        movie: m,
                                         __source: {
                                             fileName: "src/components/genre-view/genre-view.jsx",
-                                            lineNumber: 24
+                                            lineNumber: 25
                                         },
-                                        __self: this,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
-                                            movie: m,
-                                            __source: {
-                                                fileName: "src/components/genre-view/genre-view.jsx",
-                                                lineNumber: 25
-                                            },
-                                            __self: this
-                                        })
-                                    }, m._id)
-                                )
-                            })
-                        ]
-                    })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                    className: "mt-3",
-                    variant: "success",
-                    type: "button",
-                    onClick: ()=>{
-                        onBackClick();
-                    },
-                    __source: {
-                        fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 31
-                    },
-                    __self: this,
-                    children: "Back"
+                                        __self: this
+                                    })
+                                }, m._id)
+                            )
+                        })
+                    ]
                 })
-            ]
-        }));
-    }
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                className: "mt-3",
+                variant: "success",
+                type: "button",
+                onClick: ()=>{
+                    onBackClick();
+                },
+                __source: {
+                    fileName: "src/components/genre-view/genre-view.jsx",
+                    lineNumber: 31
+                },
+                __self: this,
+                children: "Back"
+            })
+        ]
+    }));
 }
+_c = GenreView;
 exports.default = GenreView;
 GenreView.propTypes = {
     genre: _propTypesDefault.default.shape({
@@ -45113,6 +45258,8 @@ GenreView.propTypes = {
     movies: _propTypesDefault.default.array.isRequired,
     onBackClick: _propTypesDefault.default.func.isRequired
 };
+var _c;
+$RefreshReg$(_c, "GenreView");
 
   $parcel$ReactRefreshHelpers$5f0a.postlude(module);
 } finally {
@@ -45162,6 +45309,7 @@ function ProfileView(props) {
     const [username, setUsername] = _react.useState("");
     const [password, setPassword] = _react.useState("");
     const [birthDate, setBirthDate] = _react.useState("");
+    // set user and favorite movies
     const getUser = ()=>{
         _axiosDefault.default.get(`https://myflixapi92.herokuapp.com/users/${currentUser}`, {
             headers: {
@@ -45235,7 +45383,7 @@ function ProfileView(props) {
         className: "profile-view",
         __source: {
             fileName: "src/components/profile-view/profile-view.jsx",
-            lineNumber: 108
+            lineNumber: 109
         },
         __self: this,
         children: [
@@ -45243,7 +45391,7 @@ function ProfileView(props) {
                 className: "value",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 109
+                    lineNumber: 110
                 },
                 __self: this,
                 children: "Profile"
@@ -45251,7 +45399,7 @@ function ProfileView(props) {
             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Row, {
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 110
+                    lineNumber: 111
                 },
                 __self: this,
                 children: [
@@ -45260,19 +45408,19 @@ function ProfileView(props) {
                         sm: 4,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 111
+                            lineNumber: 112
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 112
+                                lineNumber: 113
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Body, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 113
+                                    lineNumber: 114
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_userInfoDefault.default, {
@@ -45280,7 +45428,7 @@ function ProfileView(props) {
                                     email: user.Email,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 114
+                                        lineNumber: 115
                                     },
                                     __self: this
                                 })
@@ -45292,19 +45440,19 @@ function ProfileView(props) {
                         sm: 8,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 118
+                            lineNumber: 119
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 119
+                                lineNumber: 120
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Body, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 120
+                                    lineNumber: 121
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_updateUserDefault.default, {
@@ -45323,7 +45471,7 @@ function ProfileView(props) {
                                     deleteUser: deleteUser,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 121
+                                        lineNumber: 122
                                     },
                                     __self: this
                                 })
@@ -45338,7 +45486,7 @@ function ProfileView(props) {
                 token: token,
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 140
+                    lineNumber: 141
                 },
                 __self: this
             }),
@@ -45350,7 +45498,7 @@ function ProfileView(props) {
                 },
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 146
+                    lineNumber: 147
                 },
                 __self: this,
                 children: "Back"
@@ -45501,98 +45649,132 @@ parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
 );
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _button = require("react-bootstrap/Button");
-var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _card = require("react-bootstrap/Card");
 var _cardDefault = parcelHelpers.interopDefault(_card);
 var _reactRouterDom = require("react-router-dom");
-var _profileViewScss = require("./profile-view.scss");
-class MovieCard extends _reactDefault.default.Component {
-    // METHODS
-    deleteMovie(id) {
-        _axiosDefault.default.delete(`https://myflixapi92.herokuapp.com/users/${this.props.user}/movies/${id}`, {
+//favorite images
+var _xMarkPng = require("../../img/x-mark.png");
+var _xMarkPngDefault = parcelHelpers.interopDefault(_xMarkPng);
+var _favmovieCardScss = require("./favmovie-card.scss");
+var _s = $RefreshSig$();
+function MovieCard(props) {
+    _s();
+    const [favoriteMovies, setFavoriteMovies] = _react.useState([]);
+    const { movie  } = props;
+    // set favorite movies
+    const getFavMovies = ()=>{
+        const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
+        _axiosDefault.default.get(`https://myflixapi92.herokuapp.com/users/${user}`, {
             headers: {
-                Authorization: `Bearer ${this.props.token}`
+                Authorization: `Bearer ${token}`
             }
-        }).then(()=>{
-            alert(`The movie was successfully deleted.`);
-            window.open(`/users/${this.props.user}`, "_self");
+        }).then((response)=>{
+            setFavoriteMovies(response.data.FavoriteMovies);
         }).catch((error)=>console.error(error)
         );
-    }
-    render() {
-        const { movie  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
-            __source: {
-                fileName: "src/components/profile-view/favmovie-card.jsx",
-                lineNumber: 32
-            },
-            __self: this,
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                    to: `/movies/${movie._id}`,
+    };
+    _react.useEffect(()=>{
+        getFavMovies();
+    }, []);
+    // METHODS
+    //calling API to remove movie from the users list
+    const deleteMovie = (id)=>{
+        const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
+        _axiosDefault.default.delete(`https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(()=>{
+            window.location.reload();
+        }).catch((error)=>console.error(error)
+        );
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
+        __source: {
+            fileName: "src/components/profile-view/favmovie-card.jsx",
+            lineNumber: 52
+        },
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                to: `/movies/${movie._id}`,
+                __source: {
+                    fileName: "src/components/profile-view/favmovie-card.jsx",
+                    lineNumber: 53
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
+                    crossOrigin: "anonymous",
+                    variant: "top",
+                    src: movie.ImagePath,
                     __source: {
                         fileName: "src/components/profile-view/favmovie-card.jsx",
-                        lineNumber: 33
+                        lineNumber: 54
                     },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
-                        crossOrigin: "anonymous",
-                        variant: "top",
-                        src: movie.ImagePath,
+                    __self: this
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
+                __source: {
+                    fileName: "src/components/profile-view/favmovie-card.jsx",
+                    lineNumber: 56
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                        to: `/movies/${movie._id}`,
+                        style: {
+                            textDecoration: "none",
+                            color: "black"
+                        },
                         __source: {
                             fileName: "src/components/profile-view/favmovie-card.jsx",
-                            lineNumber: 34
+                            lineNumber: 57
                         },
-                        __self: this
-                    })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
-                    __source: {
-                        fileName: "src/components/profile-view/favmovie-card.jsx",
-                        lineNumber: 40
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                            to: `/movies/${movie._id}`,
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+                            className: "card-title",
                             __source: {
                                 fileName: "src/components/profile-view/favmovie-card.jsx",
-                                lineNumber: 41
+                                lineNumber: 61
                             },
                             __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
-                                __source: {
-                                    fileName: "src/components/profile-view/favmovie-card.jsx",
-                                    lineNumber: 42
-                                },
-                                __self: this,
-                                children: movie.Title
-                            })
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            onClick: ()=>{
-                                this.deleteMovie(movie._id);
-                            },
-                            variant: "warning",
-                            __source: {
-                                fileName: "src/components/profile-view/favmovie-card.jsx",
-                                lineNumber: 44
-                            },
-                            __self: this,
-                            children: "Remove"
+                            children: movie.Title
                         })
-                    ]
-                })
-            ]
-        }));
-    }
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("a", {
+                        href: "#",
+                        onClick: ()=>{
+                            deleteMovie(movie._id);
+                        },
+                        __source: {
+                            fileName: "src/components/profile-view/favmovie-card.jsx",
+                            lineNumber: 63
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                            src: _xMarkPngDefault.default,
+                            className: "x-icon",
+                            __source: {
+                                fileName: "src/components/profile-view/favmovie-card.jsx",
+                                lineNumber: 69
+                            },
+                            __self: this
+                        })
+                    })
+                ]
+            })
+        ]
+    }));
 }
+_s(MovieCard, "sByoVp6aBrOVoky4xmNCPrRmJmg=");
+_c = MovieCard;
 MovieCard.propTypes = {
     movie: _propTypesDefault.default.shape({
         _id: _propTypesDefault.default.string.isRequired,
@@ -45613,13 +45795,18 @@ MovieCard.propTypes = {
     user: _propTypesDefault.default.string.isRequired,
     token: _propTypesDefault.default.string.isRequired
 };
+var _c;
+$RefreshReg$(_c, "MovieCard");
 
   $parcel$ReactRefreshHelpers$8052.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","prop-types":"1tgq3","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","react-bootstrap/Button":"9CzHT","./profile-view.scss":"gb0ga"}],"gb0ga":[function() {},{}],"cK8m8":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","prop-types":"1tgq3","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","../../img/x-mark.png":"fMNQV","./favmovie-card.scss":"gancc"}],"fMNQV":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "x-mark.8ba43199.png";
+
+},{"./helpers/bundle-url":"3I0ov"}],"gancc":[function() {},{}],"cK8m8":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$94e5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -47509,12 +47696,22 @@ parcelHelpers.export(exports, "SET_MOVIES", ()=>SET_MOVIES
 );
 parcelHelpers.export(exports, "SET_FILTER", ()=>SET_FILTER
 );
+parcelHelpers.export(exports, "SET_USER", ()=>SET_USER
+);
+parcelHelpers.export(exports, "SET_FAVORITE", ()=>SET_FAVORITE
+);
 parcelHelpers.export(exports, "setMovies", ()=>setMovies
 );
 parcelHelpers.export(exports, "setFilter", ()=>setFilter
 );
+parcelHelpers.export(exports, "setUser", ()=>setUser
+);
+parcelHelpers.export(exports, "setFavorite", ()=>setFavorite
+);
 const SET_MOVIES = "SET_MOVIES";
 const SET_FILTER = "SET_FILTER";
+const SET_USER = "SET_USER";
+const SET_FAVORITE = "SET_FAVORITE";
 function setMovies(value) {
     return {
         type: SET_MOVIES,
@@ -47524,6 +47721,18 @@ function setMovies(value) {
 function setFilter(value) {
     return {
         type: SET_FILTER,
+        value
+    };
+}
+function setUser(value) {
+    return {
+        type: SET_USER,
+        value
+    };
+}
+function setFavorite(value) {
+    return {
+        type: SET_FAVORITE,
         value
     };
 }
@@ -47539,9 +47748,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _col = require("react-bootstrap/Col");
-var _colDefault = parcelHelpers.interopDefault(_col);
+var _reactBootstrap = require("react-bootstrap");
 var _reactRedux = require("react-redux");
 var _visibilityFilterInput = require("../visibility-filter-input/visibility-filter-input");
 var _visibilityFilterInputDefault = parcelHelpers.interopDefault(_visibilityFilterInput);
@@ -47562,48 +47769,63 @@ function MoviesList(props) {
         className: "main-view",
         __source: {
             fileName: "src/components/movies-list/movies-list.jsx",
-            lineNumber: 24
+            lineNumber: 25
         },
         __self: this
     }));
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
         children: [
-            /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                md: 12,
-                style: {
-                    margin: "1em"
-                },
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                 __source: {
                     fileName: "src/components/movies-list/movies-list.jsx",
-                    lineNumber: 28
+                    lineNumber: 29
                 },
                 __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_visibilityFilterInputDefault.default, {
-                    visibilityFilter: visibilityFilter,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                    sm: 12,
+                    md: 6,
+                    className: "mt-3 mb-3",
                     __source: {
                         fileName: "src/components/movies-list/movies-list.jsx",
-                        lineNumber: 29
-                    },
-                    __self: this
-                })
-            }),
-            filteredMovies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                    md: 3,
-                    __source: {
-                        fileName: "src/components/movies-list/movies-list.jsx",
-                        lineNumber: 32
+                        lineNumber: 30
                     },
                     __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
-                        movie: m,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_visibilityFilterInputDefault.default, {
+                        visibilityFilter: visibilityFilter,
                         __source: {
                             fileName: "src/components/movies-list/movies-list.jsx",
-                            lineNumber: 33
+                            lineNumber: 31
                         },
                         __self: this
                     })
-                }, m._id)
-            )
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                __source: {
+                    fileName: "src/components/movies-list/movies-list.jsx",
+                    lineNumber: 34
+                },
+                __self: this,
+                children: filteredMovies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                        sm: 12,
+                        md: 4,
+                        lg: 3,
+                        __source: {
+                            fileName: "src/components/movies-list/movies-list.jsx",
+                            lineNumber: 36
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
+                            movie: m,
+                            __source: {
+                                fileName: "src/components/movies-list/movies-list.jsx",
+                                lineNumber: 37
+                            },
+                            __self: this
+                        })
+                    }, m._id)
+                )
+            })
         ]
     }));
 }
@@ -47617,7 +47839,7 @@ $RefreshReg$(_c, "MoviesList");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-redux":"2L0if","../movie-card/movie-card":"6EiBJ","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","../visibility-filter-input/visibility-filter-input":"7ZxGS","react-bootstrap/Col":"fbam0"}],"7ZxGS":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-redux":"2L0if","../movie-card/movie-card":"6EiBJ","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","../visibility-filter-input/visibility-filter-input":"7ZxGS","react-bootstrap":"h2YVd"}],"7ZxGS":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9bc3 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -47633,15 +47855,16 @@ var _reactRedux = require("react-redux");
 var _form = require("react-bootstrap/Form");
 var _formDefault = parcelHelpers.interopDefault(_form);
 var _actions = require("../../actions/actions");
+var _visibilityFilterInputScss = require("./visibility-filter-input.scss");
 function VisibilityFilterInput(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
         onChange: (e)=>props.setFilter(e.target.value)
         ,
         value: props.visibilityFilter,
-        placeholder: "filter",
+        placeholder: "Search...",
         __source: {
             fileName: "src/components/visibility-filter-input/visibility-filter-input.jsx",
-            lineNumber: 10
+            lineNumber: 12
         },
         __self: this
     }));
@@ -47658,7 +47881,7 @@ $RefreshReg$(_c, "VisibilityFilterInput");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-redux":"2L0if","react-bootstrap/Form":"5ykgY","../../actions/actions":"1Ttfj","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh"}],"jUTZ8":[function() {},{}],"8GWVf":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-redux":"2L0if","react-bootstrap/Form":"5ykgY","../../actions/actions":"1Ttfj","@parcel/transformer-js/src/esmodule-helpers.js":"eA48O","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9rpUh","./visibility-filter-input.scss":"3ZOIV"}],"3ZOIV":[function() {},{}],"jUTZ8":[function() {},{}],"8GWVf":[function(require,module,exports) {
 'use strict';
 var compose = require('redux').compose;
 exports.__esModule = true;
@@ -48267,7 +48490,14 @@ function visibilityFilter(state = "", action) {
 function movies(state = [], action) {
     switch(action.type){
         case _actions.SET_MOVIES:
-            console.log("SET_MOVIES reducer reached");
+            return action.value;
+        default:
+            return state;
+    }
+}
+function user(state = "", action) {
+    switch(action.type){
+        case _actions.SET_USER:
             return action.value;
         default:
             return state;
@@ -48275,7 +48505,8 @@ function movies(state = [], action) {
 }
 const moviesApp = _redux.combineReducers({
     visibilityFilter,
-    movies
+    movies,
+    user
 });
 exports.default = moviesApp;
 

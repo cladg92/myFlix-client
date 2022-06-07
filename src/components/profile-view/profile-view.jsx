@@ -23,6 +23,7 @@ export function ProfileView(props) {
   const [password, setPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
 
+  // set user and favorite movies
   const getUser = () => {
     axios
       .get(`https://myflixapi92.herokuapp.com/users/${currentUser}`, {
