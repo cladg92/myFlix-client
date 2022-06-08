@@ -8,8 +8,8 @@ SPA application called myFlix built using React and based on the existing server
 
 ## Get started
 
-● Clone the project
-● run npm install to install all dependencies
+- Clone the project
+- run npm install to install all dependencies
 
 ## Views and Features
 
