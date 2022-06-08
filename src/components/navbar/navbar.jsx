@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {
-  Navbar,
-  Container,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 
 class NavBar extends Component {
   isAuth() {

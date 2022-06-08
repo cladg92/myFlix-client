@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { setMovies, setUser } from "../../actions/actions";
@@ -234,6 +235,13 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setMovies(movies));
     },
   };
+};
+
+MainView.propTypes = {
+  movies: PropTypes.array.isRequired,
+  user: PropTypes.string.isRequired,
+  setUser: PropTypes.func.isRequired,
+  setMovies: PropTypes.func.isRequired,
 };
 
 // connect() to connect component to store
