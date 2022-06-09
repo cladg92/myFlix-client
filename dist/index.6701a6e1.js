@@ -45537,14 +45537,7 @@ _s(ProfileView, "n/7iAqKlOKnbvRuejAfKjYIV4Bs=", false, function() {
 _c = ProfileView;
 exports.default = ProfileView;
 ProfileView.propTypes = {
-    user: _propTypesDefault.default.shape({
-        _id: _propTypesDefault.default.string,
-        Username: _propTypesDefault.default.string,
-        Password: _propTypesDefault.default.string,
-        Email: _propTypesDefault.default.string,
-        BirthDate: _propTypesDefault.default.string,
-        FavoriteMovies: _propTypesDefault.default.array
-    }).isRequired,
+    user: _propTypesDefault.default.string.isRequired,
     onBackLog: _propTypesDefault.default.func.isRequired
 };
 var _c;
@@ -45655,7 +45648,8 @@ exports.default = FavoriteMovies;
 FavoriteMovies.propTypes = {
     favoriteMovies: _propTypesDefault.default.array.isRequired,
     token: _propTypesDefault.default.string.isRequired,
-    user: _propTypesDefault.default.string.isRequired
+    user: _propTypesDefault.default.string.isRequired,
+    deleteMovie: _propTypesDefault.default.func.isRequired
 };
 
   $parcel$ReactRefreshHelpers$7994.postlude(module);

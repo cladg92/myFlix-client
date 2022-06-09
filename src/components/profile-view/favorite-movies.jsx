@@ -44,4 +44,5 @@ FavoriteMovies.propTypes = {
   favoriteMovies: PropTypes.array.isRequired,
   token: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
+  deleteMovie: PropTypes.func.isRequired,
 };
