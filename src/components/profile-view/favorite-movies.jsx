@@ -7,7 +7,7 @@ import "./profile-view.scss";
 
 class FavoriteMovies extends Component {
   render() {
-    const { favoriteMovies, user, token } = this.props;
+    const { favoriteMovies, deleteMovie, user, token } = this.props;
 
     return (
       <Card>
@@ -21,7 +21,13 @@ class FavoriteMovies extends Component {
             {favoriteMovies.map((m) => {
               return (
                 <Col key={m._id} xs={12} md={6} lg={4} className="fav-movie">
-                  <MovieCard token={token} user={user} movie={m} />
+                  <MovieCard
+                    favoriteMovies={favoriteMovies}
+                    deleteMovie={deleteMovie}
+                    token={token}
+                    user={user}
+                    movie={m}
+                  />
                 </Col>
               );
             })}

@@ -40,6 +40,22 @@ export function ProfileView(props) {
     getUser();
   }, []);
 
+  //calling API to remove movie from the users list
+  const deleteMovie = (id) => {
+    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    axios
+      .delete(`https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        //refresh state
+        setFavoriteMovies(favoriteMovies.filter((movie) => movie._id != id));
+        //window.location.reload();
+      })
+      .catch((error) => console.error(error));
+  };
+
   // validate user inputs
   const validate = () => {
     let isReq = true;
@@ -92,7 +108,7 @@ export function ProfileView(props) {
           props.onBackLog();
         })
         .catch((e) => {
-          console.log("Unable to update profile.");
+          console.log(e + "Unable to update profile.");
         });
     }
   };
@@ -142,6 +158,7 @@ export function ProfileView(props) {
         favoriteMovies={favoriteMovies}
         user={currentUser}
         token={token}
+        deleteMovie={deleteMovie}
       />
 
       <Button

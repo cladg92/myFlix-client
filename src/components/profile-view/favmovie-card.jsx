@@ -1,5 +1,4 @@
-import { React, useState, useEffect } from "react";
-import axios from "axios";
+import { React } from "react";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
@@ -11,42 +10,8 @@ import xMark from "../../img/x-mark.png";
 import "./favmovie-card.scss";
 
 export function MovieCard(props) {
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
-  const { movie } = props;
-
-  // set favorite movies
-  const getFavMovies = () => {
-    const user = localStorage.getItem("user");
-    const token = localStorage.getItem("token");
-    axios
-      .get(`https://myflixapi92.herokuapp.com/users/${user}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        setFavoriteMovies(response.data.FavoriteMovies);
-      })
-      .catch((error) => console.error(error));
-  };
-
-  useEffect(() => {
-    getFavMovies();
-  }, []);
-
-  // METHODS
-
-  //calling API to remove movie from the users list
-  const deleteMovie = (id) => {
-    const user = localStorage.getItem("user");
-    const token = localStorage.getItem("token");
-    axios
-      .delete(`https://myflixapi92.herokuapp.com/users/${user}/movies/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((error) => console.error(error));
-  };
+  //const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const { movie, deleteMovie } = props;
 
   return (
     <Card>
@@ -92,4 +57,5 @@ MovieCard.propTypes = {
   }).isRequired,
   user: PropTypes.string.isRequired,
   token: PropTypes.string.isRequired,
+  deleteMovie: PropTypes.func.isRequired,
 };
