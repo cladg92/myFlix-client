@@ -1,0 +1,67 @@
+
+
+.fav-icon {
+  z-index: 1000;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.fav-icon:hover {
+  height: 30px;
+  width: 30px;
+}
+
+.x-icon {
+  z-index: 1000;
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.x-icon:hover {
+  height: 15px;
+  width: 15px;
+}
+
+.fav-movie {
+  margin-bottom: 15px;
+}
+
+Card.Img {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+img {
+  height: 400px;
+}
+
+.card {
+  margin-bottom: 15px;
+}
+
+.movie-card {
+  margin-bottom: 15px;
+}
+
+Card.Img {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+img {
+  height: 400px;
+}
+
+
+
+/*# sourceMappingURL=index.5d8c9cbf.css.map */
