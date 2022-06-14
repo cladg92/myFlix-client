@@ -237,12 +237,12 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+// connect() to connect component to store
+export default connect(mapStateToProps, mapDispatchToProps)(MainView);
+
 MainView.propTypes = {
   movies: PropTypes.array.isRequired,
   user: PropTypes.string.isRequired,
   setUser: PropTypes.func.isRequired,
   setMovies: PropTypes.func.isRequired,
 };
-
-// connect() to connect component to store
-export default connect(mapStateToProps, mapDispatchToProps)(MainView);

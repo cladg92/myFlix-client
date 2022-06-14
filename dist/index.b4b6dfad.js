@@ -35745,12 +35745,15 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "SET_MOVIES", ()=>SET_MOVIES);
 parcelHelpers.export(exports, "SET_FILTER", ()=>SET_FILTER);
 parcelHelpers.export(exports, "SET_USER", ()=>SET_USER);
+parcelHelpers.export(exports, "SET_FAVORITES", ()=>SET_FAVORITES);
 parcelHelpers.export(exports, "setMovies", ()=>setMovies);
 parcelHelpers.export(exports, "setFilter", ()=>setFilter);
 parcelHelpers.export(exports, "setUser", ()=>setUser);
+parcelHelpers.export(exports, "setFavorites", ()=>setFavorites);
 const SET_MOVIES = "SET_MOVIES";
 const SET_FILTER = "SET_FILTER";
 const SET_USER = "SET_USER";
+const SET_FAVORITES = "SET_FAVORITES";
 function setMovies(value) {
     return {
         type: SET_MOVIES,
@@ -35766,6 +35769,12 @@ function setFilter(value) {
 function setUser(value) {
     return {
         type: SET_USER,
+        value
+    };
+}
+function setFavorites(value) {
+    return {
+        type: SET_FAVORITES,
         value
     };
 }
@@ -36040,14 +36049,14 @@ const mapDispatchToProps = (dispatch)=>{
         }
     };
 };
+// connect() to connect component to store
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainView);
 MainView.propTypes = {
     movies: (0, _propTypesDefault.default).array.isRequired,
     user: (0, _propTypesDefault.default).string.isRequired,
     setUser: (0, _propTypesDefault.default).func.isRequired,
     setMovies: (0, _propTypesDefault.default).func.isRequired
 };
-// connect() to connect component to store
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainView);
 
   $parcel$ReactRefreshHelpers$f7a6.postlude(module);
 } finally {
