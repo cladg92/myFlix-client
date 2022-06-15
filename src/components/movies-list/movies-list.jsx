@@ -7,10 +7,10 @@ import { connect } from "react-redux";
 import VisibilityFilterInput from "../visibility-filter-input/visibility-filter-input";
 import { MovieCard } from "../movie-card/movie-card";
 
-// extract visibility filter into a prop
+// extract visibility filter and movies into a prop
 const mapStateToProps = (state) => {
-  const { visibilityFilter } = state;
-  return { visibilityFilter };
+  const { visibilityFilter, movies } = state;
+  return { visibilityFilter, movies };
 };
 
 function MoviesList(props) {

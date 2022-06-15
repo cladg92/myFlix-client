@@ -35909,9 +35909,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                         className: "main-view"
                                     }, void 0, false, void 0, void 0);
-                                    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _moviesListDefault.default), {
-                                        movies: movies
-                                    }, void 0, false, void 0, void 0);
+                                    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _moviesListDefault.default), {}, void 0, false, void 0, void 0);
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
@@ -39311,11 +39309,12 @@ var _reactRedux = require("react-redux");
 var _visibilityFilterInput = require("../visibility-filter-input/visibility-filter-input");
 var _visibilityFilterInputDefault = parcelHelpers.interopDefault(_visibilityFilterInput);
 var _movieCard = require("../movie-card/movie-card");
-// extract visibility filter into a prop
+// extract visibility filter and movies into a prop
 const mapStateToProps = (state)=>{
-    const { visibilityFilter  } = state;
+    const { visibilityFilter , movies  } = state;
     return {
-        visibilityFilter
+        visibilityFilter,
+        movies
     };
 };
 function MoviesList(props) {
@@ -39588,8 +39587,7 @@ var _s = $RefreshSig$();
 function MovieCard(props) {
     _s();
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
-    const { movie , favorites  } = props;
-    console.log(favorites);
+    const { movie  } = props;
     // set favorite movies
     const getFavMovies = ()=>{
         const user = localStorage.getItem("user");
@@ -39657,12 +39655,12 @@ function MovieCard(props) {
                     src: movie.ImagePath
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 101,
+                    lineNumber: 99,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 100,
+                lineNumber: 98,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default).Body, {
@@ -39678,12 +39676,12 @@ function MovieCard(props) {
                             children: movie.Title
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 108,
+                            lineNumber: 106,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 104,
+                        lineNumber: 102,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -39696,36 +39694,37 @@ function MovieCard(props) {
                             className: "fav-icon"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 116,
+                            lineNumber: 114,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 110,
+                        lineNumber: 108,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 103,
+                lineNumber: 101,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 99,
+        lineNumber: 97,
         columnNumber: 5
     }, this);
 }
 _s(MovieCard, "sByoVp6aBrOVoky4xmNCPrRmJmg=");
 _c = MovieCard;
-// state from store and pass it as a prop to the component
-let mapStateToProps = (state)=>{
+//Making states available as props in the component
+const mapStateToProps = (state)=>{
     return {
+        movies: state.movies,
         favorites: state.favorites
     };
 };
-// connect() to connect component to store
+// dispatch action creators as props to child component
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(MovieCard);
 MovieCard.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
@@ -42965,7 +42964,7 @@ function ProfileView(props) {
     _s();
     // for getUser
     //Declaring states as props from redux store through connect()
-    const { movies , favorites , setFavorites  } = props;
+    const { favorites , setFavorites  } = props;
     const [user1, setUser] = (0, _react.useState)("");
     const currentUser = localStorage.getItem("user");
     const token1 = localStorage.getItem("token");
@@ -43002,7 +43001,6 @@ function ProfileView(props) {
         }).then(()=>{
             //refresh state
             setFavorites(favorites.filter((movie)=>movie._id != id));
-        //window.location.reload();
         }).catch((error)=>console.error(error));
     };
     // validate user inputs
@@ -43068,7 +43066,7 @@ function ProfileView(props) {
                 children: "Profile"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 130,
+                lineNumber: 129,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
@@ -43083,22 +43081,22 @@ function ProfileView(props) {
                                     email: user1.Email
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 135,
+                                    lineNumber: 134,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 134,
+                                lineNumber: 133,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 133,
+                            lineNumber: 132,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 132,
+                        lineNumber: 131,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -43122,28 +43120,28 @@ function ProfileView(props) {
                                     deleteUser: deleteUser
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 142,
+                                    lineNumber: 141,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 141,
+                                lineNumber: 140,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 140,
+                            lineNumber: 139,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 139,
+                        lineNumber: 138,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 131,
+                lineNumber: 130,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMoviesDefault.default), {
@@ -43152,7 +43150,7 @@ function ProfileView(props) {
                 deleteMovie: deleteMovie
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 161,
+                lineNumber: 160,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -43164,13 +43162,13 @@ function ProfileView(props) {
                 children: "Back"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 167,
+                lineNumber: 166,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/profile-view/profile-view.jsx",
-        lineNumber: 129,
+        lineNumber: 128,
         columnNumber: 5
     }, this);
 }
@@ -43258,7 +43256,6 @@ class FavoriteMovies extends (0, _react.Component) {
                                 lg: 4,
                                 className: "fav-movie",
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favmovieCard.MovieCard), {
-                                    favoriteMovies: favorites,
                                     deleteMovie: deleteMovie,
                                     token: token,
                                     user: user,

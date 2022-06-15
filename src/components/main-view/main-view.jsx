@@ -112,7 +112,7 @@ class MainView extends React.Component {
                 // Before the movies have been loaded
                 if (movies.length === 0)
                   return <div className="main-view"></div>;
-                return <MoviesList movies={movies} />;
+                return <MoviesList />;
               }}
             />
             <Route

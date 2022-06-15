@@ -24,7 +24,6 @@ export class FavoriteMovies extends Component {
               return (
                 <Col key={m._id} xs={12} md={6} lg={4} className="fav-movie">
                   <MovieCard
-                    favoriteMovies={favorites}
                     deleteMovie={deleteMovie}
                     token={token}
                     user={user}

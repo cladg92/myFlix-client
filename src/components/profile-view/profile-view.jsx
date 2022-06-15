@@ -13,7 +13,7 @@ import { setFavorites } from "../../actions/actions.js";
 export function ProfileView(props) {
   // for getUser
   //Declaring states as props from redux store through connect()
-  const { movies, favorites, setFavorites } = props;
+  const { favorites, setFavorites } = props;
 
   const [user, setUser] = useState("");
   const currentUser = localStorage.getItem("user");
@@ -55,7 +55,6 @@ export function ProfileView(props) {
       .then(() => {
         //refresh state
         setFavorites(favorites.filter((movie) => movie._id != id));
-        //window.location.reload();
       })
       .catch((error) => console.error(error));
   };

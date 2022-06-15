@@ -14,9 +14,7 @@ import "./movie-card.scss";
 
 export function MovieCard(props) {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
-  const { movie, favorites } = props;
-
-  console.log(favorites);
+  const { movie } = props;
 
   // set favorite movies
   const getFavMovies = () => {
@@ -120,12 +118,14 @@ export function MovieCard(props) {
   );
 }
 
-// state from store and pass it as a prop to the component
-let mapStateToProps = (state) => {
-  return { favorites: state.favorites };
+//Making states available as props in the component
+const mapStateToProps = (state) => {
+  return {
+    movies: state.movies,
+    favorites: state.favorites,
+  };
 };
-
-// connect() to connect component to store
+// dispatch action creators as props to child component
 export default connect(mapStateToProps)(MovieCard);
 
 MovieCard.propTypes = {
