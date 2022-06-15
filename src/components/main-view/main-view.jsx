@@ -140,8 +140,6 @@ class MainView extends React.Component {
                     <ProfileView
                       history={history}
                       match={match}
-                      movies={movies}
-                      user={user}
                       onBackLog={() => {
                         this.onLoggedOut();
                       }}
