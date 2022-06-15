@@ -52,7 +52,6 @@ export function MovieCard(props) {
         //refresh state
         getFavMovies();
         console.log(favorites);
-        console.log(movie);
       })
       .catch((error) => console.error(error));
   };
@@ -68,7 +67,6 @@ export function MovieCard(props) {
       .then(() => {
         //refresh state
         getFavMovies();
-        console.log(favorites);
       })
       .catch((error) => console.error(error));
   };

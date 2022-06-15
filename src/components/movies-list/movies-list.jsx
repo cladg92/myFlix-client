@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 };
 
 function MoviesList(props) {
-  const { movies, visibilityFilter } = props;
+  const { movies, visibilityFilter, favorites } = props;
   let filteredMovies = movies;
 
   if (visibilityFilter !== "") {

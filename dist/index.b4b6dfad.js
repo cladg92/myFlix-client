@@ -35878,7 +35878,7 @@ class MainView extends (0, _reactDefault.default).Component {
     }
     render() {
         // movies is extracted from this.props rather than from the this.state
-        let { movies , user: user1  } = this.props;
+        let { movies , user: user1 , favorites  } = this.props;
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbarDefault.default), {
@@ -39316,7 +39316,7 @@ const mapStateToProps = (state)=>{
     };
 };
 function MoviesList(props) {
-    const { movies , visibilityFilter  } = props;
+    const { movies , visibilityFilter , favorites  } = props;
     let filteredMovies = movies;
     if (visibilityFilter !== "") filteredMovies = movies.filter((m)=>m.Title.toLowerCase().includes(visibilityFilter.toLowerCase()));
     if (!movies) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39614,7 +39614,6 @@ function MovieCard(props) {
             //refresh state
             getFavMovies();
             console.log(favorites);
-            console.log(movie);
         }).catch((error)=>console.error(error));
     };
     //calling API to remove movie from the users list
@@ -39628,7 +39627,6 @@ function MovieCard(props) {
         }).then(()=>{
             //refresh state
             getFavMovies();
-            console.log(favorites);
         }).catch((error)=>console.error(error));
     };
     //when clicked the movie is either added/removed from the user via the API
@@ -39656,12 +39654,12 @@ function MovieCard(props) {
                     src: movie.ImagePath
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 102,
+                    lineNumber: 100,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 101,
+                lineNumber: 99,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default).Body, {
@@ -39677,12 +39675,12 @@ function MovieCard(props) {
                             children: movie.Title
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 109,
+                            lineNumber: 107,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 105,
+                        lineNumber: 103,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -39695,24 +39693,24 @@ function MovieCard(props) {
                             className: "fav-icon"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 117,
+                            lineNumber: 115,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 111,
+                        lineNumber: 109,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 104,
+                lineNumber: 102,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 100,
+        lineNumber: 98,
         columnNumber: 5
     }, this);
 }
