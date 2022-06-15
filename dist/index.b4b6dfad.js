@@ -2896,17 +2896,17 @@ class MyFlixApplication extends (0, _reactDefault.default).Component {
                 fluid: true,
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainViewDefault.default), {}, void 0, false, {
                     fileName: "src/index.jsx",
-                    lineNumber: 22,
+                    lineNumber: 23,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "src/index.jsx",
-                lineNumber: 21,
+                lineNumber: 22,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "src/index.jsx",
-            lineNumber: 20,
+            lineNumber: 21,
             columnNumber: 7
         }, this);
     }
@@ -35805,7 +35805,7 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactRedux = require("react-redux");
-var _actions = require("../../actions/actions");
+var _actionsJs = require("../../actions/actions.js");
 var _moviesList = require("../movies-list/movies-list");
 var _moviesListDefault = parcelHelpers.interopDefault(_moviesList);
 var _loginView = require("../login-view/login-view");
@@ -35834,8 +35834,10 @@ class MainView extends (0, _reactDefault.default).Component {
         if (accessToken !== null) {
             this.props.setUser(localStorage.getItem("user"));
             this.getMovies(accessToken);
+            this.getFavMovies();
         }
     }
+    // Set Movies state in the store
     getMovies(token) {
         (0, _axiosDefault.default).get("https://myflixapi92.herokuapp.com/movies", {
             headers: {
@@ -35848,7 +35850,20 @@ class MainView extends (0, _reactDefault.default).Component {
             console.log(error);
         });
     }
-    /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/ onLoggedIn(authData) {
+    // set favorite movies in the store
+    getFavMovies() {
+        const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
+        (0, _axiosDefault.default).get(`https://myflixapi92.herokuapp.com/users/${user}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            this.props.setFavorites(response.data.FavoriteMovies);
+        }).catch((error)=>console.error(error));
+    }
+    // When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
+    onLoggedIn(authData) {
         console.log(authData);
         this.props.setUser(authData.user.Username);
         localStorage.setItem("token", authData.token);
@@ -35873,7 +35888,7 @@ class MainView extends (0, _reactDefault.default).Component {
                     user: user1
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 78,
+                    lineNumber: 94,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
@@ -35900,7 +35915,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 86,
+                                lineNumber: 102,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -35916,7 +35931,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 102,
+                                lineNumber: 118,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -35942,7 +35957,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 113,
+                                lineNumber: 129,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -35967,7 +35982,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 138,
+                                lineNumber: 154,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -35993,7 +36008,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 160,
+                                lineNumber: 176,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -36019,24 +36034,24 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 189,
+                                lineNumber: 205,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 85,
+                        lineNumber: 101,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 84,
+                    lineNumber: 100,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 77,
+            lineNumber: 93,
             columnNumber: 7
         }, this);
     }
@@ -36045,26 +36060,22 @@ class MainView extends (0, _reactDefault.default).Component {
 let mapStateToProps = (state)=>{
     return {
         movies: state.movies,
-        user: state.user
-    };
-};
-const mapDispatchToProps = (dispatch)=>{
-    return {
-        setUser: (user)=>{
-            dispatch((0, _actions.setUser)(user));
-        },
-        setMovies: (movies)=>{
-            dispatch((0, _actions.setMovies)(movies));
-        }
+        user: state.user,
+        favorites: state.favorites
     };
 };
 // connect() to connect component to store
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainView);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, {
+    setMovies: (0, _actionsJs.setMovies),
+    setUser: (0, _actionsJs.setUser),
+    setFavorites: (0, _actionsJs.setFavorites)
+})(MainView);
 MainView.propTypes = {
     movies: (0, _propTypesDefault.default).array.isRequired,
     user: (0, _propTypesDefault.default).string.isRequired,
     setUser: (0, _propTypesDefault.default).func.isRequired,
-    setMovies: (0, _propTypesDefault.default).func.isRequired
+    setMovies: (0, _propTypesDefault.default).func.isRequired,
+    setFavorites: (0, _propTypesDefault.default).func.isRequired
 };
 
   $parcel$ReactRefreshHelpers$f7a6.postlude(module);
@@ -36072,7 +36083,7 @@ MainView.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","prop-types":"7wKI2","react-redux":"bdVon","../../actions/actions":"biFwH","../movies-list/movies-list":"bPxKK","../login-view/login-view":"9YtA0","../movie-view/movie-view":"ggaUx","../navbar/navbar":"bNPgg","react-bootstrap":"3AD9A","../register-view/register-view":"6jAr6","../director-view/director-view":"9tpci","../genre-view/genre-view":"4tuA0","../profile-view/profile-view":"2vVqf","react-router-dom":"cHIiW","./main-view.scss":"eBaMl","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jo6P5":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","prop-types":"7wKI2","react-redux":"bdVon","../movies-list/movies-list":"bPxKK","../login-view/login-view":"9YtA0","../movie-view/movie-view":"ggaUx","../navbar/navbar":"bNPgg","react-bootstrap":"3AD9A","../register-view/register-view":"6jAr6","../director-view/director-view":"9tpci","../genre-view/genre-view":"4tuA0","../profile-view/profile-view":"2vVqf","react-router-dom":"cHIiW","./main-view.scss":"eBaMl","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../actions/actions.js":"biFwH"}],"jo6P5":[function(require,module,exports) {
 module.exports = require("./lib/axios");
 
 },{"./lib/axios":"63MyY"}],"63MyY":[function(require,module,exports) {
@@ -39566,6 +39577,7 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _card = require("react-bootstrap/Card");
 var _cardDefault = parcelHelpers.interopDefault(_card);
 var _reactRouterDom = require("react-router-dom");
+var _reactRedux = require("react-redux");
 //favorite images
 var _heartEmptyPng = require("../../img/heart_empty.png");
 var _heartEmptyPngDefault = parcelHelpers.interopDefault(_heartEmptyPng);
@@ -39576,7 +39588,8 @@ var _s = $RefreshSig$();
 function MovieCard(props) {
     _s();
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
-    const { movie  } = props;
+    const { movie , favorites  } = props;
+    console.log(favorites);
     // set favorite movies
     const getFavMovies = ()=>{
         const user = localStorage.getItem("user");
@@ -39644,12 +39657,12 @@ function MovieCard(props) {
                     src: movie.ImagePath
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 97,
+                    lineNumber: 101,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 96,
+                lineNumber: 100,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default).Body, {
@@ -39665,12 +39678,12 @@ function MovieCard(props) {
                             children: movie.Title
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 104,
+                            lineNumber: 108,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 100,
+                        lineNumber: 104,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -39683,29 +39696,37 @@ function MovieCard(props) {
                             className: "fav-icon"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 112,
+                            lineNumber: 116,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 106,
+                        lineNumber: 110,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 99,
+                lineNumber: 103,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 95,
+        lineNumber: 99,
         columnNumber: 5
     }, this);
 }
 _s(MovieCard, "sByoVp6aBrOVoky4xmNCPrRmJmg=");
 _c = MovieCard;
+// state from store and pass it as a prop to the component
+let mapStateToProps = (state)=>{
+    return {
+        favorites: state.favorites
+    };
+};
+// connect() to connect component to store
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(MovieCard);
 MovieCard.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
         _id: (0, _propTypesDefault.default).string.isRequired,
@@ -39732,7 +39753,7 @@ $RefreshReg$(_c, "MovieCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","prop-types":"7wKI2","react-bootstrap/Card":"lAynp","react-router-dom":"cHIiW","../../img/heart_empty.png":"cZtYJ","../../img/heart_full.png":"bixRV","./movie-card.scss":"d6HH4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cHIiW":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","prop-types":"7wKI2","react-bootstrap/Card":"lAynp","react-router-dom":"cHIiW","../../img/heart_empty.png":"cZtYJ","../../img/heart_full.png":"bixRV","./movie-card.scss":"d6HH4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-redux":"bdVon"}],"cHIiW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MemoryRouter", ()=>(0, _reactRouter.MemoryRouter));
@@ -42937,12 +42958,15 @@ var _userInfo = require("./user-info");
 var _userInfoDefault = parcelHelpers.interopDefault(_userInfo);
 var _updateUser = require("./update-user");
 var _updateUserDefault = parcelHelpers.interopDefault(_updateUser);
+var _reactRedux = require("react-redux");
+var _actionsJs = require("../../actions/actions.js");
 var _s = $RefreshSig$();
 function ProfileView(props) {
     _s();
     // for getUser
-    const [user1, setUser] = (0, _react.useState)(props.user);
-    const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
+    //Declaring states as props from redux store through connect()
+    const { movies , favorites , setFavorites  } = props;
+    const [user1, setUser] = (0, _react.useState)("");
     const currentUser = localStorage.getItem("user");
     const token1 = localStorage.getItem("token");
     const history = (0, _reactRouterDom.useHistory)();
@@ -42954,7 +42978,7 @@ function ProfileView(props) {
     const [username, setUsername] = (0, _react.useState)("");
     const [password, setPassword] = (0, _react.useState)("");
     const [birthDate, setBirthDate] = (0, _react.useState)("");
-    // set user and favorite movies
+    // set user
     const getUser = ()=>{
         (0, _axiosDefault.default).get(`https://myflixapi92.herokuapp.com/users/${currentUser}`, {
             headers: {
@@ -42962,7 +42986,6 @@ function ProfileView(props) {
             }
         }).then((response)=>{
             setUser(response.data);
-            setFavoriteMovies(response.data.FavoriteMovies);
         }).catch((error)=>console.error(error));
     };
     (0, _react.useEffect)(()=>{
@@ -42978,7 +43001,7 @@ function ProfileView(props) {
             }
         }).then(()=>{
             //refresh state
-            setFavoriteMovies(favoriteMovies.filter((movie)=>movie._id != id));
+            setFavorites(favorites.filter((movie)=>movie._id != id));
         //window.location.reload();
         }).catch((error)=>console.error(error));
     };
@@ -43045,7 +43068,7 @@ function ProfileView(props) {
                 children: "Profile"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 126,
+                lineNumber: 130,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
@@ -43060,22 +43083,22 @@ function ProfileView(props) {
                                     email: user1.Email
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 131,
+                                    lineNumber: 135,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 130,
+                                lineNumber: 134,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 129,
+                            lineNumber: 133,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 128,
+                        lineNumber: 132,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -43099,38 +43122,38 @@ function ProfileView(props) {
                                     deleteUser: deleteUser
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 138,
+                                    lineNumber: 142,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 137,
+                                lineNumber: 141,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 136,
+                            lineNumber: 140,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 135,
+                        lineNumber: 139,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 127,
+                lineNumber: 131,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMoviesDefault.default), {
-                favoriteMovies: favoriteMovies,
+                favoriteMovies: favorites,
                 user: currentUser,
                 token: token1,
                 deleteMovie: deleteMovie
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 157,
+                lineNumber: 161,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -43142,23 +43165,32 @@ function ProfileView(props) {
                 children: "Back"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 164,
+                lineNumber: 168,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/profile-view/profile-view.jsx",
-        lineNumber: 125,
+        lineNumber: 129,
         columnNumber: 5
     }, this);
 }
-_s(ProfileView, "n/7iAqKlOKnbvRuejAfKjYIV4Bs=", false, function() {
+_s(ProfileView, "siQ/ryzgYSRg2SVIHnKuZ+vH5Sk=", false, function() {
     return [
         (0, _reactRouterDom.useHistory)
     ];
 });
 _c = ProfileView;
-exports.default = ProfileView;
+//Making states available as props in the component
+const mapStateToProps = (state)=>{
+    return {
+        favorites: state.favorites
+    };
+};
+// dispatch action creators as props to child component
+exports.default = (0, _reactRedux.connect)(mapStateToProps, {
+    setFavorites: (0, _actionsJs.setFavorites)
+})(ProfileView);
 ProfileView.propTypes = {
     user: (0, _propTypesDefault.default).string.isRequired,
     onBackLog: (0, _propTypesDefault.default).func.isRequired
@@ -43171,7 +43203,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","prop-types":"7wKI2","react-router-dom":"cHIiW","axios":"jo6P5","./favorite-movies":"dTTQH","./user-info":"66eot","./update-user":"2SBwg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"dTTQH":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","prop-types":"7wKI2","react-router-dom":"cHIiW","axios":"jo6P5","./favorite-movies":"dTTQH","./user-info":"66eot","./update-user":"2SBwg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-redux":"bdVon","../../actions/actions.js":"biFwH"}],"dTTQH":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$8767 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

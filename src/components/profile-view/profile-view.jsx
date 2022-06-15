@@ -7,10 +7,15 @@ import FavoriteMovies from "./favorite-movies";
 import UserInfo from "./user-info";
 import UpdateUser from "./update-user";
 
+import { connect } from "react-redux";
+import { setFavorites } from "../../actions/actions.js";
+
 export function ProfileView(props) {
   // for getUser
-  const [user, setUser] = useState(props.user);
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  //Declaring states as props from redux store through connect()
+  const { movies, favorites, setFavorites } = props;
+
+  const [user, setUser] = useState("");
   const currentUser = localStorage.getItem("user");
   const token = localStorage.getItem("token");
   const history = useHistory();
@@ -23,7 +28,7 @@ export function ProfileView(props) {
   const [password, setPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
 
-  // set user and favorite movies
+  // set user
   const getUser = () => {
     axios
       .get(`https://myflixapi92.herokuapp.com/users/${currentUser}`, {
@@ -31,7 +36,6 @@ export function ProfileView(props) {
       })
       .then((response) => {
         setUser(response.data);
-        setFavoriteMovies(response.data.FavoriteMovies);
       })
       .catch((error) => console.error(error));
   };
@@ -50,7 +54,7 @@ export function ProfileView(props) {
       })
       .then(() => {
         //refresh state
-        setFavoriteMovies(favoriteMovies.filter((movie) => movie._id != id));
+        setFavorites(favorites.filter((movie) => movie._id != id));
         //window.location.reload();
       })
       .catch((error) => console.error(error));
@@ -155,7 +159,7 @@ export function ProfileView(props) {
         </Col>
       </Row>
       <FavoriteMovies
-        favoriteMovies={favoriteMovies}
+        favoriteMovies={favorites}
         user={currentUser}
         token={token}
         deleteMovie={deleteMovie}
@@ -174,7 +178,16 @@ export function ProfileView(props) {
   );
 }
 
-export default ProfileView;
+//Making states available as props in the component
+const mapStateToProps = (state) => {
+  return {
+    favorites: state.favorites,
+  };
+};
+// dispatch action creators as props to child component
+export default connect(mapStateToProps, {
+  setFavorites,
+})(ProfileView);
 
 ProfileView.propTypes = {
   user: PropTypes.string.isRequired,
