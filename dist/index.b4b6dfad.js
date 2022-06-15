@@ -35732,10 +35732,19 @@ function user(state = "", action) {
             return state;
     }
 }
+function favorites(state = [], action) {
+    switch(action.type){
+        case 0, _actions.SET_FAVORITES:
+            return action.value;
+        default:
+            return state;
+    }
+}
 const moviesApp = (0, _redux.combineReducers)({
     visibilityFilter,
     movies,
-    user
+    user,
+    favorites
 });
 exports.default = moviesApp;
 
