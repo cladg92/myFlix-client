@@ -55,6 +55,7 @@ export function ProfileView(props) {
       .then(() => {
         //refresh state
         setFavorites(favorites.filter((movie) => movie._id != id));
+        console.log(favorites);
       })
       .catch((error) => console.error(error));
   };

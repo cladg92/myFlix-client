@@ -39587,7 +39587,7 @@ var _s = $RefreshSig$();
 function MovieCard(props) {
     _s();
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
-    const { movie  } = props;
+    const { movie , favorites  } = props;
     // set favorite movies
     const getFavMovies = ()=>{
         const user = localStorage.getItem("user");
@@ -39615,6 +39615,7 @@ function MovieCard(props) {
         }).then(()=>{
             //refresh state
             getFavMovies();
+            console.log(props.favorites);
         }).catch((error)=>console.error(error));
     };
     //calling API to remove movie from the users list
@@ -39655,12 +39656,12 @@ function MovieCard(props) {
                     src: movie.ImagePath
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 99,
+                    lineNumber: 100,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 98,
+                lineNumber: 99,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default).Body, {
@@ -39676,12 +39677,12 @@ function MovieCard(props) {
                             children: movie.Title
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 106,
+                            lineNumber: 107,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 102,
+                        lineNumber: 103,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -39694,24 +39695,24 @@ function MovieCard(props) {
                             className: "fav-icon"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 114,
+                            lineNumber: 115,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 108,
+                        lineNumber: 109,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 101,
+                lineNumber: 102,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 97,
+        lineNumber: 98,
         columnNumber: 5
     }, this);
 }
@@ -39720,7 +39721,6 @@ _c = MovieCard;
 //Making states available as props in the component
 const mapStateToProps = (state)=>{
     return {
-        movies: state.movies,
         favorites: state.favorites
     };
 };
@@ -43001,6 +43001,7 @@ function ProfileView(props) {
         }).then(()=>{
             //refresh state
             setFavorites(favorites.filter((movie)=>movie._id != id));
+            console.log(favorites);
         }).catch((error)=>console.error(error));
     };
     // validate user inputs
@@ -43066,7 +43067,7 @@ function ProfileView(props) {
                 children: "Profile"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 129,
+                lineNumber: 130,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
@@ -43081,22 +43082,22 @@ function ProfileView(props) {
                                     email: user1.Email
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 134,
+                                    lineNumber: 135,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 133,
+                                lineNumber: 134,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 132,
+                            lineNumber: 133,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 131,
+                        lineNumber: 132,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -43120,28 +43121,28 @@ function ProfileView(props) {
                                     deleteUser: deleteUser
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 141,
+                                    lineNumber: 142,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 140,
+                                lineNumber: 141,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 139,
+                            lineNumber: 140,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 138,
+                        lineNumber: 139,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 130,
+                lineNumber: 131,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMoviesDefault.default), {
@@ -43150,7 +43151,7 @@ function ProfileView(props) {
                 deleteMovie: deleteMovie
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 160,
+                lineNumber: 161,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -43162,13 +43163,13 @@ function ProfileView(props) {
                 children: "Back"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 166,
+                lineNumber: 167,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/profile-view/profile-view.jsx",
-        lineNumber: 128,
+        lineNumber: 129,
         columnNumber: 5
     }, this);
 }
@@ -43255,7 +43256,7 @@ class FavoriteMovies extends (0, _react.Component) {
                                 md: 6,
                                 lg: 4,
                                 className: "fav-movie",
-                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favmovieCard.MovieCard), {
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favmovieCard.FavMovieCard), {
                                     deleteMovie: deleteMovie,
                                     token: token,
                                     user: user,
@@ -43318,7 +43319,7 @@ $parcel$ReactRefreshHelpers$62ec.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
+parcelHelpers.export(exports, "FavMovieCard", ()=>FavMovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _propTypes = require("prop-types");
@@ -43330,7 +43331,7 @@ var _reactRouterDom = require("react-router-dom");
 var _xMarkPng = require("../../img/x-mark.png");
 var _xMarkPngDefault = parcelHelpers.interopDefault(_xMarkPng);
 var _favmovieCardScss = require("./favmovie-card.scss");
-function MovieCard(props) {
+function FavMovieCard(props) {
     const { movie , deleteMovie  } = props;
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default), {
         children: [
@@ -43402,8 +43403,8 @@ function MovieCard(props) {
         columnNumber: 5
     }, this);
 }
-_c = MovieCard;
-MovieCard.propTypes = {
+_c = FavMovieCard;
+FavMovieCard.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
         _id: (0, _propTypesDefault.default).string.isRequired,
         Title: (0, _propTypesDefault.default).string.isRequired,
@@ -43425,7 +43426,7 @@ MovieCard.propTypes = {
     deleteMovie: (0, _propTypesDefault.default).func.isRequired
 };
 var _c;
-$RefreshReg$(_c, "MovieCard");
+$RefreshReg$(_c, "FavMovieCard");
 
   $parcel$ReactRefreshHelpers$62ec.postlude(module);
 } finally {

@@ -14,7 +14,7 @@ import "./movie-card.scss";
 
 export function MovieCard(props) {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
-  const { movie } = props;
+  const { movie, favorites } = props;
 
   // set favorite movies
   const getFavMovies = () => {
@@ -51,6 +51,7 @@ export function MovieCard(props) {
       .then(() => {
         //refresh state
         getFavMovies();
+        console.log(props.favorites);
       })
       .catch((error) => console.error(error));
   };
@@ -121,7 +122,6 @@ export function MovieCard(props) {
 //Making states available as props in the component
 const mapStateToProps = (state) => {
   return {
-    movies: state.movies,
     favorites: state.favorites,
   };
 };

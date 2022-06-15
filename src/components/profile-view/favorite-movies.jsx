@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MovieCard } from "./favmovie-card";
+import { FavMovieCard } from "./favmovie-card";
 import { Card, Col, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 
@@ -23,7 +23,7 @@ export class FavoriteMovies extends Component {
             {favorites.map((m) => {
               return (
                 <Col key={m._id} xs={12} md={6} lg={4} className="fav-movie">
-                  <MovieCard
+                  <FavMovieCard
                     deleteMovie={deleteMovie}
                     token={token}
                     user={user}

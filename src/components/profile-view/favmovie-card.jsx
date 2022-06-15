@@ -9,7 +9,7 @@ import xMark from "../../img/x-mark.png";
 
 import "./favmovie-card.scss";
 
-export function MovieCard(props) {
+export function FavMovieCard(props) {
   const { movie, deleteMovie } = props;
 
   return (
@@ -37,7 +37,7 @@ export function MovieCard(props) {
   );
 }
 
-MovieCard.propTypes = {
+FavMovieCard.propTypes = {
   movie: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
