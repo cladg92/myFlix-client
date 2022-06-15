@@ -10,7 +10,6 @@ import xMark from "../../img/x-mark.png";
 import "./favmovie-card.scss";
 
 export function MovieCard(props) {
-  //const [favoriteMovies, setFavoriteMovies] = useState([]);
   const { movie, deleteMovie } = props;
 
   return (

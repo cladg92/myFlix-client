@@ -159,7 +159,6 @@ export function ProfileView(props) {
         </Col>
       </Row>
       <FavoriteMovies
-        favoriteMovies={favorites}
         user={currentUser}
         token={token}
         deleteMovie={deleteMovie}
