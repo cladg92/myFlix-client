@@ -6,6 +6,8 @@ This project was part of the [Career Foundry Full Stack Web Development course](
 
 Single-page application (SPA) built using React that fetches data from the movie API (i.e., [myflixapi92](https://myflixapi92.herokuapp.com/documentation/)).
 
+Check it live [here](https://myflixapp92.netlify.app/).
+
 ## Views and Features
 
 ### Main view
@@ -44,12 +46,11 @@ Single-page application (SPA) built using React that fetches data from the movie
 - Displays favorite movies
 - Allows users to remove a movie from their list of favorites.
 
-
 ## Set up
 
 - Clone the repository running `git clone https://github.com/cladg92/myFlix-client.git` in the terminal.
 - Head to the project folder and install dependencies with `npm install`.
-
+- Run `npm run start` to build and start the application.
 
 ## Dependencies
 
@@ -65,9 +66,9 @@ Single-page application (SPA) built using React that fetches data from the movie
 - redux ^ 4.2.0
 - redux-devtools-extension ^ 2.13.9
 
-## Tech-stack
+## Technologies
 
-MongoDB, ExpressJS, ReactJS, NodeJS
+MERN Stack (MongoDB, ExpressJS, ReactJS, NodeJS), Parcel, Axios, React-Bootstrap, React Router DOM, Redux
 
 ## Author
 
