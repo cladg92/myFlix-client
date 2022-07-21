@@ -13,7 +13,6 @@ Check it live [here](https://myflixapp92.netlify.app/).
 ### Main view
 
 - Returns a list of ALL movies to the user (each listed item with an image and title)
-- Filtering
 - Ability to select a movie for more details
 
 ### Single movie view
