@@ -52,20 +52,6 @@ Check it live [here](https://myflixapp92.netlify.app/).
 - Head to the project folder and install dependencies with `npm install`.
 - Run `npm run start` to build and start the application.
 
-## Dependencies
-
-- @parcel ^2.6.0
-- @parcel/transformer-sass ^2.6.0
-- axios ^0.27.2
-- prop-types ^ 15.8.1
-- react ^ 18.1.0
-- react-bootstrap ^ 2.4.0
-- react-dom ^ 18.1.0
-- react-redux ^ 8.0.2
-- react-router-dom ^ 5.3.1
-- redux ^ 4.2.0
-- redux-devtools-extension ^ 2.13.9
-
 ## Technologies
 
 MERN Stack (MongoDB, ExpressJS, ReactJS, NodeJS), Parcel, Axios, React-Bootstrap, React Router DOM, Redux
