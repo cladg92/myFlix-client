@@ -55,6 +55,4 @@ Check it live [here](https://myflixapp92.netlify.app/).
 
 MERN Stack (MongoDB, ExpressJS, ReactJS, NodeJS), Parcel, Axios, React-Bootstrap, React Router DOM, Redux
 
-## Author
 
-Clara Di Gregorio
