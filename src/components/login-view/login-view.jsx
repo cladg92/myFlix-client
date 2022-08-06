@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import axios from "axios";
+import "./login-view.scss";
 
 export function LoginView(props) {
   const [username, setUsername] = useState("");
@@ -26,8 +27,9 @@ export function LoginView(props) {
   };
 
   return (
-    <Form>
-      <Form.Group controlId="formUsername">
+    <Form className="form" id="login-form">
+      <h1 className="welcome-heading">Welcome to MyFlix App!</h1>
+      <Form.Group controlId="formUsername" className="form-group">
         <Form.Label>Username:</Form.Label>
         <Form.Control
           type="text"
@@ -36,7 +38,7 @@ export function LoginView(props) {
           onChange={(e) => setUsername(e.target.value)}
         />
       </Form.Group>
-      <Form.Group controlId="formPassword">
+      <Form.Group controlId="formPassword" className="form-group">
         <Form.Label>Password:</Form.Label>
         <Form.Control
           type="password"
@@ -45,12 +47,7 @@ export function LoginView(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
       </Form.Group>
-      <Button
-        className="mt-3"
-        variant="success"
-        type="submit"
-        onClick={handleSubmit}
-      >
+      <Button className="mt-3" type="submit" onClick={handleSubmit}>
         Login
       </Button>
     </Form>

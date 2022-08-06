@@ -17,7 +17,7 @@ class NavBar extends Component {
   render() {
     const { onBackLog, user } = this.props;
     return (
-      <Navbar className="main-nav" sticky="top" bg="dark" variant="dark">
+      <Navbar className="main-nav" sticky="top" variant="dark">
         <Container>
           <Navbar.Brand className="navbar-logo" href="/">
             MyFlix

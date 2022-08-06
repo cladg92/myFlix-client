@@ -87,7 +87,7 @@ class MainView extends React.Component {
 
   render() {
     // movies is extracted from this.props rather than from the this.state
-    let { movies, user, favorites } = this.props;
+    let { movies, user } = this.props;
 
     return (
       <Router>
@@ -97,7 +97,7 @@ class MainView extends React.Component {
           }}
           user={user}
         />
-        <Container>
+        <Container className="main-view">
           <Row className="justify-content-md-center">
             <Route
               exact

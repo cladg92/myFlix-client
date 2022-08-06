@@ -26,20 +26,16 @@ function MoviesList(props) {
   if (!movies) return <div className="main-view" />;
 
   return (
-    <>
-      <Row>
-        <Col sm={12} md={6} className="mt-3 mb-3">
-          <VisibilityFilterInput visibilityFilter={visibilityFilter} />
+    <Row>
+      <Col sm={12} className="mt-3 mb-3">
+        <VisibilityFilterInput visibilityFilter={visibilityFilter} />
+      </Col>
+      {filteredMovies.map((m) => (
+        <Col sm={12} md={4} lg={3} key={m._id}>
+          <MovieCard movie={m} />
         </Col>
-      </Row>
-      <Row>
-        {filteredMovies.map((m) => (
-          <Col sm={12} md={4} lg={3} key={m._id}>
-            <MovieCard movie={m} />
-          </Col>
-        ))}
-      </Row>
-    </>
+      ))}
+    </Row>
   );
 }
 
