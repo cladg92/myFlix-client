@@ -1,5 +1,18 @@
-$background-color: #000;
+$primary-color: #920e9e;
 
+nav.main-nav {
+  background-color: $primary-color;
+}
+
+button.mt-3.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+}
+
+button.mt-3:hover {
+  background-color: $primary-color;
+  opacity: 0.8;
+}
 .movie-card {
   margin-bottom: 15px;
 }

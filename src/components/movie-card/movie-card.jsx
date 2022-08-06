@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 
+import { connect } from "react-redux";
+
 //favorite images
 import heartEmpty from "../../img/heart_empty.png";
 import heartFull from "../../img/heart_full.png";
@@ -12,7 +14,7 @@ import "./movie-card.scss";
 
 export function MovieCard(props) {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
-  const { movie } = props;
+  const { movie, favorites } = props;
 
   // set favorite movies
   const getFavMovies = () => {
@@ -49,6 +51,7 @@ export function MovieCard(props) {
       .then(() => {
         //refresh state
         getFavMovies();
+        console.log(favorites);
       })
       .catch((error) => console.error(error));
   };
@@ -115,6 +118,15 @@ export function MovieCard(props) {
     </Card>
   );
 }
+
+//Making states available as props in the component
+const mapStateToProps = (state) => {
+  return {
+    favorites: state.favorites,
+  };
+};
+// dispatch action creators as props to child component
+export default connect(mapStateToProps)(MovieCard);
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
