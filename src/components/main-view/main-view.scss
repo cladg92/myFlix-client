@@ -1,15 +1,19 @@
 $primary-color: #920e9e;
+$text-color: #fff;
 
 nav.main-nav {
   background-color: $primary-color;
 }
 
-button.mt-3.btn-primary {
+button.mt-3.btn-primary,
+button.btn {
   background-color: $primary-color;
   border-color: $primary-color;
+  margin-right: 10px;
 }
 
-button.mt-3:hover {
+button.mt-3:hover,
+button.btn:hover {
   background-color: $primary-color;
   opacity: 0.8;
 }
@@ -17,8 +21,18 @@ button.mt-3:hover {
   margin-bottom: 15px;
 }
 
+div.card {
+  border-color: $primary-color;
+  border-style: double;
+  box-shadow: $primary-color 0px 3px 8px;
+}
+
 div.card-body {
   background-color: #000;
+}
+
+div.card-title {
+  color: $text-color;
 }
 
 Card.Img {

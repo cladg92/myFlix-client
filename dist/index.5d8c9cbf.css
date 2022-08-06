@@ -49,6 +49,10 @@ p {
   margin-bottom: 15px;
 }
 
+form.update-form {
+  padding: 0;
+}
+
 Card.Img {
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -68,12 +72,13 @@ nav.main-nav {
   background-color: #920e9e;
 }
 
-button.mt-3.btn-primary {
+button.mt-3.btn-primary, button.btn {
   background-color: #920e9e;
   border-color: #920e9e;
+  margin-right: 10px;
 }
 
-button.mt-3:hover {
+button.mt-3:hover, button.btn:hover {
   opacity: .8;
   background-color: #920e9e;
 }
@@ -82,8 +87,18 @@ button.mt-3:hover {
   margin-bottom: 15px;
 }
 
+div.card {
+  border-style: double;
+  border-color: #920e9e;
+  box-shadow: 0 3px 8px #920e9e;
+}
+
 div.card-body {
   background-color: #000;
+}
+
+div.card-title {
+  color: #fff;
 }
 
 Card.Img {

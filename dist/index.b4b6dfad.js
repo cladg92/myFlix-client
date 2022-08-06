@@ -43170,7 +43170,6 @@ function ProfileView(props) {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
-                variant: "success",
                 type: "button",
                 onClick: ()=>{
                     history.goBack();
@@ -43579,9 +43578,11 @@ function UpdateUser(props) {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default), {
+                className: "update-form",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
                         controlId: "formUsername",
+                        className: "form-group",
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
                                 children: "Username:"
@@ -43615,6 +43616,7 @@ function UpdateUser(props) {
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
                         controlId: "formEmail",
+                        className: "form-group",
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
                                 children: "Email:"
@@ -43648,6 +43650,7 @@ function UpdateUser(props) {
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
                         controlId: "formPassword",
+                        className: "form-group",
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
                                 children: "Password:"
@@ -43681,6 +43684,7 @@ function UpdateUser(props) {
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
                         controlId: "formBirthday",
+                        className: "form-group",
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
                                 children: "Birthday:"
@@ -43706,7 +43710,6 @@ function UpdateUser(props) {
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
                         className: "mt-3",
-                        variant: "success",
                         type: "submit",
                         onClick: updateUser,
                         children: "Update"
@@ -43717,13 +43720,12 @@ function UpdateUser(props) {
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
                         className: "mt-3",
-                        variant: "warning",
                         type: "submit",
                         onClick: deleteUser,
                         children: "Delete profile"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/update-user.jsx",
-                        lineNumber: 75,
+                        lineNumber: 70,
                         columnNumber: 9
                     }, this)
                 ]

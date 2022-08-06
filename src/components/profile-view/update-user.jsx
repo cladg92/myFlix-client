@@ -22,8 +22,8 @@ function UpdateUser(props) {
   return (
     <div className="update-user">
       <h5>Update profile</h5>
-      <Form>
-        <Form.Group controlId="formUsername">
+      <Form className="update-form">
+        <Form.Group controlId="formUsername" className="form-group">
           <Form.Label>Username:</Form.Label>
           <Form.Control
             type="text"
@@ -34,7 +34,7 @@ function UpdateUser(props) {
           {/* code added here to display validation error */}
           {usernameErr && <p>{usernameErr}</p>}
         </Form.Group>
-        <Form.Group controlId="formEmail">
+        <Form.Group controlId="formEmail" className="form-group">
           <Form.Label>Email:</Form.Label>
           <Form.Control
             type="email"
@@ -45,7 +45,7 @@ function UpdateUser(props) {
           {/* code added here to display validation error */}
           {emailErr && <p>{emailErr}</p>}
         </Form.Group>
-        <Form.Group controlId="formPassword">
+        <Form.Group controlId="formPassword" className="form-group">
           <Form.Label>Password:</Form.Label>
           <Form.Control
             type="password"
@@ -56,7 +56,7 @@ function UpdateUser(props) {
           {/* code added here to display validation error */}
           {passwordErr && <p>{passwordErr}</p>}
         </Form.Group>
-        <Form.Group controlId="formBirthday">
+        <Form.Group controlId="formBirthday" className="form-group">
           <Form.Label>Birthday:</Form.Label>
           <Form.Control
             type="date"
@@ -64,20 +64,10 @@ function UpdateUser(props) {
             onChange={(e) => setBirthDate(e.target.value)}
           />
         </Form.Group>
-        <Button
-          className="mt-3"
-          variant="success"
-          type="submit"
-          onClick={updateUser}
-        >
+        <Button className="mt-3" type="submit" onClick={updateUser}>
           Update
         </Button>
-        <Button
-          className="mt-3"
-          variant="warning"
-          type="submit"
-          onClick={deleteUser}
-        >
+        <Button className="mt-3" type="submit" onClick={deleteUser}>
           Delete profile
         </Button>
       </Form>

@@ -165,7 +165,6 @@ export function ProfileView(props) {
       />
 
       <Button
-        variant="success"
         type="button"
         onClick={() => {
           history.goBack();
