@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Row, Col, Card } from "react-bootstrap";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import FavoriteMovies from "./favorite-movies";
 import UserInfo from "./user-info";
@@ -18,7 +18,7 @@ export function ProfileView(props) {
   const [user, setUser] = useState("");
   const currentUser = localStorage.getItem("user");
   const token = localStorage.getItem("token");
-  const history = useHistory();
+  const navigate = useNavigate();
   // for updateUser
   const [usernameErr, setUsernameErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
@@ -167,7 +167,7 @@ export function ProfileView(props) {
       <Button
         type="button"
         onClick={() => {
-          history.goBack();
+          navigate(-1);
         }}
       >
         Back
