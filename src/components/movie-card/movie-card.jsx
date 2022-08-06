@@ -105,6 +105,7 @@ export function MovieCard(props) {
           style={{ textDecoration: "none", color: "black" }}
         >
           <Card.Title className="card-title">{movie.Title}</Card.Title>
+          <Card.Text>{movie.ReleaseYear}</Card.Text>
         </Link>
         <a
           href="#"

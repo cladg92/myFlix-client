@@ -71,6 +71,7 @@ export function RegisterView() {
       <Card.Body className="register-card-body">
         <Form className="form" id="register-form">
           <h1 className="welcome-heading">Welcome to MyFlix App!</h1>
+          <p className="welcome-heading">Register</p>
           <Form.Group controlId="formUsername" className="form-group">
             <Form.Label>Username:</Form.Label>
             <Form.Control

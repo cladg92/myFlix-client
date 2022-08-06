@@ -32,6 +32,7 @@ export function LoginView(props) {
       <Card.Body className="login-card-body">
         <Form className="form" id="login-form">
           <h1 className="welcome-heading">Welcome to MyFlix App!</h1>
+          <p className="welcome-heading">Login</p>
           <Form.Group controlId="formUsername" className="form-group">
             <Form.Label>Username:</Form.Label>
             <Form.Control

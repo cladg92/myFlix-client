@@ -5,6 +5,18 @@ nav.main-nav {
   background-color: $primary-color;
 }
 
+div.justify-content-md-center.row {
+  margin: auto;
+}
+
+h1.movie-title,
+h1.genre-name,
+h1.director-name,
+h1.value {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
 button.mt-3.btn-primary,
 button.btn {
   background-color: $primary-color;
@@ -35,6 +47,11 @@ div.card-title {
   color: $text-color;
 }
 
+div.movie-col,
+div.movie-row {
+  margin: auto;
+}
+
 Card.Img {
   position: relative;
   overflow: hidden;
@@ -44,4 +61,13 @@ Card.Img {
 
 img {
   height: 400px;
+}
+
+a.link {
+  text-decoration: none;
+  color: $primary-color;
+}
+
+p.value {
+  color: $text-color;
 }

@@ -17,15 +17,20 @@ export class MovieView extends React.Component {
               <Card.Body>
                 <div className="movie-genre">
                   <span className="label">Genre: </span>
-                  <Link to={`/genres/${movie.Genre.Name}`}>
-                    <span variant="link">{movie.Genre.Name}</span>
-                  </Link>
+                  <a className="link" href={`/genres/${movie.Genre.Name}`}>
+                    <span className="link" variant="link">
+                      {movie.Genre.Name}
+                    </span>
+                  </a>
                 </div>
                 <div className="movie-director">
                   <span className="label">Director: </span>
-                  <Link to={`/directors/${movie.Director.Name}`}>
-                    <span variant="link">{movie.Director.Name}</span>
-                  </Link>
+                  <a
+                    className="link"
+                    href={`/directors/${movie.Director.Name}`}
+                  >
+                    <span className="link">{movie.Director.Name}</span>
+                  </a>
                 </div>
                 <div className="movie-actors">
                   <span className="label">Actors: </span>
