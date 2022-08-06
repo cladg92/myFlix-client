@@ -3,7 +3,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { setMovies, setUser } from "../../actions/actions";
+import { setMovies, setUser, setFavorites } from "../../actions/actions.js";
 import MoviesList from "../movies-list/movies-list";
 
 import { LoginView } from "../login-view/login-view";
@@ -34,9 +34,11 @@ class MainView extends React.Component {
     if (accessToken !== null) {
       this.props.setUser(localStorage.getItem("user"));
       this.getMovies(accessToken);
+      this.getFavMovies();
     }
   }
 
+  // Set Movies state in the store
   getMovies(token) {
     axios
       .get("https://myflixapi92.herokuapp.com/movies", {
@@ -51,7 +53,21 @@ class MainView extends React.Component {
       });
   }
 
-  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
+  // set favorite movies in the store
+  getFavMovies() {
+    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    axios
+      .get(`https://myflixapi92.herokuapp.com/users/${user}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.props.setFavorites(response.data.FavoriteMovies);
+      })
+      .catch((error) => console.error(error));
+  }
+
+  // When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
 
   onLoggedIn(authData) {
     console.log(authData);
@@ -81,7 +97,7 @@ class MainView extends React.Component {
           }}
           user={user}
         />
-        <Container>
+        <Container className="main-view">
           <Row className="justify-content-md-center">
             <Route
               exact
@@ -96,7 +112,7 @@ class MainView extends React.Component {
                 // Before the movies have been loaded
                 if (movies.length === 0)
                   return <div className="main-view"></div>;
-                return <MoviesList movies={movies} />;
+                return <MoviesList />;
               }}
             />
             <Route
@@ -124,8 +140,6 @@ class MainView extends React.Component {
                     <ProfileView
                       history={history}
                       match={match}
-                      movies={movies}
-                      user={user}
                       onBackLog={() => {
                         this.onLoggedOut();
                       }}
@@ -223,26 +237,20 @@ class MainView extends React.Component {
 
 // state from store and pass it as a prop to the component
 let mapStateToProps = (state) => {
-  return { movies: state.movies, user: state.user };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setUser: (user) => {
-      dispatch(setUser(user));
-    },
-    setMovies: (movies) => {
-      dispatch(setMovies(movies));
-    },
-  };
+  return { movies: state.movies, user: state.user, favorites: state.favorites };
 };
 
 // connect() to connect component to store
-export default connect(mapStateToProps, mapDispatchToProps)(MainView);
+export default connect(mapStateToProps, {
+  setMovies,
+  setUser,
+  setFavorites,
+})(MainView);
 
 MainView.propTypes = {
   movies: PropTypes.array.isRequired,
   user: PropTypes.string.isRequired,
   setUser: PropTypes.func.isRequired,
   setMovies: PropTypes.func.isRequired,
+  setFavorites: PropTypes.func.isRequired,
 };

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import "./register-view.scss";
 
 export function RegisterView() {
   const [email, setEmail] = useState("");
@@ -65,8 +66,9 @@ export function RegisterView() {
   };
 
   return (
-    <Form>
-      <Form.Group controlId="formUsername">
+    <Form className="form" id="register-form">
+      <h1 className="welcome-heading">Welcome to MyFlix App!</h1>
+      <Form.Group controlId="formUsername" className="form-group">
         <Form.Label>Username:</Form.Label>
         <Form.Control
           type="text"
@@ -76,7 +78,7 @@ export function RegisterView() {
         {/* code added here to display validation error */}
         {usernameErr && <p>{usernameErr}</p>}
       </Form.Group>
-      <Form.Group controlId="formEmail">
+      <Form.Group controlId="formEmail" className="form-group">
         <Form.Label>Email:</Form.Label>
         <Form.Control
           type="email"
@@ -86,7 +88,7 @@ export function RegisterView() {
         {/* code added here to display validation error */}
         {emailErr && <p>{emailErr}</p>}
       </Form.Group>
-      <Form.Group controlId="formPassword">
+      <Form.Group controlId="formPassword" className="form-group">
         <Form.Label>Password:</Form.Label>
         <Form.Control
           type="password"
@@ -96,7 +98,7 @@ export function RegisterView() {
         {/* code added here to display validation error */}
         {passwordErr && <p>{passwordErr}</p>}
       </Form.Group>
-      <Form.Group controlId="formBirthday">
+      <Form.Group controlId="formBirthday" className="form-group">
         <Form.Label>Birthday:</Form.Label>
         <Form.Control
           type="date"
@@ -104,12 +106,7 @@ export function RegisterView() {
           onChange={(e) => setBirthDate(e.target.value)}
         />
       </Form.Group>
-      <Button
-        className="mt-3"
-        variant="success"
-        type="submit"
-        onClick={handleRegister}
-      >
+      <Button className="mt-3" type="submit" onClick={handleRegister}>
         Register
       </Button>
     </Form>

@@ -1,0 +1,14 @@
+$background-color: #000;
+$text-color: #fff;
+
+body {
+  min-height: 100vh;
+}
+
+div.container-fluid,
+div.main-view.container {
+  background-color: $background-color;
+  color: $text-color;
+  min-height: 100vh;
+  padding: 0;
+}

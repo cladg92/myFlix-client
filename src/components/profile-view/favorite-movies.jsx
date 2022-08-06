@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import { MovieCard } from "./favmovie-card";
+import { FavMovieCard } from "./favmovie-card";
 import { Card, Col, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 
+import { connect } from "react-redux";
+
 import "./profile-view.scss";
 
-class FavoriteMovies extends Component {
+export class FavoriteMovies extends Component {
   render() {
-    const { favoriteMovies, deleteMovie, user, token } = this.props;
+    const { favorites, deleteMovie, user, token } = this.props;
 
     return (
       <Card>
@@ -18,11 +20,10 @@ class FavoriteMovies extends Component {
             </Col>
           </Row>
           <Row className="justify-content-md-center">
-            {favoriteMovies.map((m) => {
+            {favorites.map((m) => {
               return (
                 <Col key={m._id} xs={12} md={6} lg={4} className="fav-movie">
-                  <MovieCard
-                    favoriteMovies={favoriteMovies}
+                  <FavMovieCard
                     deleteMovie={deleteMovie}
                     token={token}
                     user={user}
@@ -38,10 +39,17 @@ class FavoriteMovies extends Component {
   }
 }
 
-export default FavoriteMovies;
+//Making states available as props in the component
+const mapStateToProps = (state) => {
+  return {
+    favorites: state.favorites,
+  };
+};
+// dispatch action creators as props to child component
+export default connect(mapStateToProps)(FavoriteMovies);
 
 FavoriteMovies.propTypes = {
-  favoriteMovies: PropTypes.array.isRequired,
+  favorites: PropTypes.array.isRequired,
   token: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   deleteMovie: PropTypes.func.isRequired,

@@ -7,14 +7,14 @@ import { connect } from "react-redux";
 import VisibilityFilterInput from "../visibility-filter-input/visibility-filter-input";
 import { MovieCard } from "../movie-card/movie-card";
 
-// extract visibility filter into a prop
+// extract visibility filter and movies into a prop
 const mapStateToProps = (state) => {
-  const { visibilityFilter } = state;
-  return { visibilityFilter };
+  const { visibilityFilter, movies } = state;
+  return { visibilityFilter, movies };
 };
 
 function MoviesList(props) {
-  const { movies, visibilityFilter } = props;
+  const { movies, visibilityFilter, favorites } = props;
   let filteredMovies = movies;
 
   if (visibilityFilter !== "") {
@@ -26,20 +26,16 @@ function MoviesList(props) {
   if (!movies) return <div className="main-view" />;
 
   return (
-    <>
-      <Row>
-        <Col sm={12} md={6} className="mt-3 mb-3">
-          <VisibilityFilterInput visibilityFilter={visibilityFilter} />
+    <Row>
+      <Col sm={12} className="mt-3 mb-3">
+        <VisibilityFilterInput visibilityFilter={visibilityFilter} />
+      </Col>
+      {filteredMovies.map((m) => (
+        <Col sm={12} md={4} lg={3} key={m._id}>
+          <MovieCard movie={m} />
         </Col>
-      </Row>
-      <Row>
-        {filteredMovies.map((m) => (
-          <Col sm={12} md={4} lg={3} key={m._id}>
-            <MovieCard movie={m} />
-          </Col>
-        ))}
-      </Row>
-    </>
+      ))}
+    </Row>
   );
 }
 
