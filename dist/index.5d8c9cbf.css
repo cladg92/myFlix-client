@@ -23,12 +23,16 @@ h1.welcome-heading {
   padding-bottom: 30px;
 }
 
-form {
-  padding-top: 30%;
+.login-card {
+  margin-top: 30%;
 }
 
 p {
   color: #920e9e;
+}
+
+.register-card {
+  margin-top: 30%;
 }
 
 .x-icon {

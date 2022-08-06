@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import axios from "axios";
 import "./register-view.scss";
 
@@ -66,49 +67,53 @@ export function RegisterView() {
   };
 
   return (
-    <Form className="form" id="register-form">
-      <h1 className="welcome-heading">Welcome to MyFlix App!</h1>
-      <Form.Group controlId="formUsername" className="form-group">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        {/* code added here to display validation error */}
-        {usernameErr && <p>{usernameErr}</p>}
-      </Form.Group>
-      <Form.Group controlId="formEmail" className="form-group">
-        <Form.Label>Email:</Form.Label>
-        <Form.Control
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {/* code added here to display validation error */}
-        {emailErr && <p>{emailErr}</p>}
-      </Form.Group>
-      <Form.Group controlId="formPassword" className="form-group">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {/* code added here to display validation error */}
-        {passwordErr && <p>{passwordErr}</p>}
-      </Form.Group>
-      <Form.Group controlId="formBirthday" className="form-group">
-        <Form.Label>Birthday:</Form.Label>
-        <Form.Control
-          type="date"
-          value={birthDate}
-          onChange={(e) => setBirthDate(e.target.value)}
-        />
-      </Form.Group>
-      <Button className="mt-3" type="submit" onClick={handleRegister}>
-        Register
-      </Button>
-    </Form>
+    <Card className="register-card">
+      <Card.Body className="register-card-body">
+        <Form className="form" id="register-form">
+          <h1 className="welcome-heading">Welcome to MyFlix App!</h1>
+          <Form.Group controlId="formUsername" className="form-group">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            {/* code added here to display validation error */}
+            {usernameErr && <p>{usernameErr}</p>}
+          </Form.Group>
+          <Form.Group controlId="formEmail" className="form-group">
+            <Form.Label>Email:</Form.Label>
+            <Form.Control
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {/* code added here to display validation error */}
+            {emailErr && <p>{emailErr}</p>}
+          </Form.Group>
+          <Form.Group controlId="formPassword" className="form-group">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {/* code added here to display validation error */}
+            {passwordErr && <p>{passwordErr}</p>}
+          </Form.Group>
+          <Form.Group controlId="formBirthday" className="form-group">
+            <Form.Label>Birthday:</Form.Label>
+            <Form.Control
+              type="date"
+              value={birthDate}
+              onChange={(e) => setBirthDate(e.target.value)}
+            />
+          </Form.Group>
+          <Button className="mt-3" type="submit" onClick={handleRegister}>
+            Register
+          </Button>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 }
